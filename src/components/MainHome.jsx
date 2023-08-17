@@ -7,7 +7,6 @@ import Modern from './Modern/Modern';
 import MemStay from './Memorable/MemStay';
 import Gallery from './Gallery/Gallery';
 import Footer from './Footer/Footer';
-import xmlJs from 'xml-js';
 const MainHome = () => {
   
   const [error, setError] = useState(null);

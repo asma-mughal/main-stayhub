@@ -3,7 +3,6 @@ import { bathroom, bedroom, comfort2, gallery4, guest, home, location } from '..
 import { destinatons } from '../../constants'
 import { Link } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
-import {xml2js} from 'xml-js';
 const CardDest = ({data, start, end,link}) => {
   const { fetchImages, parseImages} = useMyContext();
   const [result,setResult] = useState([])
