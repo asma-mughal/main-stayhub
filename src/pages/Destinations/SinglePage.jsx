@@ -14,7 +14,7 @@ const SinglePage = () => {
        setError('Error fetching data');
      } else {
       const res = convertXmlToJson(responseData['#text']?.value)
-      setJsonData(JSON.parse(res))
+      setJsonData((res))
      }
    });
 

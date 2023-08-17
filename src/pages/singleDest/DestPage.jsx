@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { mainDest, star1, home, guest, bedroom, bathroom } from '../../assets'
 import { aminities, destinatons } from '../../constants'
 import { useParams } from 'react-router-dom'
@@ -8,22 +8,36 @@ const DestPage = ({oneProperty}) => {
   const uniqueId = localStorage.setItem("propertyId", id)
   const record = destinatons.find((i)=> i.id === id);
   const starImagePath = "star.png";
+  const [shuffledIndex, setShuffledIndex] = useState(0);
+
+  const getRandomIndex = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+  useEffect(() => {
+    const newShuffledIndex = getRandomIndex(0, 3);
+    setShuffledIndex(newShuffledIndex);
+  }, []);
 
   const stars = [];
   for (let i = 0; i < record?.review; i++) {
     stars.push(<img src={starImagePath} alt="Star" />);
   }
+
+  const url = oneProperty?.PropertyImages?.PropertyImage?.[shuffledIndex]?.ImageUrl?.['#text']?.value || 'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
+  console.log(oneProperty)
   return (
 
   <>
       <div className="w-full h-auto font-poppins">
-        <img className="object-cover w-full h-full" src={oneProperty?.PropertyImages?.icon} alt="Image" />
+{ url && <img className="object-cover w-full h-full" src={url}
+         alt="Image" /> }
+       
       </div>
       <div className="flex flex-row items-center my-5">
         {Array.from({ length: oneProperty?.record?.review }, (_, index) => (
           <img
             key={index}
-            src={star1}
+            src={""}
             className="w-3 h-3 m-1"
             alt="Star"
           />
@@ -42,7 +56,7 @@ const DestPage = ({oneProperty}) => {
         </p>
         <h1 className="font-semibold text-heading mb-2 font-poppins">Description</h1>
         <p className={`text-xs text-justify text-gray-500 font-poppins my-2 xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl`}>
-          {oneProperty?.record?.description}
+          {oneProperty?.Basicinfo?.Description['#text']?.value}
         </p>
         <h1 className="font-semibold text-heading mb-2">Property Features</h1>
         <div className="container my-2">
@@ -65,11 +79,11 @@ const DestPage = ({oneProperty}) => {
           <div className="w-full lg:w-1/2 xl:w-1/2 ">
             <div className="flex flex-wrap items-start justify-between">
               {/* Map through amenities */}
-              {oneProperty?.aminities?.map((amenity) => (
+              {oneProperty?.CustomAmenities?.CustomAmenity?.map((amenity) => (
                 <div className="w-2/6 mb-3 lg:mt-0 md:w-2/5 lg:w-1/6" key={amenity.id}>
                   <div className="flex flex-col pr-4 items-center justify-start">
                     <img src={amenity.icon} className="h-6 w-6 mb-3" alt={amenity.title} />
-                    <p className="text-xs">{amenity.title}</p>
+                    <p className="text-xs">{amenity?.Name['#text']?.value}</p>
                   </div>
                 </div>
               ))}

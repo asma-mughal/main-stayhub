@@ -1,13 +1,43 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import styles from "../style";
 import Navbar from "./Navbar";
 import Tags from './Tags';
 import CardHero from './CardHero';
+import { useMyContext } from '../context/MyContext';
 const Hero = ({heading, title, name, height}) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
     setIsActive(!isActive);
+  };
+  const { fetchData,convertXmlToJson, searchResults, setSearchResults} = useMyContext()
+  const [error, setError] = useState()
+  const [jsonData, setJsonData] = useState({});
+  useEffect(() => {
+   fetchData((error, responseData) => {
+     if (error) {
+       setError('Error fetching data');
+     } else {
+      const res = convertXmlToJson(responseData['#text']?.value)
+      setSearchResults(res)
+      setJsonData((res))
+     }
+   });
+
+   }, [])
+  const [searchQuery, setSearchQuery] = useState('');
+ 
+
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    const filteredDestinations = jsonData?.PropertyList?.Property?.filter(
+      (property) =>
+        property.name['#text']['value'].toLowerCase().includes(query)
+    );
+
+    setSearchResults(filteredDestinations);
   };
   return (
     <section id="home" className="font-poppins relative" >
@@ -35,7 +65,10 @@ hover:bg-opacity-50`}
   
   <div className="flex items-center bg-white rounded-full shadow-xl">
    <input type="text" className="w-full  px-6 py-3 text-sm
-    text-gray-800 rounded-l-full focus:outline-none " placeholder="Search destinations..." />
+    text-gray-800 rounded-l-full focus:outline-none " placeholder="Search destinations..."
+    value={searchQuery}
+    onChange={handleSearch}
+    />
    <button className="bg-secondary hover:bg-secondary/80
    text-white text-xs px-6 py-4 rounded-r-full transition duration-300">Search</button>
  </div> 

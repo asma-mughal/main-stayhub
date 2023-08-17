@@ -4,12 +4,13 @@ import { destinatons } from '../../constants'
 import { Link } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
 const CardDest = ({data, start, end,link}) => {
-  const { fetchImages, parseImages} = useMyContext();
+  const { fetchImages, parseImages, searchResults} = useMyContext();
   const [result,setResult] = useState([])
+  console.log(searchResults)
   useEffect(() => {
     fetchImages()
       .then(data => {
-      console.log(data)
+      //console.log(data)
       // const propertyImages = data.DataSet["xs:schema"]["xs:element"]["xs:complexType"]["xs:choice"]["xs:element"]["xs:complexType"]["xs:sequence"]["xs:element"];
 
       // const extractedImages = propertyImages.map(image => {
@@ -43,7 +44,7 @@ const CardDest = ({data, start, end,link}) => {
   
             <header className="flex items-center justify-between leading-tight p-2 md:p-4">
               <h1 className="text-lg">
-                <Link to={`/single/${item.PropertyID['#text']}`}>
+                <Link to={`/single/${item.PropertyID['#text'].value}`}>
                   <a className="no-underline hover:underline font-semibold text-heading" href="#">
                     {item['name']['#text']['value']}
                   </a>
@@ -61,21 +62,47 @@ const CardDest = ({data, start, end,link}) => {
             {item['description'] && (
               <p className="flex-grow pb-3 px-2 md:px-4">{item['description']['#text']['value']}</p>
             )}
-  
-            {item['details'] && (
-              <div className="flex">
-                {/* Render your details */}
-                {/* Assuming details are nested and have similar structure */}
-              </div>
+{/*   
+            {item['NumberFloors'] && (
+               <div className="flex">
+               <div className="w-1/4 p-4 text-center border-r">
+                 <div className="mb-2">
+                 <img src={home} alt="Icon 1" className="w-5 h-5 mx-auto" />
+                 </div>
+                 <p className='text-xs'>1 Home</p>
+               </div>
+               <div className="w-1/4 p-4 text-center border-r">
+                 <div className="mb-2">
+                 <img src={guest} alt="Icon 1" className="w-5 h-5 mx-auto" />
+                 </div>
+                 <p className='text-xs'>1 Guests</p>
+               </div>
+               <div className="w-1/4 p-4 text-center border-r">
+                 <div className="mb-2">
+                 <img src={bedroom} alt="Icon 1" className="w-5 h-5 mx-auto" />
+                 </div>
+                 <p className='text-xs'>1 Boudoir</p>
+               </div>
+               <div className="w-1/4 p-4 text-center">
+                 <div className="mb-2">
+                 <img src={bathroom} alt="Icon 1" className="w-5 h-5 mx-auto" />
+                 </div>
+                 <p className='text-xs'>1 lavatory</p>
+               </div>
+               </div>
             )}
-  
-            {item['price'] && (
-              <footer className="flex items-center justify-between leading-none p-2 md:p-4">
-                <a className="flex items-center no-underline hover:underline text-black" href="#">
-                  <p className="ml-2 text-sm">${item['price']['#text']['value']} per night</p>
-                </a>
-              </footer>
-            )}
+   */}
+               
+  {item['maxprice']['#text']['value'] && <footer class="flex items-center justify-between 
+  leading-none p-2 md:p-4">
+                        <a class="flex items-center no-underline hover:underline text-black" href="#">
+                            <p class="ml-2 text-sm">
+                               $ {item['maxprice']['#text']['value']} per night
+                            </p>
+                        </a>
+                     
+                    </footer>}
+
           </article>
         </div>
       ))}

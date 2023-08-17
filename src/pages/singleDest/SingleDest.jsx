@@ -10,9 +10,9 @@ const SingleDest = () => {
   const [error, setError] = useState()
   const [oneProperty, setOneProperty] = useState({});
   useEffect(() => {
+    
     fetchOneProperty()
       .then(data => {
-        console.log(data?.Root?.Properties?.ProperTy)
         setOneProperty(data?.Root?.Properties?.ProperTy)
       })
       .catch(error => {

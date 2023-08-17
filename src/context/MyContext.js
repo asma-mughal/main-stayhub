@@ -6,7 +6,7 @@ export const useMyContext = () => useContext(MyContext);
 
 export const MyProvider = ({ children }) => {
   const [data, setData] = useState('abc');
-  
+  const [searchResults, setSearchResults] = useState();
   const updateData = newData => {
     setData(newData);
   };
@@ -80,7 +80,6 @@ export const MyProvider = ({ children }) => {
   }
   function fetchOneProperty() {
     const uniqueId = localStorage.getItem("propertyId")
-   
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -216,6 +215,7 @@ export const MyProvider = ({ children }) => {
     fetchOneProperty,
     fetchImages,
     parseImages,
+    searchResults, setSearchResults
   };
 
   return (
