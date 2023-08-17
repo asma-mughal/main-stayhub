@@ -30,12 +30,9 @@ const CardDest = ({data, start, end,link}) => {
   }, []);
   return (
     <div className="px-3 font-poppins">
-    <div className="flex flex-wrap -mx-2"> {/* Adjust mx-2 for spacing */}
+    <div className="flex flex-wrap -mx-2">
       {data?.PropertyList?.Property?.slice(start, end).map((item, index) => (
-        <div
-          className="my-2 px-2 w-full md:w-1/2 lg:my-4 lg:w-1/3"
-          key={index}
-        >
+        <div className="my-2 px-2 w-full md:w-1/2 lg:my-4 lg:w-1/3" key={index}>
           <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
             <a href="#">
               <img
@@ -47,9 +44,9 @@ const CardDest = ({data, start, end,link}) => {
   
             <header className="flex items-center justify-between leading-tight p-2 md:p-4">
               <h1 className="text-lg">
-                <Link to={`/single/${item.PropertyID?._text}`}>
+                <Link to={`/single/${item.PropertyID['#text']}`}>
                   <a className="no-underline hover:underline font-semibold text-heading" href="#">
-                    {item?.name?._text}
+                    {item['name']['#text']['value']}
                   </a>
                 </Link>
               </h1>
@@ -57,25 +54,26 @@ const CardDest = ({data, start, end,link}) => {
               {item.a6 && (
                 <div className="flex items-center justify-center">
                   <img src={location} alt="Location Icon" className="w-4 h-4 m-1" />
-                  <span className="text-gray-600 text-sm mr-2">{item.a6._text}</span>
+                  <span className="text-gray-600 text-sm mr-2">{item['a6']['#text']['value']}</span>
                 </div>
               )}
             </header>
   
-            {item.description && (
-              <p className="flex-grow pb-3 px-2 md:px-4">{item.description._text}</p>
+            {item['description'] && (
+              <p className="flex-grow pb-3 px-2 md:px-4">{item['description']['#text']['value']}</p>
             )}
   
-            {item.details && (
+            {item['details'] && (
               <div className="flex">
                 {/* Render your details */}
+                {/* Assuming details are nested and have similar structure */}
               </div>
             )}
   
-            {item.price && (
+            {item['price'] && (
               <footer className="flex items-center justify-between leading-none p-2 md:p-4">
                 <a className="flex items-center no-underline hover:underline text-black" href="#">
-                  <p className="ml-2 text-sm">${item.price?._text} per night</p>
+                  <p className="ml-2 text-sm">${item['price']['#text']['value']} per night</p>
                 </a>
               </footer>
             )}
@@ -84,7 +82,6 @@ const CardDest = ({data, start, end,link}) => {
       ))}
     </div>
   </div>
-  
   )
 }
 

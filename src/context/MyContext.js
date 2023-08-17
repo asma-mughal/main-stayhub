@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react';
-import xmlJs, {xml2js} from 'xml-js';
 import { urlAPI , barefootAccount, userName, password} from '../constants';
 const MyContext = createContext();
 
@@ -156,21 +155,58 @@ export const MyProvider = ({ children }) => {
         throw new Error('Error fetching data');
       });
   }
+  // const convertXmlToJson = (xmlData) => {
+  //   const options = { compact: true, spaces: 2 };
+  //   const result = xmlJs.xml2json(xmlData, options);
+  //   return result;
+  // };
+
   const convertXmlToJson = (xmlData) => {
-    const options = { compact: true, spaces: 2 };
-    const result = xmlJs.xml2json(xmlData, options);
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
+    return xmlToJsonTwo(xmlDoc);
+  };
+  const xmlToJsonTwo = (xml) => {
+    const result = {};
+
+    if (xml.nodeType === 1) {
+      if (xml.attributes.length > 0) {
+        result['@attributes'] = {};
+        for (let i = 0; i < xml.attributes.length; i++) {
+          const attribute = xml.attributes.item(i);
+          result['@attributes'][attribute.nodeName] = attribute.nodeValue;
+        }
+      }
+    } else if (xml.nodeType === 3) {
+      result['#text'] = xml.nodeValue;
+    }
+
+    const elementNodes = Array.from(xml.childNodes).filter(node => node.nodeType === 1);
+    if (elementNodes.length > 0) {
+      elementNodes.forEach(node => {
+        if (!result[node.nodeName]) {
+          result[node.nodeName] = xmlToJson(node);
+        } else {
+          if (!Array.isArray(result[node.nodeName])) {
+            result[node.nodeName] = [result[node.nodeName]];
+          }
+          result[node.nodeName].push(xmlToJson(node));
+        }
+      });
+    }
+
     return result;
   };
   const parseImages = (xmlResponse) =>{
-    const options = { compact: true, ignoreComment: true, spaces: 4 };
-    const result = xml2js(xmlResponse, options);
+    // const options = { compact: true, ignoreComment: true, spaces: 4 };
+    // const result = xml2js(xmlResponse, options);
 
-    if (result.DataSet && result.DataSet.item) {
-      const images = Array.isArray(result.DataSet.item)
-        ? result.DataSet.item
-        : [result.DataSet.item];
-      console.log(images)
-    }
+    // if (result.DataSet && result.DataSet.item) {
+    //   const images = Array.isArray(result.DataSet.item)
+    //     ? result.DataSet.item
+    //     : [result.DataSet.item];
+    //   console.log(images)
+    // }
   }
   const contextValue = {
     data,
@@ -179,7 +215,7 @@ export const MyProvider = ({ children }) => {
     convertXmlToJson,
     fetchOneProperty,
     fetchImages,
-    parseImages
+    parseImages,
   };
 
   return (
