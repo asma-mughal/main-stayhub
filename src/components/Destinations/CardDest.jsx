@@ -4,9 +4,8 @@ import { destinatons } from '../../constants'
 import { Link } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
 const CardDest = ({data, start, end,link}) => {
-  const { fetchImages, parseImages, searchResults} = useMyContext();
+  const { fetchImages, parseImages,filteredProperties} = useMyContext();
   const [result,setResult] = useState([])
-  console.log(searchResults)
   useEffect(() => {
     fetchImages()
       .then(data => {
@@ -31,7 +30,7 @@ const CardDest = ({data, start, end,link}) => {
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2">
-      {data?.PropertyList?.Property?.slice(start, end).map((item, index) => (
+      {filteredProperties?.slice(start, end).map((item, index) => (
         <div className="my-2 px-2 w-full md:w-1/2 lg:my-4 lg:w-1/3" key={index}>
           <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
             <a href="#">

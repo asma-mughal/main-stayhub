@@ -10,35 +10,23 @@ const Hero = ({heading, title, name, height}) => {
   const handleClick = () => {
     setIsActive(!isActive);
   };
-  const { fetchData,convertXmlToJson, searchResults, setSearchResults} = useMyContext()
+  const { jsonData,filteredProperties, setFilteredProperties} = useMyContext()
   const [error, setError] = useState()
-  const [jsonData, setJsonData] = useState({});
-  useEffect(() => {
-   fetchData((error, responseData) => {
-     if (error) {
-       setError('Error fetching data');
-     } else {
-      const res = convertXmlToJson(responseData['#text']?.value)
-      setSearchResults(res)
-      setJsonData((res))
-     }
-   });
-
-   }, [])
   const [searchQuery, setSearchQuery] = useState('');
- 
-
-  const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
+  
+  const handleSearchInputChange = (event) => {
+    const query = event.target.value;
     setSearchQuery(query);
-
-    const filteredDestinations = jsonData?.PropertyList?.Property?.filter(
-      (property) =>
-        property.name['#text']['value'].toLowerCase().includes(query)
+    const filtered = jsonData?.PropertyList?.Property?.filter(property =>
+      property.name['#text']['value'].toLowerCase().includes(query.toLowerCase())
     );
-
-    setSearchResults(filteredDestinations);
+    setFilteredProperties(filtered || []);
   };
+  useEffect(() => {
+    if (jsonData?.PropertyList?.Property) {
+      setFilteredProperties(jsonData.PropertyList.Property);
+    }
+  }, [jsonData]);
   return (
     <section id="home" className="font-poppins relative" >
 <section 
@@ -67,7 +55,7 @@ hover:bg-opacity-50`}
    <input type="text" className="w-full  px-6 py-3 text-sm
     text-gray-800 rounded-l-full focus:outline-none " placeholder="Search destinations..."
     value={searchQuery}
-    onChange={handleSearch}
+    onChange={handleSearchInputChange}
     />
    <button className="bg-secondary hover:bg-secondary/80
    text-white text-xs px-6 py-4 rounded-r-full transition duration-300">Search</button>

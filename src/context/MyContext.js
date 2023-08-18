@@ -6,7 +6,8 @@ export const useMyContext = () => useContext(MyContext);
 
 export const MyProvider = ({ children }) => {
   const [data, setData] = useState('abc');
-  const [searchResults, setSearchResults] = useState();
+   const [jsonData, setJsonData] = useState({});
+   const [filteredProperties, setFilteredProperties] = useState([]);
   const updateData = newData => {
     setData(newData);
   };
@@ -77,6 +78,44 @@ export const MyProvider = ({ children }) => {
       .catch(error => {
         callback('Error fetching data', null);
       });
+  }
+  const getAvailablityByDate = (callback ,date1, date2) =>{
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cookie': 'ASP.NET_SessionId=nksnbl2xfnhvahhvq1feejmt'
+      },
+      body: new URLSearchParams({
+        'username': userName,
+        'password': password,
+        'barefootAccount': barefootAccount,
+        'date1' : "05/01/2008",
+        'date2' : "05/10/2008",
+        'weekly' : 0
+      })
+    };
+    return fetch(`${urlAPI}/barefootwebservice/BarefootService.asmx/GetPropertyAvailabilityByDate`, requestOptions)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then(responseBody => {
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(responseBody, 'text/xml');
+
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData;
+    })
+    .catch(error => {
+      throw new Error('Error fetching data');
+    });
+    
   }
   function fetchOneProperty() {
     const uniqueId = localStorage.getItem("propertyId")
@@ -215,7 +254,9 @@ export const MyProvider = ({ children }) => {
     fetchOneProperty,
     fetchImages,
     parseImages,
-    searchResults, setSearchResults
+    jsonData, setJsonData,
+    getAvailablityByDate,
+    filteredProperties, setFilteredProperties
   };
 
   return (

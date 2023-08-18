@@ -7,22 +7,19 @@ import { Link, json, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext'
 const Destination = () => {
   const navigate = useNavigate()
-  const { fetchData,convertXmlToJson} = useMyContext()
+  const { fetchData,convertXmlToJson,jsonData, setJsonData,filteredData, setFilteredData} = useMyContext()
   const [error, setError] = useState()
-  const [jsonData, setJsonData] = useState({});
   useEffect(() => {
    fetchData((error, responseData) => {
      if (error) {
        setError('Error fetching data');
      } else {
       const res = convertXmlToJson(responseData['#text']?.value)
-      
       setJsonData((res))
      }
    });
 
    }, [])
-   
   return (
     <>
    

@@ -6,14 +6,23 @@ import Navbar from '../../components/Navbar';
 import DestPage from './DestPage';
 import { useMyContext } from '../../context/MyContext';
 const SingleDest = () => {
-  const { fetchOneProperty,convertXmlToJson} = useMyContext()
+  const { fetchOneProperty,convertXmlToJson,getAvailablityByDate} = useMyContext()
   const [error, setError] = useState()
   const [oneProperty, setOneProperty] = useState({});
   useEffect(() => {
-    
     fetchOneProperty()
       .then(data => {
         setOneProperty(data?.Root?.Properties?.ProperTy)
+      })
+      .catch(error => {
+        console.error('Error fetching property data:', error);
+      });
+  }, []);
+  useEffect(() => {
+    
+    getAvailablityByDate()
+      .then(data => {
+       console.log(data)
       })
       .catch(error => {
         console.error('Error fetching property data:', error);
