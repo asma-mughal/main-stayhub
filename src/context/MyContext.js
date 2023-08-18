@@ -79,7 +79,7 @@ export const MyProvider = ({ children }) => {
         callback('Error fetching data', null);
       });
   }
-  const getAvailablityByDate = (callback ,date1, date2) =>{
+  const getAvailablityByDate = (date1, date2) =>{
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -90,8 +90,8 @@ export const MyProvider = ({ children }) => {
         'username': userName,
         'password': password,
         'barefootAccount': barefootAccount,
-        'date1' : "05/01/2008",
-        'date2' : "05/10/2008",
+        'date1' :date1,
+        'date2' : date2,
         'weekly' : 0
       })
     };

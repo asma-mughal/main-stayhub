@@ -19,8 +19,7 @@ const SingleDest = () => {
       });
   }, []);
   useEffect(() => {
-    
-    getAvailablityByDate()
+    getAvailablityByDate(oneProperty?.Basicinfo?.CheckInTime, oneProperty?.Basicinfo?.CheckOutTime)
       .then(data => {
        console.log(data)
       })
