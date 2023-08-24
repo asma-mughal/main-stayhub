@@ -2,11 +2,13 @@ import React,{useState, useEffect} from 'react'
 import { mainDest, star1, home, guest, bedroom, bathroom } from '../../assets'
 import { aminities, destinatons } from '../../constants'
 import { useParams } from 'react-router-dom'
-
+import { useNavigate } from "react-router-dom";
 const DestPage = ({oneProperty}) => {
   const { id } = useParams()
   const uniqueId = localStorage.setItem("propertyId", id)
   const [shuffledIndex, setShuffledIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   const getRandomIndex = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
@@ -58,40 +60,36 @@ const DestPage = ({oneProperty}) => {
         <p className={`text-xs text-justify text-gray-500 font-poppins my-2 xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl`}>
           {oneProperty?.Basicinfo?.Description['#text']?.value}
         </p>
-        <h1 className="font-semibold text-heading mb-2 font-poppins">Availibity</h1>
-        <p className={`text-xs text-justify text-gray-500 font-poppins my-2 xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl`}>
-          {oneProperty?.Basicinfo?.Description['#text']?.value}
-        </p>
-        <h1 className="font-semibold text-heading mb-2">Property Features</h1>
+        <h1 className="font-semibold text-heading mb-2 font-poppins ">Property Features</h1>
         {oneProperty?.BathroomAccommodations && (
         <div className="flex">
           <div className="w-1/4 p-4 text-center border-r">
             <div className="mb-2">
               <img src={home} alt="Home Icon" className="w-5 h-5 mx-auto" />
             </div>
-            <p className="text-xs">Home</p>
+            <p className="text-xs font-poppins">Home</p>
           </div>
           <div className="w-1/4 p-4 text-center border-r">
             <div className="mb-2">
               <img src={guest} alt="Guest Icon" className="w-5 h-5 mx-auto" />
             </div>
-            <p className="text-xs">Guests</p>
+            <p className="text-xs font-poppins">Guests</p>
           </div>
           <div className="w-1/4 p-4 text-center border-r">
             <div className="mb-2">
               <img src={bedroom} alt="Bedroom Icon" className="w-5 h-5 mx-auto" />
             </div>
-            <p className="text-xs">{totalBedrooms} Bedroom(s)</p>
+            <p className="text-xs font-poppins">{totalBedrooms} Bedroom(s)</p>
           </div>
           <div className="w-1/4 p-4 text-center">
             <div className="mb-2">
               <img src={bathroom} alt="Bathroom Icon" className="w-5 h-5 mx-auto" />
             </div>
-            <p className="text-xs">{totalBathrooms} Bathroom(s)</p>
+            <p className="text-xs font-poppins">{totalBathrooms} Bathroom(s)</p>
           </div>
         </div>
       )}
-        <h1 className="font-semibold text-heading mb-2">Amenities</h1>
+        <h1 className="font-semibold text-heading mb-2 font-poppins">Amenities</h1>
         <div className="container my-2">
           <div className="w-full lg:w-1/2 xl:w-1/2 ">
             <div className="flex flex-wrap items-start justify-between">
@@ -100,14 +98,22 @@ const DestPage = ({oneProperty}) => {
                 <div className="w-2/6 mb-3 lg:mt-0 md:w-2/5 lg:w-1/6" key={amenity.id}>
                   <div className="flex flex-col pr-4 items-center justify-start">
                     <img src={amenity.icon} className="h-6 w-6 mb-3" alt={amenity.title} />
-                    <p className="text-xs">{amenity?.Name['#text']?.value}</p>
+                    <p className="text-xs font-poppins">{amenity?.Name['#text']?.value}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
+
+        <button 
+           onClick={()=>navigate("/getQuote")}
+            className="bg-secondary hover:bg-secondary/80
+            mt-5
+             text-white text-xs px-6 py-4 rounded-full transition duration-300 font-poppins">
+              Book your stay</button>
       </div>
+      
 
    </>
   )

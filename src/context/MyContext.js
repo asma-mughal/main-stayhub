@@ -155,6 +155,112 @@ export const MyProvider = ({ children }) => {
         throw new Error('Error fetching data');
       });
   }
+ async function GetLeaseidByReztypeid(formValues) {
+    const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
+    const uniqueId = localStorage.getItem("propertyId")
+    const url = 'https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/CreateQuote';
+    const requestBody = {
+      'username': userName,
+      'password': password,
+      'barefootAccount': barefootAccount,
+      'strADate':arrivalDate,
+      'strDDate': deptDate,
+      'propertyId': '6807',
+      'num_adult': numAdult,
+      'num_pet': numPet,
+      'num_baby': numBaby,
+      'num_child': numChild,
+      'reztypeid': '1001'
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(requestBody)
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData;    
+    } catch (error) {
+      console.error('API Request Error:', error);
+    
+    }
+  }
+  const saveProperty = async(payment,ezicAccount,propertyid,strDate,strEnd,tenantId,leaseId,ccTransType,firstName,lastName,ezicTagHere,ezicTranstype, ezicPayType,
+    cardNumberHere,
+   expireMonth,
+   expireYear,
+   cvv,
+   ccRateType,
+   ccType,
+   street,
+    city,
+    state,
+    zipCode,
+   country) =>{
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+             'username': 'bsc20230607',
+             'password': '#20230607vhgfbefe#375378',
+            'barefootAccount': 'v3cbsc0526',
+            'isTest': 'true',
+          'strPayment': payment,
+          'EzicAccount': ezicAccount,
+          'propertyId': propertyid,
+          'strADate': strDate,
+          'strDDate': strEnd,
+          'tenantid': tenantId,
+          'leaseid': leaseId,
+          'cctranstype': ccTransType,
+          'cFName': firstName,
+          'cLName':lastName,
+          'EzicTag': ezicTagHere,
+          'EzicTranstype': ezicTranstype,
+          'EzicPaytype': ezicPayType,
+          'cardNum': cardNumberHere,
+          'expireMonth': expireMonth,
+          'expireYear':expireYear,
+          'cvv':cvv,
+          'ccratetype': ccRateType,
+          'cctype':ccType,
+          'street':street,
+          'city': city,
+          'state': state,
+          'zip': zipCode,
+          'country':country,
+          'RoutingNo': 'routingNumberHere',
+          'AccSource': 'accSourceHere'
+            })
+          };
+      
+          try {
+            const response = await 
+            fetch(`${urlAPI}/barefootwebservice/BarefootService.asmx/PropertyBookingNew`, requestOptions);
+      
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+      
+            const responseBodyText = await response.text();
+            console.log(responseBodyText)
+          } catch (error) {
+          } finally {
+           
+          }
+    }
   const fetchImages = () =>{
     const uniqueId = localStorage.getItem("propertyId")
    
@@ -256,6 +362,8 @@ export const MyProvider = ({ children }) => {
     parseImages,
     jsonData, setJsonData,
     getAvailablityByDate,
+    saveProperty,
+    GetLeaseidByReztypeid,
     filteredProperties, setFilteredProperties
   };
 

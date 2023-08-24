@@ -10,6 +10,7 @@ import Home from './dashboard/pages/home/Home';
 import MainHome from './components/MainHome';
 import TestAPI from './pages/test';
 import MainForm from './components/Forms/MainForm';
+import BookingPage from './pages/singleDest/BookingPage';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
     <Route path='/single/:id' element={<SingleDest />} />
     <Route path='/dash' element={<Home />} />
     <Route path='/test' element={<TestAPI />} />
-    <Route path='/propertyAdd' element={<MainForm />} />
+    <Route path='/getQuote' element={<BookingPage />} />
   </Routes>
   );
 }

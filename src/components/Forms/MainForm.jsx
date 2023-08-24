@@ -17,14 +17,14 @@ const MainForm = ({ fields, onSubmit }) => {
   };
 
   return (
-<div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center font-poppins">
-  <div class="container max-w-screen-lg mx-auto">
+<div className="min-h-screen p-6 flex items-center justify-center font-poppins">
+  <div className="container max-w-screen-lg mx-auto">
     <div>
 
-      <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-          <div class="text-gray-600">
-            <p class="font-medium text-lg">Property Details</p>
+      <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+        <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+          <div className="text-gray-600">
+            <p className="font-medium text-lg">Property Details</p>
             <p>Please fill out all the fields.</p>
           </div>
 
@@ -58,7 +58,9 @@ const MainForm = ({ fields, onSubmit }) => {
           ))}
           <div className={`md:col-span-5 text-right`}>
             <div className="inline-flex items-end">
-              <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button type="submit" className="bg-secondary hover:bg-secondary/80
+            mt-5
+             text-white text-sm px-6 py-4 rounded-full transition duration-300 font-poppins">
                 Submit
               </button>
             </div>
