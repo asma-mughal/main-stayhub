@@ -18,15 +18,17 @@ const Hero = ({heading, title, name, height}) => {
     const query = event.target.value;
     setSearchQuery(query);
     const filtered = jsonData?.PropertyList?.Property?.filter(property =>
-      property.name['#text']['value'].toLowerCase().includes(query.toLowerCase())
+      property?.name['#text']?.value?.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredProperties(filtered || []);
+    console.log(filtered)
+    setFilteredProperties(filtered);
   };
   useEffect(() => {
     if (jsonData?.PropertyList?.Property) {
       setFilteredProperties(jsonData.PropertyList.Property);
     }
   }, [jsonData]);
+  // console.log(jsonData?.PropertyList?.Property[1]?.name['#text'].value)
   return (
     <section id="home" className="font-poppins relative" >
 <section 

@@ -7,7 +7,7 @@ import { Link, json, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext'
 const Destination = () => {
   const navigate = useNavigate()
-  const { fetchData,convertXmlToJson,jsonData, setJsonData,filteredData, setFilteredData} = useMyContext()
+  const { fetchData,convertXmlToJson,jsonData, setJsonData} = useMyContext()
   const [error, setError] = useState()
   useEffect(() => {
    fetchData((error, responseData) => {
@@ -52,6 +52,7 @@ const Destination = () => {
   start={0}
   end={3}
   link={true}
+  filterYes= {true}
   />
   </>
   )

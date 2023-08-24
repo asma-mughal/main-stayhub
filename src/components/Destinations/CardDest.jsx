@@ -3,7 +3,7 @@ import { bathroom, bedroom, comfort2, gallery4, guest, home, location } from '..
 import { destinatons } from '../../constants'
 import { Link } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
-const CardDest = ({data, start, end,link}) => {
+const CardDest = ({data, start, end,link, filterYes}) => {
   const { fetchImages, parseImages,filteredProperties} = useMyContext();
   const [result,setResult] = useState([])
   useEffect(() => {
@@ -30,7 +30,7 @@ const CardDest = ({data, start, end,link}) => {
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2">
-      {filteredProperties?.slice(start, end).map((item, index) => (
+      { filteredProperties?.slice(start, end).map((item, index) => (
         <div className="my-2 px-2 w-full md:w-1/2 lg:my-4 lg:w-1/3" key={index}>
           <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
             <a href="#">
@@ -43,23 +43,23 @@ const CardDest = ({data, start, end,link}) => {
   
             <header className="flex items-center justify-between leading-tight p-2 md:p-4">
               <h1 className="text-lg">
-                <Link to={`/single/${item.PropertyID['#text'].value}`}>
+                <Link to={`/single/${item.PropertyID['#text']?.value}`}>
                   <a className="no-underline hover:underline font-semibold text-heading" href="#">
-                    {item['name']['#text']['value']}
+                    {item['name']['#text']?.value}
                   </a>
                 </Link>
               </h1>
   
-              {item.a6 && (
+              {item?.a6 && (
                 <div className="flex items-center justify-center">
                   <img src={location} alt="Location Icon" className="w-4 h-4 m-1" />
-                  <span className="text-gray-600 text-sm mr-2">{item['a6']['#text']['value']}</span>
+                  <span className="text-gray-600 text-sm mr-2">{item['a6']['#text']?.value}</span>
                 </div>
               )}
             </header>
   
             {item['description'] && (
-              <p className="flex-grow pb-3 px-2 md:px-4">{item['description']['#text']['value']}</p>
+              <p className="flex-grow pb-3 px-2 md:px-4">{item['description']['#text']?.value}</p>
             )}
 {/*   
             {item['NumberFloors'] && (
@@ -92,11 +92,11 @@ const CardDest = ({data, start, end,link}) => {
             )}
    */}
                
-  {item['maxprice']['#text']['value'] && <footer class="flex items-center justify-between 
+  {item['maxprice']['#text']?.value && <footer class="flex items-center justify-between 
   leading-none p-2 md:p-4">
                         <a class="flex items-center no-underline hover:underline text-black" href="#">
                             <p class="ml-2 text-sm">
-                               $ {item['maxprice']['#text']['value']} per night
+                               $ {item['maxprice']['#text']?.value} per night
                             </p>
                         </a>
                      

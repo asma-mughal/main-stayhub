@@ -21,7 +21,6 @@ const SingleDest = () => {
   useEffect(() => {
     getAvailablityByDate(oneProperty?.Basicinfo?.CheckInTime, oneProperty?.Basicinfo?.CheckOutTime)
       .then(data => {
-       console.log(data)
       })
       .catch(error => {
         console.error('Error fetching property data:', error);
