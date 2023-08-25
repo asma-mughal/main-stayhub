@@ -109,8 +109,9 @@ const DestPage = ({oneProperty}) => {
         <button 
            onClick={()=>navigate("/getQuote")}
             className="bg-secondary hover:bg-secondary/80
-            mt-5
-             text-white text-xs px-6 py-4 rounded-full transition duration-300 font-poppins">
+            mt-5 w-[150px]
+             text-white text-xs px-6 py-4 capitalize
+              rounded-full transition duration-300 font-poppins">
               Book your stay</button>
       </div>
       

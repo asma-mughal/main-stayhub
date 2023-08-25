@@ -11,15 +11,10 @@ const BookingPage = () => {
         { name: 'numBaby', label: 'Number of Baby', colSpan: 5, type:'number' },
         { name: 'numChild', label: 'Number of  Child', colSpan: 5, type:'number' }
       ];
-      const handleSubmit = formData => {
+      const handleSubmit = async (formData) => {
       //arrivalDate, deptDate, numAdult, numPet, numBaby, numChild
-      GetLeaseidByReztypeid((error, responseData) => {
-        if (error) {
-         
-        } else {
-        console.log(responseData)
-        }
-      });
+      const res =await  GetLeaseidByReztypeid(formData);
+      console.log(res)
 
       };
   return (

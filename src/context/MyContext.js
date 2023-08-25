@@ -157,6 +157,7 @@ export const MyProvider = ({ children }) => {
   }
  async function GetLeaseidByReztypeid(formValues) {
     const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
+    console.log(formValues)
     const uniqueId = localStorage.getItem("propertyId")
     const url = 'https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/CreateQuote';
     const requestBody = {
@@ -165,12 +166,11 @@ export const MyProvider = ({ children }) => {
       'barefootAccount': barefootAccount,
       'strADate':arrivalDate,
       'strDDate': deptDate,
-      'propertyId': '6807',
+      'propertyId': '6439',
       'num_adult': numAdult,
       'num_pet': numPet,
       'num_baby': numBaby,
-      'num_child': numChild,
-      'reztypeid': '1001'
+      'num_child': numChild
     };
 
     const requestOptions = {
@@ -189,7 +189,7 @@ export const MyProvider = ({ children }) => {
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
       const jsonData = xmlToJson(xmlDOM);
-      return jsonData;    
+      return jsonData;
     } catch (error) {
       console.error('API Request Error:', error);
     
@@ -293,7 +293,7 @@ export const MyProvider = ({ children }) => {
         const parser2 = new DOMParser();
         const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
         const jsonData = xmlToJson(xmlDOM);
-        return jsonData;
+        console.log(jsonData)
       })
       .catch(error => {
         throw new Error('Error fetching data');
