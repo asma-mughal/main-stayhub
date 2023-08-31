@@ -3,6 +3,7 @@ import { mainDest, star1, home, guest, bedroom, bathroom } from '../../assets'
 import { aminities, destinatons } from '../../constants'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
+import Carousel from '../../components/Slider/Carousel';
 const DestPage = ({oneProperty}) => {
   const { id } = useParams()
   const uniqueId = localStorage.setItem("propertyId", id)
@@ -32,28 +33,18 @@ const DestPage = ({oneProperty}) => {
   return (
 
   <>
-      <div className="w-full h-auto font-poppins">
-{ url && <img className="object-cover w-full h-full" src={url}
-         alt="Image" /> }
+      <div className="w-full font-poppins">
+{ url && <Carousel PropertyImage={oneProperty?.PropertyImages?.PropertyImage}/> }
        
       </div>
       <div className="flex flex-row items-center my-5">
-        {Array.from({ length: oneProperty?.record?.review }, (_, index) => (
-          <img
-            key={index}
-            src={""}
-            className="w-3 h-3 m-1"
-            alt="Star"
-          />
-        ))}
+       
         <span className={`text-sm text-justify text-gray-500 ml-2`}>
           {oneProperty?.record?.review} reviews
         </span>
       </div>
       <div className="flex-col flex">
-        <h1 className={`text-[24px] font-poppins mb-2 font-bold text-heading leading-[30.8px]`}>
-          {oneProperty?.record?.title}{' '}|{' '}{oneProperty?.record?.location}
-        </h1>
+       
         <h1 className="font-semibold text-heading font-poppins mb-2">The Space</h1>
         <p className={`text-xs text-justify text-gray-500 font-poppins my-2 xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl`}>
         Welcome to our popular destinations section, where we unveil a curated collection of captivating locations that are beloved by travelers worldwide. Whether you seek the tranquility of a beachside retreat, the vibrant energy of a bustling city, or the charm of a historic town, our selection of popular destinations offers something for every wanderlust-filled soul. Prepare to embark on an unforgettable journey as we highlight the unique experiences and hidden gems that await you.
@@ -61,10 +52,12 @@ const DestPage = ({oneProperty}) => {
         {oneProperty?.Basicinfo?.City['#text']?.value && 
         <>
         <h1 className="font-semibold text-heading mb-2 font-poppins">Property Location</h1>
-        <p className="text-xs text-justify text-gray-500 font-poppins my-2 xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl">
-        <p className="text-xs text-justify text-gray-500 font-poppins my-2 xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl">
-  {oneProperty?.Basicinfo?.Street['#text']?.value}, {oneProperty?.Basicinfo?.City['#text']?.value},
-   {oneProperty?.Basicinfo?.State['#text']?.value}, {oneProperty?.Basicinfo?.Zip['#text']?.value}, {oneProperty?.Basicinfo?.Country['#text']?.value}
+        <p className="text-xs text-justify text-gray-500 font-poppins 
+       xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl">
+        <p className="text-xs text-justify text-gray-500 font-poppins
+         my-2 xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl">
+  {oneProperty?.Basicinfo?.Street['#text']?.value} {oneProperty?.Basicinfo?.City['#text']?.value},
+ {'  '}  {oneProperty?.Basicinfo?.State['#text']?.value} {oneProperty?.Basicinfo?.Zip['#text']?.value}, {oneProperty?.Basicinfo?.Country['#text']?.value}
 </p>
 </p>
         </>
