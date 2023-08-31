@@ -293,7 +293,6 @@ export const MyProvider = ({ children }) => {
         const parser2 = new DOMParser();
         const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
         const jsonData = xmlToJson(xmlDOM);
-        console.log(jsonData)
       })
       .catch(error => {
         throw new Error('Error fetching data');

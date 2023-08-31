@@ -30,7 +30,7 @@ const CardDest = ({data, start, end,link, filterYes}) => {
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2">
-      { filteredProperties?.slice(start, end).map((item, index) => (
+      { filteredProperties?.map((item, index) => (
         <div className="my-2 px-2 w-full md:w-1/2 lg:my-4 lg:w-1/3" key={index}>
           <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
             <a href="#">
