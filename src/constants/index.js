@@ -1,5 +1,7 @@
-import { air, aminties, bath, comfort2, comfort3, desert2, desert3, food2, food3, gift, internet, iron, pakring, pool, scene, scene2, sliderFood } from "../assets";
-import { comfort, desert, food } from "../assets";
+import { air, aminties, bath, bathroom, bedroom, cap, comfort2, comfort3, desert2, desert3, 
+  dustbin, food2, food3, gift, internet, iron, location, pakring, pool, scene, scene2, sliderFood } from "../assets";
+import { comfort, desert, food, area,  complex, coffee, dvd, fireplace, bbq, info,
+   locker, pets, microwave, TV, washing} from "../assets";
 import { gallery1, gallery2, gallery3, gallery4, gallery5 } from "../assets";
 export const navLinks = [
   {
@@ -385,6 +387,41 @@ export const aminities = [
     icon: pakring
   }
 ]
+
+export const amenityIconMapping = {
+  "Area": area,
+  "BBQ": bbq,
+  "Lockbox":locker,
+  "Allow Pets":pets,
+  "Wifi Code":internet,
+  "Sleep Cap":cap,
+  "Bedrooms":bedroom,
+  "Trash Pick-up day":dustbin,
+  "High Speed Internet":internet,
+  "Washer and Dryer":washing,
+  "Cable TV":TV,
+  "King BR1":bedroom,
+  "Bathroom 1":bathroom,
+  'Bathroom':bathroom,
+  "Bedroom 1 Level":bedroom,
+  "Bathroom 2":bedroom,
+  "En-Suite Bath BR":bedroom,
+  "Microwave":microwave,
+  "Hot Tub":bath,
+  "TV Bed":TV,
+  "DVD":dvd,
+  "DVR":dvd,
+  "ilink":info,
+  "Fireplace":fireplace,
+  "WiFi Router Name":internet,
+  "Additional Bedding":bedroom,
+  "Number of Bathrooms":bedroom,
+  "Long Term Property":area,
+  "Complex":complex,
+  "Location":location, 
+  "Coffee Machine":coffee
+  
+};
 export const urlAPI = "https://portals.barefoot.com"
 export const userName =   'bsc20230607'
 export const password =  '#20230607vhgfbefe#375378'

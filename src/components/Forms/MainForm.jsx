@@ -42,6 +42,7 @@ const MainForm = ({ fields, onSubmit }) => {
                   value={formData[field.name] || ''}
                   onChange={handleChange}
                   placeholder={field.placeholder || ''}
+                  required
                 />
               ) : (
                 <input
@@ -52,6 +53,7 @@ const MainForm = ({ fields, onSubmit }) => {
                   value={formData[field.name] || ''}
                   onChange={handleChange}
                   placeholder={field.placeholder || ''}
+                  required
                 />
               )}
             </div>

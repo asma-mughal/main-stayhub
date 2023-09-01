@@ -1,23 +1,15 @@
 import React,{useState, useEffect} from 'react'
-import { mainDest, star1, home, guest, bedroom, bathroom } from '../../assets'
-import { aminities, destinatons } from '../../constants'
+import { mainDest, star1, home, guest, bedroom, bathroom, info } from '../../assets'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import Carousel from '../../components/Slider/Carousel';
+import { amenityIconMapping } from '../../constants';
 const DestPage = ({oneProperty}) => {
   const { id } = useParams()
   const uniqueId = localStorage.setItem("propertyId", id)
-  const [shuffledIndex, setShuffledIndex] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const getRandomIndex = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-  useEffect(() => {
-    const newShuffledIndex = getRandomIndex(0, 3);
-    setShuffledIndex(newShuffledIndex);
-  }, []);
-    let totalBedrooms = 0;
+ 
+  let totalBedrooms = 0;
   let totalBathrooms = 0;
 
   if (oneProperty?.details?.BedroomAccommodations?.BedroomAccommodation) {
@@ -27,14 +19,42 @@ const DestPage = ({oneProperty}) => {
   if (oneProperty?.details?.BathroomAccommodations?.BathroomAccommodation) {
     totalBathrooms = oneProperty.details.BathroomAccommodations.BathroomAccommodation.length;
   }
-  const url = oneProperty?.PropertyImages?.PropertyImage?.[shuffledIndex]?.ImageUrl?.['#text']?.value || 'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
   console.log(oneProperty)
-
+  const extractUniqueAmenities = () => {
+    // Regular expression pattern to match amenity names
+    const amenityPattern = /[A-Za-z\s-]+/g;
+  
+    const amenitiesSet = new Set();
+  
+    oneProperty?.CustomAmenities?.CustomAmenity?.forEach((amenity) => {
+      const customName = amenity?.CustomName['#text']?.value;
+      const amenitiesList = customName.match(amenityPattern);
+  
+      if (amenitiesList) {
+        amenitiesList.forEach((amenity) => {
+          const trimmedAmenity = amenity.trim();
+  
+          if (trimmedAmenity === 'DVD' || trimmedAmenity === 'DVR') {
+            amenitiesSet.add('DVD/DVR');
+          } else {
+            amenitiesSet.add(trimmedAmenity);
+          }
+        });
+      }
+    });
+  
+    return Array.from(amenitiesSet);
+  };
+  
+  const uniqueAmenities = extractUniqueAmenities();
+  const getDefaultIcon = () => {
+    return info;
+  };
   return (
 
   <>
       <div className="w-full font-poppins">
-{ url && <Carousel PropertyImage={oneProperty?.PropertyImages?.PropertyImage}/> }
+{oneProperty?.PropertyImages?.PropertyImage && <Carousel PropertyImage={oneProperty?.PropertyImages?.PropertyImage}/> }
        
       </div>
       <div className="flex flex-row items-center my-5">
@@ -57,7 +77,7 @@ const DestPage = ({oneProperty}) => {
         <p className="text-xs text-justify text-gray-500 font-poppins
          my-2 xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl">
   {oneProperty?.Basicinfo?.Street['#text']?.value} {oneProperty?.Basicinfo?.City['#text']?.value},
- {'  '}  {oneProperty?.Basicinfo?.State['#text']?.value} {oneProperty?.Basicinfo?.Zip['#text']?.value}, {oneProperty?.Basicinfo?.Country['#text']?.value}
+  {' '} {oneProperty?.Basicinfo?.State['#text']?.value} {oneProperty?.Basicinfo?.Zip['#text']?.value}, {oneProperty?.Basicinfo?.Country['#text']?.value}
 </p>
 </p>
         </>
@@ -101,15 +121,14 @@ const DestPage = ({oneProperty}) => {
         <div className="container my-2">
           <div className="w-full lg:w-1/2 xl:w-1/2 ">
             <div className="flex flex-wrap items-start justify-between">
-              {/* Map through amenities */}
-              {oneProperty?.CustomAmenities?.CustomAmenity?.map((amenity) => (
-                <div className="w-2/6 mb-3 lg:mt-0 md:w-2/5 lg:w-1/6" key={amenity.id}>
-                  <div className="flex flex-col pr-4 items-center justify-start">
-                    <img src={amenity.icon} className="h-6 w-6 mb-3" alt={amenity.title} />
-                    <p className="text-xs font-poppins">{amenity?.Name['#text']?.value}</p>
-                  </div>
-                </div>
-              ))}
+            {uniqueAmenities?.map((amenity) => (
+  <div className="w-2/6 mb-3 lg:mt-0 md:w-2/5 lg:w-1/6" key={amenity.id}>
+    <div className="flex flex-col pr-4 items-center justify-start">
+    <img src={amenityIconMapping[amenity] || getDefaultIcon()} className="h-6 w-6 mb-3" alt={amenity} />
+      <p className="text-xs font-poppins">{amenity}</p>
+    </div>
+  </div>
+))}
             </div>
           </div>
         </div>

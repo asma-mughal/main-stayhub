@@ -41,7 +41,22 @@ import pool from './swimming-man.png';
 import pakring from './parking-sign.png';
 import iron from './iron.png';
 import blackLogo from './logo3.png';
+import area from './area.png';
+import complex from './building.png';
+import coffee from './coffee-machine.png';
+import dvd from './dvd-player.png';
+import fireplace from './fireplace.png';
+import bbq from './grill.png';
+import info from './info.png';
+import locker from './locker.png';
+import pets from './pawprint.png';
+import microwave from './microwave.png';
+import TV from './tv.png';
+import washing from './washing-machine.png';
+import cap from './sleeping-hat.png';
+import dustbin from './dustbin.png';
 export {
+  area, complex, coffee, dvd, fireplace, bbq, info, locker, pets, microwave, TV, washing,cap,dustbin,
   logo, close,menu, hero, tag1, tag2, tag3, cardImage, arrow, location,
   bathroom, guest, home, bedroom, scene, scene2, food, comfort, desert,
   sliderFood, aminties, gift,star1,food2, food3, comfort2, comfort3, desert2 , desert3,
