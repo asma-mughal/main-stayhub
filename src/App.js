@@ -11,6 +11,7 @@ import MainHome from './components/MainHome';
 import TestAPI from './pages/test';
 import MainForm from './components/Forms/MainForm';
 import BookingPage from './pages/singleDest/BookingPage';
+import PropertyAvailable from './pages/singleDest/PropertyAvailable';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
     <Route path='/dash' element={<Home />} />
     <Route path='/test' element={<TestAPI />} />
     <Route path='/getQuote' element={<BookingPage />} />
+    <Route path='/available' element={<PropertyAvailable />} />
   </Routes>
   );
 }

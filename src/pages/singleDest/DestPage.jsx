@@ -1,14 +1,10 @@
-import React,{useState, useEffect} from 'react'
-import { mainDest, star1, home, guest, bedroom, bathroom, info } from '../../assets'
-import { useParams } from 'react-router-dom'
+import React from 'react'
+import {  home, guest, bedroom, bathroom, info } from '../../assets'
 import { useNavigate } from "react-router-dom";
 import Carousel from '../../components/Slider/Carousel';
 import { amenityIconMapping } from '../../constants';
 const DestPage = ({oneProperty}) => {
-  const { id } = useParams()
-  const uniqueId = localStorage.setItem("propertyId", id)
   const navigate = useNavigate();
- 
   let totalBedrooms = 0;
   let totalBathrooms = 0;
 
@@ -19,7 +15,6 @@ const DestPage = ({oneProperty}) => {
   if (oneProperty?.details?.BathroomAccommodations?.BathroomAccommodation) {
     totalBathrooms = oneProperty.details.BathroomAccommodations.BathroomAccommodation.length;
   }
-  console.log(oneProperty)
   const extractUniqueAmenities = () => {
     // Regular expression pattern to match amenity names
     const amenityPattern = /[A-Za-z\s-]+/g;
@@ -125,7 +120,7 @@ const DestPage = ({oneProperty}) => {
   <div className="w-2/6 mb-3 lg:mt-0 md:w-2/5 lg:w-1/6" key={amenity.id}>
     <div className="flex flex-col pr-4 items-center justify-start">
     <img src={amenityIconMapping[amenity] || getDefaultIcon()} className="h-6 w-6 mb-3" alt={amenity} />
-      <p className="text-xs font-poppins">{amenity}</p>
+      <p className="text-xs font-poppins text-center">{amenity}</p>
     </div>
   </div>
 ))}
@@ -134,7 +129,7 @@ const DestPage = ({oneProperty}) => {
         </div>
 
         <button 
-           onClick={()=>navigate("/getQuote")}
+           onClick={()=>navigate("/available")}
             className="bg-secondary hover:bg-secondary/80
             mt-5 w-[150px]
              text-white text-xs px-6 py-4 capitalize

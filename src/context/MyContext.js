@@ -166,11 +166,47 @@ export const MyProvider = ({ children }) => {
       'barefootAccount': barefootAccount,
       'strADate':arrivalDate,
       'strDDate': deptDate,
-      'propertyId': '6439',
+      'propertyId':uniqueId,
       'num_adult': numAdult,
       'num_pet': numPet,
       'num_baby': numBaby,
       'num_child': numChild
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(requestBody)
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData;
+    } catch (error) {
+      console.error('API Request Error:', error);
+    
+    }
+  }
+  async function IsPropertyAvailable(formValues) {
+    const { date1} = formValues;
+    console.log(date1)
+    const uniqueId = localStorage.getItem("propertyId")
+    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/IsPropertyAvailability`;
+    const requestBody = {
+      'username': userName,
+      'password': password, 
+      'barefootAccount': barefootAccount,
+       'date1' :date1,
+       'date2' :date1,
+       'propertyId':uniqueId
     };
 
     const requestOptions = {
@@ -363,7 +399,8 @@ export const MyProvider = ({ children }) => {
     getAvailablityByDate,
     saveProperty,
     GetLeaseidByReztypeid,
-    filteredProperties, setFilteredProperties
+    filteredProperties, setFilteredProperties,
+    IsPropertyAvailable
   };
 
   return (

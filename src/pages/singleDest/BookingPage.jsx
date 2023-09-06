@@ -18,7 +18,9 @@ const BookingPage = () => {
 
       };
   return (
-    <MainForm fields={fields} onSubmit={handleSubmit} />
+    <MainForm fields={fields} onSubmit={handleSubmit} 
+    heading={'Property Details'}
+    />
   )
 }
 
