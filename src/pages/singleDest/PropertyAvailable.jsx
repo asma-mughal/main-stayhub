@@ -24,7 +24,7 @@ const PropertyAvailable = () => {
             }, 2000); 
           } else {
             setTimeout(() => {
-              navigate('/'); 
+              navigate('/test'); 
             }, 2000);
           }
         } catch (error) {
@@ -44,12 +44,12 @@ const PropertyAvailable = () => {
       ) : (
         <div className="result-container text-center">
           {result === 'true' ? (
-            <p className="text-green-500 text-2xl font-poppins">The property is available.</p>
+            <p className="text-green-500 text-xl font-semibold font-poppins">The property is available.</p>
           ) : (
-            <div className="result-not-available">
-              <p className="text-red-500 text-2xl font-poppins">Sorry, the property is not available.</p>
-              <div className="sad-face text-4xl">😞</div>
-            </div>
+            <div className="result-not-available flex items-center">
+                <p className="text-red-500 text-xl font-semibold font-poppins mr-2">Sorry, the property is not available.</p>
+                <div className="sad-face text-xl">😞</div>
+              </div>
           )}
         </div>
       )

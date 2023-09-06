@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
 import MainForm from '../components/Forms/MainForm';
+import { useMyContext } from '../context/MyContext';
 const TestAPI = () => {
-    const [responseData, setResponseData] = useState('');
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
-
+    const {getMinDays} = useMyContext();
     
     const fields = [
       { name: 'strPayment', label: 'Payment Details', colSpan: 5, placeholder: 'Payment info here', type: 'number' }, 
@@ -29,10 +27,12 @@ const TestAPI = () => {
       { name: 'Country', label: 'Country', colSpan: 5 },
     ];
   
-    const handleSubmit = formData => {
-      // Handle form submission logic for Page 1
-      console.log('Page 1 data:', formData);
-    };
+    const handleSubmit = async () => {
+      //arrivalDate, deptDate, numAdult, numPet, numBaby, numChild
+      const res =await  getMinDays();
+      console.log(res)
+
+      };
   return (
     <div>
       <MainForm fields={fields} onSubmit={handleSubmit} />

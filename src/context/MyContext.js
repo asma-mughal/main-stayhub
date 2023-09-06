@@ -90,12 +90,12 @@ export const MyProvider = ({ children }) => {
         'username': userName,
         'password': password,
         'barefootAccount': barefootAccount,
-        'date1' :date1,
-        'date2' : date2,
+        'date1' :'12/12/2023',
+        'date2' : '12/19/2023',
         'weekly' : 0
       })
     };
-    return fetch(`${urlAPI}/barefootwebservice/BarefootService.asmx/GetPropertyAvailabilityByDate`, requestOptions)
+    return fetch(`${urlAPI}/barefootwebservice/BarefootService.asmx/GetPropertyAvailabilityByDateXML`, requestOptions)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -103,6 +103,7 @@ export const MyProvider = ({ children }) => {
       return response.text();
     })
     .then(responseBody => {
+      console.log(responseBody)
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(responseBody, 'text/xml');
 
@@ -110,7 +111,7 @@ export const MyProvider = ({ children }) => {
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
       const jsonData = xmlToJson(xmlDOM);
-      return jsonData;
+     
     })
     .catch(error => {
       throw new Error('Error fetching data');
@@ -231,6 +232,81 @@ export const MyProvider = ({ children }) => {
     
     }
   }
+  async function getMinDays(formValues) {
+    const uniqueId = localStorage.getItem("propertyId")
+    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/GetMinimumDays`;
+    const requestBody = {
+      'username': userName,
+      'password': password, 
+      'barefootAccount': barefootAccount,
+       'propertyId':uniqueId,
+       'reztypeid':'20'
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(requestBody)
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData;
+    } catch (error) {
+      console.error('API Request Error:', error);
+    
+    }
+  }
+
+  //GetQuoteRatesDetail
+  async function GetQuoteRatesDetail(formValues) {
+    const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
+    console.log(formValues)
+    const uniqueId = localStorage.getItem("propertyId")
+    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/CreateQuote`;
+    const requestBody = {
+      'username': userName,
+      'password': password,
+      'barefootAccount': barefootAccount,
+      'strADate':arrivalDate,
+      'strDDate': deptDate,
+      'propertyId':uniqueId,
+      'num_adult': numAdult,
+      'num_pet': numPet,
+      'num_baby': numBaby,
+      'num_child': numChild
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(requestBody)
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData;
+    } catch (error) {
+      console.error('API Request Error:', error);
+    
+    }
+  }
   const saveProperty = async(payment,ezicAccount,propertyid,strDate,strEnd,tenantId,leaseId,ccTransType,firstName,lastName,ezicTagHere,ezicTranstype, ezicPayType,
     cardNumberHere,
    expireMonth,
@@ -298,8 +374,6 @@ export const MyProvider = ({ children }) => {
           }
     }
   const fetchImages = () =>{
-    const uniqueId = localStorage.getItem("propertyId")
-   
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -400,7 +474,8 @@ export const MyProvider = ({ children }) => {
     saveProperty,
     GetLeaseidByReztypeid,
     filteredProperties, setFilteredProperties,
-    IsPropertyAvailable
+    IsPropertyAvailable,
+    getMinDays
   };
 
   return (
