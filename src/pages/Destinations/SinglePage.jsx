@@ -5,7 +5,7 @@ import Footer from '../../components/Footer/Footer';
 import { useMyContext } from '../../context/MyContext';
 import NewCard from '../singleDest/NewCard';
 const DateRange = () =>{
-  const { getAvailablityByDate} = useMyContext()
+  const { getAvailablityByDate,convertXmlToJson} = useMyContext()
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
@@ -19,14 +19,7 @@ const DateRange = () =>{
   const handleSearchButtonClick = async () => {
     try {
       const jsonData = await getAvailablityByDate(startDate, endDate);
-      console.log(jsonData)
-      // const filteredResults = jsonData?.result.filter(item => {
-      
-      //   const availabilityDate = new Date(item.availabilityDate).getTime();
-      //   return availabilityDate >= new Date(startDate).getTime() && availabilityDate <= new Date(endDate).getTime();
-      // });
-  
-      // console.log('Filtered Results:', filteredResults);
+      const data = convertXmlToJson(jsonData?.string['#text'].value);
     } catch (error) {
       console.error('Error fetching or filtering data:', error.message);
     }
@@ -64,6 +57,7 @@ const SinglePage = () => {
   const { fetchData,convertXmlToJson} = useMyContext()
   const [jsonData, setJsonData] = useState({});
   const [error, setError] = useState();
+  const [filteredData, setFilteredData] = useState({});
   useEffect(() => {
    fetchData((error, responseData) => {
      if (error) {

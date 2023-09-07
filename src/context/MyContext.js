@@ -103,15 +103,10 @@ export const MyProvider = ({ children }) => {
       return response.text();
     })
     .then(responseBody => {
-      console.log(responseBody)
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(responseBody, 'text/xml');
-
-      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
-      const parser2 = new DOMParser();
-      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
-      const jsonData = xmlToJson(xmlDOM);
-     
+      const jsonData = xmlToJson(xmlDoc);
+      return jsonData;
     })
     .catch(error => {
       throw new Error('Error fetching data');
@@ -144,12 +139,10 @@ export const MyProvider = ({ children }) => {
       .then(responseBody => {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(responseBody, 'text/xml');
-  
         const xmlString = new XMLSerializer().serializeToString(xmlDoc);
         const parser2 = new DOMParser();
         const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
         const jsonData = xmlToJson(xmlDOM);
-      
         return jsonData;
       })
       .catch(error => {
