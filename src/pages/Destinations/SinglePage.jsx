@@ -4,7 +4,7 @@ import { destinatons } from '../../constants';
 import Footer from '../../components/Footer/Footer';
 import { useMyContext } from '../../context/MyContext';
 import NewCard from '../singleDest/NewCard';
-const DateRange = () =>{
+const DateRange = ({setFilteredData}) =>{
   const { getAvailablityByDate,convertXmlToJson} = useMyContext()
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -20,6 +20,7 @@ const DateRange = () =>{
     try {
       const jsonData = await getAvailablityByDate(startDate, endDate);
       const data = convertXmlToJson(jsonData?.string['#text'].value);
+     setFilteredData(data?.Property?.PropertyAvailability)
     } catch (error) {
       console.error('Error fetching or filtering data:', error.message);
     }
@@ -98,12 +99,16 @@ const SinglePage = () => {
     text-justify font-poppins text-gray-500
     `}>From pristine beaches with crystal-clear waters to majestic mountains with panoramic views, breathtaking beauty at every turn.</p>  
     </div>
-    <DateRange />
-    <NewCard data ={jsonData}
-  start={0}
-  end={3}
-  link={true}
-  />
+    <DateRange
+    filteredData={filteredData}
+    setFilteredData ={setFilteredData}
+     />
+    {Object.keys(filteredData).length > 0 ? (
+        <NewCard data={filteredData} link={true} />
+      ) : (
+        <NewCard data={jsonData?.PropertyList?.Property
+        }  link={true} />
+      )}
     </>
 
   )

@@ -1,11 +1,11 @@
 import React from 'react'
-import { bathroom, bedroom, comfort2, gallery4, guest, home, location } from '../../assets'
+import { gallery4,location } from '../../assets'
 import { Link } from 'react-router-dom'
-const NewCard = ({data, start, end}) => {
+const NewCard = ({ data }) => {
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2"> {/* Adjust mx-2 for spacing */}
-      {data?.PropertyList?.Property?.map((item, index) => (
+      {data?.map((item, index) => (
        <div className="my-2 px-2 w-full md:w-1/2 lg:my-4 lg:w-1/3" key={index}>
        <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
          <a href="#">
@@ -82,7 +82,7 @@ leading-none p-2 md:p-4">
       ))}
     </div>
   </div>
-  )
-}
+  );
+};
 
 export default NewCard
