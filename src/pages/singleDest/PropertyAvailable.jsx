@@ -24,7 +24,7 @@ const PropertyAvailable = () => {
             }, 2000); 
           } else {
             setTimeout(() => {
-              navigate('/test'); 
+              navigate('/getQuote'); 
             }, 2000);
           }
         } catch (error) {

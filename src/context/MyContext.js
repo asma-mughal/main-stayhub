@@ -468,7 +468,8 @@ export const MyProvider = ({ children }) => {
     GetLeaseidByReztypeid,
     filteredProperties, setFilteredProperties,
     IsPropertyAvailable,
-    getMinDays
+    getMinDays,
+    GetQuoteRatesDetail
   };
 
   return (
