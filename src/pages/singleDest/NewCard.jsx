@@ -11,8 +11,8 @@ const NewCard = ({ data }) => {
          <a href="#">
            <img
              alt="Placeholder"
-             className="block h-48 md:h-64 lg:h-80 xl:h-80 w-full object-cover"
-             src={gallery4}
+             className="block h-80 w-full object-cover"
+             src={item['imagepath']['#text']?.value || gallery4}
            />
          </a>
 
