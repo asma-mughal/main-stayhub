@@ -6,6 +6,7 @@ import { useMyContext } from '../../context/MyContext';
 const CardDest = ({data, start, end,link, filterYes}) => {
   const { fetchImages, parseImages,filteredProperties} = useMyContext();
   const [result,setResult] = useState([])
+  console.log(filteredProperties)
   useEffect(() => {
     fetchImages()
       .then(data => {
@@ -34,11 +35,11 @@ const CardDest = ({data, start, end,link, filterYes}) => {
         <div className="my-2 px-2 w-full md:w-1/2 lg:my-4 lg:w-1/3" key={index}>
           <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
             <a href="#">
-              <img
-                alt="Placeholder"
-                className="block h-48 md:h-64 lg:h-80 xl:h-80 w-full object-cover"
-                src={gallery4}
-              />
+            <img
+  alt="Placeholder"
+  className="block max-h-80 w-auto"
+  src={item['imagepath']['#text']?.value || gallery4}
+/>
             </a>
   
             <header className="flex items-center justify-between leading-tight p-2 md:p-4">
