@@ -6,7 +6,6 @@ import { useMyContext } from '../../context/MyContext';
 const CardDest = ({data, start, end,link, filterYes}) => {
   const { fetchImages, parseImages,filteredProperties} = useMyContext();
   const [result,setResult] = useState([])
-  console.log(filteredProperties)
   useEffect(() => {
     fetchImages()
       .then(data => {

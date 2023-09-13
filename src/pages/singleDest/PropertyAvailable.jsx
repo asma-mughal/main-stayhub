@@ -9,6 +9,7 @@ const PropertyAvailable = () => {
     const navigate = useNavigate(); 
     const fields = [
         { name: 'date1', label: 'Arrival Date', colSpan: 5, type:'date' },
+        { name: 'date2', label: 'Departure Date', colSpan: 5, type:'date' },
       ];
       const handleSubmit = async (formData) => {
         setIsLoading(true);
@@ -18,13 +19,14 @@ const PropertyAvailable = () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       setResult(res?.boolean['#text']?.value);
+      console.log(res)
           if (res?.boolean['#text']?.value === 'true') {
             setTimeout(() => {
               navigate('/getQuote');
             }, 2000); 
           } else {
             setTimeout(() => {
-              navigate('/getQuote'); 
+              navigate('/'); 
             }, 2000);
           }
         } catch (error) {

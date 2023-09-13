@@ -90,8 +90,8 @@ export const MyProvider = ({ children }) => {
         'username': userName,
         'password': password,
         'barefootAccount': barefootAccount,
-        'date1' :'12/12/2023',
-        'date2' : '12/19/2023',
+        'date1' :date1,
+        'date2' : date2,
         'weekly' : 0
       })
     };
@@ -190,8 +190,7 @@ export const MyProvider = ({ children }) => {
     }
   }
   async function IsPropertyAvailable(formValues) {
-    const { date1} = formValues;
-    console.log(date1)
+    const { date1, date2} = formValues;
     const uniqueId = localStorage.getItem("propertyId")
     const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/IsPropertyAvailability`;
     const requestBody = {
@@ -199,7 +198,7 @@ export const MyProvider = ({ children }) => {
       'password': password, 
       'barefootAccount': barefootAccount,
        'date1' :date1,
-       'date2' :date1,
+       'date2' :date2,
        'propertyId':uniqueId
     };
 
