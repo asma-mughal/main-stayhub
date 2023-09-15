@@ -263,6 +263,47 @@ export const MyProvider = ({ children }) => {
     const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
     console.log(formValues)
     const uniqueId = localStorage.getItem("propertyId")
+    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/CreateQuoteByReztypeid`;
+    const requestBody = {
+      'username': userName,
+      'password': password,
+      'barefootAccount': barefootAccount,
+      'strADate':arrivalDate,
+      'strDDate': deptDate,
+      'propertyId':uniqueId,
+      'num_adult': numAdult,
+      'num_pet': numPet,
+      'num_baby': numBaby,
+      'num_child': numChild,
+      'reztypeid':20
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(requestBody)
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData;
+    } catch (error) {
+      console.error('API Request Error:', error);
+    
+    }
+  }
+  async function GetOptionalServiceIDs (formValues) {
+    const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
+    console.log(formValues)
+    const uniqueId = localStorage.getItem("propertyId")
     const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/CreateQuote`;
     const requestBody = {
       'username': userName,

@@ -25,6 +25,7 @@ function App() {
     <Route path='/getQuote' element={<BookingPage />} />
     <Route path='/available' element={<PropertyAvailable />} />
     <Route path='/rates' element={<PropertyRates />} />
+    
   </Routes>
   );
 }
