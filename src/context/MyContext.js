@@ -300,22 +300,14 @@ export const MyProvider = ({ children }) => {
     
     }
   }
-  async function GetOptionalServiceIDs (formValues) {
-    const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
-    console.log(formValues)
+  async function GetOptionalServiceIDs(formValues) {
     const uniqueId = localStorage.getItem("propertyId")
     const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/CreateQuote`;
     const requestBody = {
       'username': userName,
       'password': password,
       'barefootAccount': barefootAccount,
-      'strADate':arrivalDate,
-      'strDDate': deptDate,
-      'propertyId':uniqueId,
-      'num_adult': numAdult,
-      'num_pet': numPet,
-      'num_baby': numBaby,
-      'num_child': numChild
+      'reztypeID':20,
     };
 
     const requestOptions = {
@@ -334,7 +326,7 @@ export const MyProvider = ({ children }) => {
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
       const jsonData = xmlToJson(xmlDOM);
-      return jsonData;
+     console.log(jsonData)
     } catch (error) {
       console.error('API Request Error:', error);
     
@@ -509,7 +501,8 @@ export const MyProvider = ({ children }) => {
     filteredProperties, setFilteredProperties,
     IsPropertyAvailable,
     getMinDays,
-    GetQuoteRatesDetail
+    GetQuoteRatesDetail,
+    GetOptionalServiceIDs
   };
 
   return (

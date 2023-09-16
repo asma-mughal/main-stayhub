@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
-
+import { useNavigate } from 'react-router-dom';
+import { useMyContext } from '../../context/MyContext';
 const PropertyRates = () => {
     const [propertyRates, setPropertyRates] = useState(null);
-  
+    const navigate = useNavigate(); 
     useEffect(() => {
       const storedDataJSON = localStorage.getItem('propertyRatesData');
       const storedData = JSON.parse(storedDataJSON);
@@ -10,7 +11,12 @@ const PropertyRates = () => {
         setPropertyRates(storedData);
       }
     }, []);
-  console.log(propertyRates)
+    const handleSubmit = () =>{
+      setTimeout(() => {
+        navigate('/optional')
+      }, 2000); 
+    
+    }
     return (
         <div className="flex flex-col justify-center 
         font-poppins
@@ -39,7 +45,9 @@ const PropertyRates = () => {
           <p className="mt-4 text-red-600 text-sm">
             Disclaimer: Please review the property rates carefully before proceeding.
           </p>
-          <button type="submit" className="bg-secondary hover:bg-secondary/80
+          <button type="submit"
+          onClick={handleSubmit}
+           className="bg-secondary hover:bg-secondary/80
             mt-5 w-full
              text-white text-sm px-6 py-4 rounded-full transition duration-300 font-poppins">
                 Next

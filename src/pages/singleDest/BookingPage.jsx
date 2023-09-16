@@ -22,7 +22,7 @@ const BookingPage = () => {
           const data = convertXmlToJson(res?.string['#text']?.value);
           console.log(data)
           const dataJSON = JSON.stringify(data);
-          // localStorage.setItem('propertyRatesData', dataJSON);
+          localStorage.setItem('propertyRatesData', dataJSON);
           setTimeout(()=>{
          
           },2000)
@@ -31,7 +31,7 @@ const BookingPage = () => {
           console.error('Error:', error);
         } finally {
           setIsLoading(false);
-          //navigate("/rates")
+          navigate("/rates")
         }
       };
   return (

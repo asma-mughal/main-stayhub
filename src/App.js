@@ -12,6 +12,7 @@ import MainForm from './components/Forms/MainForm';
 import BookingPage from './pages/singleDest/BookingPage';
 import PropertyAvailable from './pages/singleDest/PropertyAvailable';
 import PropertyRates from './pages/Quote/PropertyRates';
+import OptionalService from './pages/Quote/OptionalService';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
     <Route path='/getQuote' element={<BookingPage />} />
     <Route path='/available' element={<PropertyAvailable />} />
     <Route path='/rates' element={<PropertyRates />} />
-    
+    <Route path='/optional' element={<OptionalService />} />
   </Routes>
   );
 }
