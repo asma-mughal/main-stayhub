@@ -502,7 +502,8 @@ export const MyProvider = ({ children }) => {
     IsPropertyAvailable,
     getMinDays,
     GetQuoteRatesDetail,
-    GetOptionalServiceIDs
+    GetOptionalServiceIDs,
+    xmlToJson
   };
 
   return (

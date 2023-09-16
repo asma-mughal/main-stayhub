@@ -2,8 +2,9 @@ import React, {useState} from 'react'
 import MainForm from '../../components/Forms/MainForm';
 import { useMyContext } from '../../context/MyContext';
 import { useNavigate } from 'react-router-dom';
+
 const BookingPage = () => {
-    const {GetQuoteRatesDetail,convertXmlToJson} = useMyContext()
+    const {GetQuoteRatesDetail,convertXmlToJson, xmlToJson} = useMyContext()
       const [isLoading, setIsLoading] = useState(false);
       const navigate = useNavigate(); 
     const fields = [
@@ -20,9 +21,7 @@ const BookingPage = () => {
           const res = await GetQuoteRatesDetail(formData);
           console.log(res)
           const data = convertXmlToJson(res?.string['#text']?.value);
-          console.log(data)
-          const dataJSON = JSON.stringify(data);
-          localStorage.setItem('propertyRatesData', dataJSON);
+
           setTimeout(()=>{
          
           },2000)
@@ -31,7 +30,7 @@ const BookingPage = () => {
           console.error('Error:', error);
         } finally {
           setIsLoading(false);
-          navigate("/rates")
+          //navigate("/rates")
         }
       };
   return (
