@@ -261,7 +261,6 @@ export const MyProvider = ({ children }) => {
   //GetQuoteRatesDetail
   async function GetQuoteRatesDetail(formValues) {
     const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
-    console.log(formValues)
     const uniqueId = localStorage.getItem("propertyId")
     const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/CreateQuoteByReztypeid`;
     const requestBody = {

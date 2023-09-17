@@ -2,7 +2,39 @@ import React, {useState} from 'react'
 import MainForm from '../../components/Forms/MainForm';
 import { useMyContext } from '../../context/MyContext';
 import { useNavigate } from 'react-router-dom';
+function parseXmlData(xmlData) {
+  try {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
+    const propertyRatesData = {};
+    const propertyRatesElements = xmlDoc.querySelectorAll('propertyRates propertyratesdetails');
+    propertyRatesElements.forEach((detail, index) => {
+      const ratesname = detail.querySelector('ratesname').textContent;
+      const ratesvalue = parseFloat(detail.querySelector('ratesvalue').textContent);
+      const ratesid = parseInt(detail.querySelector('ratesid').textContent);
+      propertyRatesData[`propertyRate${index + 1}`] = { ratesname, ratesvalue, ratesid };
+    });
+    const quoteInfoElement = xmlDoc.querySelector('QuoteInfo');
+    const quoteInfoData = {};
+    if (quoteInfoElement) {
+      const quoteInfoFields = Array.from(quoteInfoElement.children);
+      quoteInfoFields.forEach(field => {
+        quoteInfoData[field.tagName] = field.textContent;
+      });
+    }
 
+    // Combine the extracted data
+    const extractedData = {
+      propertyRates: propertyRatesData,
+      QuoteInfo: quoteInfoData,
+    };
+
+    return extractedData;
+  } catch (error) {
+    console.error('Error parsing XML data:', error);
+    return null; // Return null to indicate an error occurred
+  }
+}
 const BookingPage = () => {
     const {GetQuoteRatesDetail,convertXmlToJson, xmlToJson} = useMyContext()
       const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +53,13 @@ const BookingPage = () => {
           const res = await GetQuoteRatesDetail(formData);
           console.log(res)
           const data = convertXmlToJson(res?.string['#text']?.value);
-
+          const dataJSON = JSON.stringify(data);
+          localStorage.setItem('propertyRatesData', dataJSON);
+          const rawData = res?.string['#text']?.value;
+          const xmlDataWithRoot = `<root>${rawData}</root>`;
+          const result = parseXmlData(xmlDataWithRoot);
+          const resultJson = JSON.stringify(result);
+          localStorage.setItem('quoteInfo', resultJson);
           setTimeout(()=>{
          
           },2000)
@@ -30,7 +68,7 @@ const BookingPage = () => {
           console.error('Error:', error);
         } finally {
           setIsLoading(false);
-          //navigate("/rates")
+          navigate("/rates")
         }
       };
   return (
