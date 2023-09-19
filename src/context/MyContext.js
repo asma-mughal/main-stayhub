@@ -257,8 +257,6 @@ export const MyProvider = ({ children }) => {
     
     }
   }
-
-  //GetQuoteRatesDetail
   async function GetQuoteRatesDetail(formValues) {
     const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
     const uniqueId = localStorage.getItem("propertyId")
@@ -309,6 +307,70 @@ export const MyProvider = ({ children }) => {
       'reztypeID':20,
       'begindate':formValues?.ArrivedDate,
       'enddate':formValues?.DepartureDate
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(requestBody)
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData
+    } catch (error) {
+      console.error('API Request Error:', error);
+    
+    }
+  }
+  async function AddCoupon(couponCode, leaseId) {
+    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/AddCoupon`;
+    const requestBody = {
+      'username': userName,
+      'password': password,
+      'barefootAccount': barefootAccount,
+      'leaseid':leaseId,
+    'couponCode':couponCode,
+
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(requestBody)
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData
+    } catch (error) {
+      console.error('API Request Error:', error);
+    
+    }
+  }
+  async function deleteCoupon(couponCode, leaseId) {
+    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/RemoveCoupon`;
+    const requestBody = {
+      'username': userName,
+      'password': password,
+      'barefootAccount': barefootAccount,
+      'leaseid':leaseId,
     };
 
     const requestOptions = {
@@ -431,41 +493,7 @@ export const MyProvider = ({ children }) => {
            
           }
     }
-  const fetchImages = () =>{
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Cookie': 'ASP.NET_SessionId=nksnbl2xfnhvahhvq1feejmt'
-      },
-      body: new URLSearchParams({
-        'username': userName,
-        'password': password,
-        'barefootAccount': barefootAccount,
-        'PropertyID': '6750'
-      })
-    };
-  
-    return fetch(`${urlAPI}/barefootwebservice/BarefootService.asmx/GetPropertyAllImgs`,
-     requestOptions)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then(responseBody => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(responseBody, 'text/xml');
-        const xmlString = new XMLSerializer().serializeToString(xmlDoc);
-        const parser2 = new DOMParser();
-        const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
-        const jsonData = xmlToJson(xmlDOM);
-      })
-      .catch(error => {
-        throw new Error('Error fetching data');
-      });
-  }
+ 
   // const convertXmlToJson = (xmlData) => {
   //   const options = { compact: true, spaces: 2 };
   //   const result = xmlJs.xml2json(xmlData, options);
@@ -525,7 +553,6 @@ export const MyProvider = ({ children }) => {
     fetchData,
     convertXmlToJson,
     fetchOneProperty,
-    fetchImages,
     parseImages,
     jsonData, setJsonData,
     getAvailablityByDate,
