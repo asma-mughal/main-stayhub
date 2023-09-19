@@ -333,6 +333,38 @@ export const MyProvider = ({ children }) => {
     
     }
   }
+  async function GetCouponList(leaseId) {
+   
+    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/GetValidCouponList`;
+    const requestBody = {
+      'username': userName,
+      'password': password,
+      'barefootAccount': barefootAccount,
+      'leaseid':leaseId
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(requestBody)
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData
+    } catch (error) {
+      console.error('API Request Error:', error);
+    
+    }
+  }
   const saveProperty = async(payment,ezicAccount,propertyid,strDate,strEnd,tenantId,leaseId,ccTransType,firstName,lastName,ezicTagHere,ezicTranstype, ezicPayType,
     cardNumberHere,
    expireMonth,
@@ -504,7 +536,8 @@ export const MyProvider = ({ children }) => {
     getMinDays,
     GetQuoteRatesDetail,
     GetOptionalServiceIDs,
-    xmlToJson
+    xmlToJson,
+    GetCouponList
   };
 
   return (

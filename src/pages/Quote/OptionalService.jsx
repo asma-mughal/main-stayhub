@@ -18,7 +18,7 @@ const OptionalService = () => {
     const [optionalServices, setOptionalServices] = useState();
     useEffect(() => {
       const storedDataJSON = localStorage.getItem('quoteInfo');
-    const storedData = JSON.parse(storedDataJSON);
+      const storedData = JSON.parse(storedDataJSON);
       const fetchData = async () => {
         try {
           const optionalServiceData = await GetOptionalServiceIDs(storedData?.QuoteInfo);
@@ -33,7 +33,7 @@ const OptionalService = () => {
     }, []); 
     const handleSubmit = () =>{
       setTimeout(() => {
-        navigate('/optional')
+        navigate('/coupon')
       }, 1000); 
     
     }

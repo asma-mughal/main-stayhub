@@ -13,6 +13,7 @@ import BookingPage from './pages/singleDest/BookingPage';
 import PropertyAvailable from './pages/singleDest/PropertyAvailable';
 import PropertyRates from './pages/Quote/PropertyRates';
 import OptionalService from './pages/Quote/OptionalService';
+import GetCoupon from './pages/Quote/GetCoupon';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
     <Route path='/available' element={<PropertyAvailable />} />
     <Route path='/rates' element={<PropertyRates />} />
     <Route path='/optional' element={<OptionalService />} />
+    <Route path='/coupon' element={<GetCoupon />} />
   </Routes>
   );
 }
