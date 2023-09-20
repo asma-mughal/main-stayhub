@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { useMyContext } from '../../context/MyContext'
+import { useNavigate } from 'react-router-dom';
 
 const GetCoupon = () => {
     const { GetCouponList,convertXmlToJson } = useMyContext();
     const [data, setData] = useState(null);
+    const navigate = useNavigate(); 
     useEffect(() => {
         // Load data from local storage
         const storedDataJSON = localStorage.getItem('quoteInfo');
@@ -20,6 +22,7 @@ const GetCoupon = () => {
         fetchData();
       }, []);
     const handleSubmit = () =>{
+      navigate('/consumer')
     }
   
     const handleDeleteCoupon =() =>{

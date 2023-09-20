@@ -4,29 +4,8 @@ import { destinatons } from '../../constants'
 import { Link } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
 const CardDest = ({data, start, end,link, filterYes}) => {
-  const { fetchImages, parseImages,filteredProperties} = useMyContext();
+  const {  parseImages,filteredProperties} = useMyContext();
   const [result,setResult] = useState([])
-  useEffect(() => {
-    fetchImages()
-      .then(data => {
-      //console.log(data)
-      // const propertyImages = data.DataSet["xs:schema"]["xs:element"]["xs:complexType"]["xs:choice"]["xs:element"]["xs:complexType"]["xs:sequence"]["xs:element"];
-
-      // const extractedImages = propertyImages.map(image => {
-      //   return {
-      //     propertyId: image["attributes"]["name"] === "propertyId" ? image["attributes"]["type"] : "",
-      //     imageNo: image["attributes"]["name"] === "imageNo" ? image["attributes"]["type"] : "",
-      //     imagepath: image["attributes"]["name"] === "imagepath" ? image["attributes"]["type"] : "",
-      //     imageDesc: image["attributes"]["name"] === "imageDesc" ? image["attributes"]["type"] : "",
-      //   };
-      // });
-      
-      // console.log(extractedImages);
-      })
-      .catch(error => {
-        console.error('Error fetching property data:', error);
-      });
-  }, []);
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2">
