@@ -58,7 +58,7 @@ export const MyProvider = ({ children }) => {
       })
     };
   
-    fetch(`${urlAPI}/barefootwebservice/BarefootService.asmx/GetProperty`, requestOptions)
+    fetch(`${urlAPI}/GetProperty`, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -95,7 +95,7 @@ export const MyProvider = ({ children }) => {
         'weekly' : 0
       })
     };
-    return fetch(`${urlAPI}/barefootwebservice/BarefootService.asmx/GetPropertyAvailabilityByDateXML`, requestOptions)
+    return fetch(`${urlAPI}/GetPropertyAvailabilityByDateXML`, requestOptions)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -129,7 +129,7 @@ export const MyProvider = ({ children }) => {
       })
     };
   
-    return fetch(`${urlAPI}/barefootwebservice/BarefootService.asmx/GetPropertyDetails`, requestOptions)
+    return fetch(`${urlAPI}/GetPropertyDetails`, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -153,7 +153,7 @@ export const MyProvider = ({ children }) => {
     const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
     console.log(formValues)
     const uniqueId = localStorage.getItem("propertyId")
-    const url = 'https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/CreateQuote';
+    const url = `${urlAPI}/CreateQuote`;
     const requestBody = {
       'username': userName,
       'password': password,
@@ -192,7 +192,7 @@ export const MyProvider = ({ children }) => {
   async function IsPropertyAvailable(formValues) {
     const { date1, date2} = formValues;
     const uniqueId = localStorage.getItem("propertyId")
-    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/IsPropertyAvailability`;
+    const url = `${urlAPI}/IsPropertyAvailability`;
     const requestBody = {
       'username': userName,
       'password': password, 
@@ -226,7 +226,7 @@ export const MyProvider = ({ children }) => {
   }
   async function getMinDays(formValues) {
     const uniqueId = localStorage.getItem("propertyId")
-    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/GetMinimumDays`;
+    const url = `${urlAPI}/GetMinimumDays`;
     const requestBody = {
       'username': userName,
       'password': password, 
@@ -260,7 +260,7 @@ export const MyProvider = ({ children }) => {
   async function GetQuoteRatesDetail(formValues) {
     const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
     const uniqueId = localStorage.getItem("propertyId")
-    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/CreateQuoteByReztypeid`;
+    const url = `${urlAPI}/CreateQuoteByReztypeid`;
     const requestBody = {
       'username': userName,
       'password': password,
@@ -299,7 +299,7 @@ export const MyProvider = ({ children }) => {
   }
   async function GetOptionalServiceIDs(formValues) {
     const uniqueId = localStorage.getItem("propertyId");
-    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/GetOptionalServiceIDs`;
+    const url = `${urlAPI}/GetOptionalServiceIDs`;
     const requestBody = {
       'username': userName,
       'password': password,
@@ -332,7 +332,7 @@ export const MyProvider = ({ children }) => {
     }
   }
   async function AddCoupon(couponCode, leaseId) {
-    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/AddCoupon`;
+    const url = `${urlAPI}/AddCoupon`;
     const requestBody = {
       'username': userName,
       'password': password,
@@ -365,7 +365,7 @@ export const MyProvider = ({ children }) => {
     }
   }
   async function deleteCoupon(couponCode, leaseId) {
-    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/RemoveCoupon`;
+    const url = `${urlAPI}/RemoveCoupon`;
     const requestBody = {
       'username': userName,
       'password': password,
@@ -397,7 +397,7 @@ export const MyProvider = ({ children }) => {
   }
   async function GetCouponList(leaseId) {
    
-    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx/GetValidCouponList`;
+    const url = `${urlAPI}/GetValidCouponList`;
     const requestBody = {
       'username': userName,
       'password': password,
@@ -429,7 +429,7 @@ export const MyProvider = ({ children }) => {
   }
   async function setCosumerInfo(info) {
   
-    const url = `${urlAPI}/barefootwebservice/BarefootService.asmx?op=SetConsumerInfo`;
+    const url = `${urlAPI}?op=SetConsumerInfo`;
     const requestBody = {
       'username': userName,
       'password': password,

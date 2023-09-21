@@ -422,7 +422,7 @@ export const amenityIconMapping = {
   "Coffee Machine":coffee
   
 };
-export const urlAPI = "https://portals.barefoot.com"
+export const urlAPI = "https://portals.barefoot.com/barefootwebservice/BarefootService.asmx"
 export const userName =   'bsc20230607'
 export const password =  '#20230607vhgfbefe#375378'
 export const barefootAccount =  'v3cbsc0526'
