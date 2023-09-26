@@ -4,6 +4,11 @@ import { destinatons } from '../../constants'
 import { Link } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
 const CardDest = ({data, start, end,link, filterYes}) => {
+  function handleLinkClick(propertyId) {
+    // Set the propertyId in localStorage
+    localStorage.setItem('propertyId', propertyId);
+  }
+  
   const {  parseImages,filteredProperties} = useMyContext();
   const [result,setResult] = useState([])
   return (
@@ -22,7 +27,10 @@ const CardDest = ({data, start, end,link, filterYes}) => {
   
             <header className="flex items-center justify-between leading-tight p-2 md:p-4">
               <h1 className="text-lg">
-                <Link to={`/single/${item.PropertyID['#text']?.value}`}>
+                <Link to={`/single/${item.PropertyID['#text']?.value}`
+                }
+                onClick={() => handleLinkClick(item.PropertyID['#text']?.value)}
+                >
                   <a className="no-underline hover:underline font-semibold text-heading" href="#">
                     {item['name']['#text']?.value}
                   </a>

@@ -117,7 +117,7 @@ const DestPage = ({oneProperty}) => {
           <div className="w-full lg:w-1/2 xl:w-1/2 ">
             <div className="flex flex-wrap items-start justify-between">
             {uniqueAmenities?.map((amenity) => (
-  <div className="w-2/6 mb-3 lg:mt-0 md:w-2/5 lg:w-1/6" key={amenity.id}>
+  <div className="w-2/6 mb-3 lg:mt-0 md:w-2/5 lg:w-1/6" key={oneProperty?.id}>
     <div className="flex flex-col pr-4 items-center justify-start">
     <img src={amenityIconMapping[amenity] || getDefaultIcon()} className="h-6 w-6 mb-3" alt={amenity} />
       <p className="text-xs font-poppins text-center">{amenity}</p>

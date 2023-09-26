@@ -429,12 +429,15 @@ export const MyProvider = ({ children }) => {
   }
   async function setCosumerInfo(info) {
   
-    const url = `${urlAPI}?op=SetConsumerInfo`;
+    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/SetConsumerInfo?
+    username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&
+    Info=street1&Info=aasddfdf&Info=street1&Info=street1&Info=street1&Info=street1&Info=street1
+    &Info=street1&Info=d&
+    Info=ed&Info=ds&Info=ed&Info=sf&Info=rfr&Info=rrf&Info=srgr&Info=rgreg`;
     const requestBody = {
       'username': userName,
       'password': password,
       'barefootAccount': barefootAccount,
-      'Info':'info'
     };
 
     const requestOptions = {

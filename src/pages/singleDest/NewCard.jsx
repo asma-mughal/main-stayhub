@@ -1,6 +1,10 @@
 import React from 'react'
 import { gallery4,location } from '../../assets'
 import { Link } from 'react-router-dom'
+function handleLinkClick(propertyId) {
+  localStorage.setItem('propertyId', propertyId);
+}
+
 const NewCard = ({ data }) => {
   return (
     <div className="px-3 font-poppins">
@@ -18,7 +22,9 @@ const NewCard = ({ data }) => {
 
          <header className="flex items-center justify-between leading-tight p-2 md:p-4">
            <h1 className="text-lg">
-             <Link to={`/single/${item.PropertyID['#text']?.value}`}>
+             <Link to={`/single/${item.PropertyID['#text']?.value}`}
+             onClick={() => handleLinkClick(item.PropertyID['#text']?.value)}
+             >
                <a className="no-underline hover:underline font-semibold text-heading" href="#">
                  {item['name']['#text']?.value}
                </a>
