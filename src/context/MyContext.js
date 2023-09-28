@@ -427,49 +427,27 @@ export const MyProvider = ({ children }) => {
     
     }
   }
-  async function setCosumerInfo() {
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        username: 'bsc20230607',
-        password: '#20230607vhgfbefe#375378',
-        barefootAccount: 'v3cbsc0526',
-        Info: 'saif',
-        Info: 'azeem',
-        Info: 'abbasi',
-        Info: 'islamabd',
-        Info: 'pakistan',
-        Info: 'numl',
-        Info: 'dev',
-        Info: 'frontend',
-        Info: 'python',
-        Info: 'java',
-        Info: 'tensorflow',
-        Info: 'AI',
-        Info: 'record',
-        Info: 'react',
-        Info: 'next',
-        Info: 'jas',
-        Info: 'test',
-        Info: 'api',
-      }),
-    };
-  
-    try {
-      const response = await fetch('https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/SetConsumerInfo', requestOptions);
-      
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
-      }
-  
-      const data = await response.text();
-      return data; // Return the response data
-    } catch (error) {
-      throw new Error(`An error occurred: ${error.message}`);
-    }
+  async function setCosumerInfo(formValues) {
+    const uniqueId = localStorage.getItem("propertyId")
+    const {street1,street2, city,state, zip,country,lastname,firstname,homephone,bizphone,fax,mobile,email,strADate,strDDate,SourceOfBusiness } = formValues;
+    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/SetConsumerInfo?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&Info=${street1}&Info=${street2}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=${lastname}&Info=${firstname}&Info=${homephone}&Info=${bizphone}&Info=${fax}&Info=${mobile}&Info=${email}&Info=${strADate}&Info=${strDDate}&Info=${uniqueId}&Info=${SourceOfBusiness}`;
+    
+      fetch(url)  
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+          }
+          return response.text();
+        })
+        .then(data => {
+          const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(data, "text/xml");
+    const tenantId = xmlDoc.getElementsByTagName("int")[0]?.textContent;
+    localStorage.setItem("tenantId", tenantId);
+        })
+        .catch(error => {
+          console.error(error);
+        });
   }
   
   const saveProperty = async(payment,ezicAccount,propertyid,strDate,strEnd,tenantId,leaseId,ccTransType,firstName,lastName,ezicTagHere,ezicTranstype, ezicPayType,

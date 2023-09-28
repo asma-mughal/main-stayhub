@@ -6,21 +6,14 @@ const ConsumerInfo = () => {
     const {convertXmlToJson, xmlToJson, setCosumerInfo} = useMyContext()
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate(); 
-    useEffect(() => {
-      setCosumerInfo()
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          console.error(error.message);
-        });
-    }, []); 
+
     const fields = [
         { name: 'street1', label: 'Street # 01', colSpan: 5, type:'text' },
         { name: 'street2', label: 'Street # 02', colSpan: 5, type:'text' },
         { name: 'city', label: 'City', colSpan: 5 , type:'text'},
         { name: 'state', label: 'State', colSpan: 5 , type:'text'},
         { name: 'zip', label: 'Zip Code', colSpan: 5, type:'number' },
+        { name: 'country', label: 'Country', colSpan: 5, type:'string' },
         { name: 'lastname', label: 'Last Name', colSpan: 5, type:'text' },
         { name: 'firstname', label: 'First Name', colSpan: 5, type:'text' },
         { name: 'homephone', label: 'Home Phone', colSpan: 5, type:'number' },
@@ -28,23 +21,32 @@ const ConsumerInfo = () => {
         { name: 'fax', label: 'Fax', colSpan: 5, type:'number' },
         { name: 'mobile', label: 'Mobile Number', colSpan: 5, type:'number' },
         { name: 'email', label: 'Email', colSpan: 5, type:'email' },
-        { name: 'strADate', label: 'Arrival Date', colSpan: 5, type:'text' },
+        { name: 'strADate', label: 'Arrival Date', colSpan: 5, type:'date' },
+        { name: 'strDDate', label: 'Departure Date', colSpan: 5, type:'date' },
         { name: 'SourceOfBusiness', label: 'Source of Busniess', colSpan: 5, type:'text' }
       ];
+      // useEffect(() => {
+      //   const url = 'https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/SetConsumerInfo?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&Info=street1&Info=aasddfdf&Info=street1&Info=street1&Info=street1&Info=street1&Info=street1&Info=street1&Info=d&Info=ed&Info=ds&Info=ed&Info=sf&Info=rfr&Info=rrf&Info=srgr&Info=rgreg';
+    
+      //   fetch(url)
+      //     .then(response => {
+      //       if (!response.ok) {
+      //         throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+      //       }
+      //       return response.text();
+      //     })
+      //     .then(data => {
+      //       console.log(data);
+      //     })
+      //     .catch(error => {
+      //       console.error(error);
+      //     });
+      // }, []);
       const handleSubmit = async (formData) => {
-        console.log(formData)
         try {
           setIsLoading(true);
-          const res = await setCosumerInfo(formData);
-          console.log(res)
-          const data = convertXmlToJson(res?.string['#text']?.value);
-          const dataJSON = JSON.stringify(data);
-          localStorage.setItem('propertyRatesData', dataJSON);
-          const rawData = res?.string['#text']?.value;
-          const xmlDataWithRoot = `<root>${rawData}</root>`;
-        //   const result = parseXmlData(xmlDataWithRoot);
-        //   const resultJson = JSON.stringify(result);
-        //   localStorage.setItem('quoteInfo', resultJson);
+          const data = await setCosumerInfo(formData)
+          console.log(data)
           setTimeout(()=>{
          
           },2000)
