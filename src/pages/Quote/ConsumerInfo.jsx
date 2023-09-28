@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useMyContext } from '../../context/MyContext';
 import { useNavigate } from 'react-router-dom';
 import MainForm from '../../components/Forms/MainForm';
@@ -6,6 +6,15 @@ const ConsumerInfo = () => {
     const {convertXmlToJson, xmlToJson, setCosumerInfo} = useMyContext()
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate(); 
+    useEffect(() => {
+      setCosumerInfo()
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.error(error.message);
+        });
+    }, []); 
     const fields = [
         { name: 'street1', label: 'Street # 01', colSpan: 5, type:'text' },
         { name: 'street2', label: 'Street # 02', colSpan: 5, type:'text' },

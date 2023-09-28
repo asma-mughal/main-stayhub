@@ -26,7 +26,6 @@ const SingleDest = () => {
         console.error('Error fetching property data:', error);
       });
   }, []);
-  console.log(oneProperty)
   return (
     <div className="w-full overflow-hidden">
     
