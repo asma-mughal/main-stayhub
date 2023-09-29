@@ -484,7 +484,7 @@ export const MyProvider = ({ children }) => {
         });
   }
   
-  const saveProperty = async(payment,ezicAccount,propertyid,strDate,strEnd,tenantId,leaseId,ccTransType,firstName,lastName,ezicTagHere,ezicTranstype, ezicPayType,
+  const saveProperty = async(payment,ezicAccount,propertyid,strADate,strEnd,tenantId,leaseId,ccTransType,firstName,lastName,ezicTagHere,ezicTranstype, ezicPayType,
     cardNumberHere,
    expireMonth,
    expireYear,
@@ -496,59 +496,21 @@ export const MyProvider = ({ children }) => {
     state,
     zipCode,
    country) =>{
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-             'username': 'bsc20230607',
-             'password': '#20230607vhgfbefe#375378',
-            'barefootAccount': 'v3cbsc0526',
-            'isTest': 'true',
-          'strPayment': payment,
-          'EzicAccount': ezicAccount,
-          'propertyId': propertyid,
-          'strADate': strDate,
-          'strDDate': strEnd,
-          'tenantid': tenantId,
-          'leaseid': leaseId,
-          'cctranstype': ccTransType,
-          'cFName': firstName,
-          'cLName':lastName,
-          'EzicTag': ezicTagHere,
-          'EzicTranstype': ezicTranstype,
-          'EzicPaytype': ezicPayType,
-          'cardNum': cardNumberHere,
-          'expireMonth': expireMonth,
-          'expireYear':expireYear,
-          'cvv':cvv,
-          'ccratetype': ccRateType,
-          'cctype':ccType,
-          'street':street,
-          'city': city,
-          'state': state,
-          'zip': zipCode,
-          'country':country,
-          'RoutingNo': 'routingNumberHere',
-          'AccSource': 'accSourceHere'
-            })
-          };
-      
-          try {
-            const response = await 
-            fetch(`${urlAPI}/barefootwebservice/BarefootService.asmx/PropertyBookingNew`, requestOptions);
-      
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-      
-            const responseBodyText = await response.text();
-            console.log(responseBodyText)
-          } catch (error) {
-          } finally {
-           
+    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=false&Info=${payment}&Info=${ezicAccount}&Info=propertyId&Info=${strADate}&Info=${strEnd}&Info=6643&Info=120&Info=${ccTransType}&Info=${firstName}&Info=${lastName}&Info=${ezicTagHere}&Info=${ezicTranstype}&Info=${ezicPayType}&Info=${cardNumberHere}&Info=${expireMonth}&Info=${expireYear}&Info=${cvv}&Info=${ccRateType}&Info=${ccType}&Info=${street}&Info=${city}&Info=${state}&Info=${zipCode}&Info=${country}&Info=zip&Info=zip&Info=zip`;
+    
+      fetch(url)  
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
           }
+          return response.text();
+        })
+        .then(data => {
+          console.log(data)
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
  
   // const convertXmlToJson = (xmlData) => {
