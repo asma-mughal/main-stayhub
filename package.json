@@ -2,7 +2,9 @@
   "name": "stayhub",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://portals.barefoot.com",
   "dependencies": {
+    "-": "^0.0.1",
     "@emotion/styled": "^11.11.0",
     "@heroicons/react": "^2.0.18",
     "@mui/icons-material": "^5.14.1",
@@ -11,6 +13,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
+    "http-proxy-middleware": "^2.0.6",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-circular-progressbar": "^2.1.0",
@@ -22,6 +25,7 @@
     "readable-stream": "^4.4.2",
     "recharts": "^2.7.2",
     "sass": "^1.64.0",
+    "save-dev": "^0.0.1-security",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
   },

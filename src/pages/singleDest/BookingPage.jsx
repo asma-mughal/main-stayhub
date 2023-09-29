@@ -51,7 +51,6 @@ const BookingPage = () => {
         try {
           setIsLoading(true);
           const res = await GetQuoteRatesDetail(formData);
-          console.log(res)
           const data = convertXmlToJson(res?.string['#text']?.value);
           const dataJSON = JSON.stringify(data);
           localStorage.setItem('propertyRatesData', dataJSON);

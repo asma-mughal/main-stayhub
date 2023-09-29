@@ -297,6 +297,39 @@ export const MyProvider = ({ children }) => {
     
     }
   }
+  async function setCommentsInfo(formValues, leaseID) {
+    const { comments} = formValues;
+    const url = `${urlAPI}/SetCommentsInfo`;
+    const requestBody = {
+      'username': userName,
+      'password': password,
+      'barefootAccount': barefootAccount,
+      'leaseid':leaseID,
+      'comments':comments,
+      'commentType':'-1'
+    };
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(requestBody)
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData;
+    } catch (error) {
+      console.error('API Request Error:', error);
+    
+    }
+  }
   async function GetOptionalServiceIDs(formValues) {
     const uniqueId = localStorage.getItem("propertyId");
     const url = `${urlAPI}/GetOptionalServiceIDs`;
@@ -429,6 +462,7 @@ export const MyProvider = ({ children }) => {
   }
   async function setCosumerInfo(formValues) {
     const uniqueId = localStorage.getItem("propertyId")
+    console.log(formValues)
     const {street1,street2, city,state, zip,country,lastname,firstname,homephone,bizphone,fax,mobile,email,strADate,strDDate,SourceOfBusiness } = formValues;
     const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/SetConsumerInfo?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&Info=${street1}&Info=${street2}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=${lastname}&Info=${firstname}&Info=${homephone}&Info=${bizphone}&Info=${fax}&Info=${mobile}&Info=${email}&Info=${strADate}&Info=${strDDate}&Info=${uniqueId}&Info=${SourceOfBusiness}`;
     
@@ -588,7 +622,8 @@ export const MyProvider = ({ children }) => {
     GetOptionalServiceIDs,
     xmlToJson,
     GetCouponList,
-    setCosumerInfo
+    setCosumerInfo,
+    setCommentsInfo
   };
 
   return (

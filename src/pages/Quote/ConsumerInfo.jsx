@@ -5,15 +5,89 @@ import MainForm from '../../components/Forms/MainForm';
 const ConsumerInfo = () => {
     const {convertXmlToJson, xmlToJson, setCosumerInfo} = useMyContext()
     const [isLoading, setIsLoading] = useState(false);
+    const [isStored, setIsStored] = useState(false); // 
     const navigate = useNavigate(); 
-
+    const stateOptions = [
+      'Alabama',
+      'Alaska',
+      'Arizona',
+      'Arkansas',
+      'California',
+      'Colorado',
+      'Connecticut',
+      'Delaware',
+      'Florida',
+      'Georgia',
+      'Hawaii',
+      'Idaho',
+      'Illinois',
+      'Indiana',
+      'Iowa',
+      'Kansas',
+      'Kentucky',
+      'Louisiana',
+      'Maine',
+      'Maryland',
+      'Massachusetts',
+      'Michigan',
+      'Minnesota',
+      'Mississippi',
+      'Missouri',
+      'Montana',
+      'Nebraska',
+      'Nevada',
+      'New Hampshire',
+      'New Jersey',
+      'New Mexico',
+      'New York',
+      'North Carolina',
+      'North Dakota',
+      'Ohio',
+      'Oklahoma',
+      'Oregon',
+      'Pennsylvania',
+      'Rhode Island',
+      'South Carolina',
+      'South Dakota',
+      'Tennessee',
+      'Texas',
+      'Utah',
+      'Vermont',
+      'Virginia',
+      'Washington',
+      'West Virginia',
+      'Wisconsin',
+      'Wyoming'
+    ]
+    const countryOptions =[
+      'United States',
+      'Canada',
+      'United Kingdom',
+      'Australia',
+      'India',
+      'Germany',
+      'France',
+      'Japan',
+      'China',
+      'Brazil',
+      'Mexico',
+      'South Korea',
+      'Spain',
+      'Italy',
+      'Netherlands',
+      'Sweden',
+      'Norway',
+      'Denmark',
+      'Russia',
+      'South Africa'
+    ]
     const fields = [
         { name: 'street1', label: 'Street # 01', colSpan: 5, type:'text' },
         { name: 'street2', label: 'Street # 02', colSpan: 5, type:'text' },
         { name: 'city', label: 'City', colSpan: 5 , type:'text'},
-        { name: 'state', label: 'State', colSpan: 5 , type:'text'},
+        { name: 'state', label: 'State', colSpan: 5, type: 'select', options: stateOptions },
         { name: 'zip', label: 'Zip Code', colSpan: 5, type:'number' },
-        { name: 'country', label: 'Country', colSpan: 5, type:'string' },
+        { name: 'country', label: 'Country', colSpan: 5,  type: 'select', options: countryOptions },
         { name: 'lastname', label: 'Last Name', colSpan: 5, type:'text' },
         { name: 'firstname', label: 'First Name', colSpan: 5, type:'text' },
         { name: 'homephone', label: 'Home Phone', colSpan: 5, type:'number' },
@@ -47,29 +121,41 @@ const ConsumerInfo = () => {
           setIsLoading(true);
           const data = await setCosumerInfo(formData)
           console.log(data)
-          setTimeout(()=>{
-         
-          },2000)
+          setIsStored(true);
+
+          setTimeout(() => {
+            setIsLoading(false);
+            navigate('/comments'); // Navigate to the comments page after a delay
+          }, 2000);
         } catch (error) {
           console.log(error)
           console.error('Error:', error);
-        } finally {
-          setIsLoading(false);
-          //navigate("/rates")
-        }
+        } 
       };
+      useEffect(() => {
+        if (isStored) {
+          const timer = setTimeout(() => {
+            setIsLoading(false);
+            navigate('/comments'); 
+          }, 2000);
+          return () => clearTimeout(timer);
+        }
+      }, [isStored, navigate]);
   return (
-    <div className="h-full flex flex-col justify-center items-center">
-    <div>
+<div className="h-full flex flex-col justify-center items-center">
+  <div className="flex flex-col items-center h-full">
+    <div className="mb-4">
       {isLoading ? (
-     <div className="loader border-t-4 border-secondary border-solid rounded-full h-12 w-12 animate-spin mb-4">
-
-     </div>
+          <div className="h-screen flex flex-col justify-center items-center">
+        <div className="loader border-t-4 border-secondary border-solid rounded-full h-12 w-12 animate-spin"></div>
+        </div>
       ) : (
+        
         <MainForm fields={fields} onSubmit={handleSubmit} heading={'Consumer Details'} />
       )}
     </div>
-    </div>
+  </div>
+</div>
   )
 }
 

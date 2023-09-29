@@ -15,6 +15,7 @@ import PropertyRates from './pages/Quote/PropertyRates';
 import OptionalService from './pages/Quote/OptionalService';
 import GetCoupon from './pages/Quote/GetCoupon';
 import ConsumerInfo from './pages/Quote/ConsumerInfo';
+import CommentsInfo from './pages/Quote/CommentsInfo';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
     <Route path='/optional' element={<OptionalService />} />
     <Route path='/coupon' element={<GetCoupon />} />
     <Route path='/consumer' element={<ConsumerInfo />} />
+    <Route path='/comments' element={<CommentsInfo />} />
   </Routes>
   );
 }
