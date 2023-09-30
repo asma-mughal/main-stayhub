@@ -10,6 +10,10 @@ const MainForm = ({ fields, onSubmit , heading}) => {
       [name]: value
     }));
   };
+  const isFieldRequired = (fieldName) => {
+    const fieldConfig = fields.find((field) => field.name === fieldName);
+    return fieldConfig ? fieldConfig.required : false;
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -32,52 +36,55 @@ const MainForm = ({ fields, onSubmit , heading}) => {
       <form onSubmit={handleSubmit}>
         <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
         {fields.map((field) => (
-  <div className={`md:col-span-${field.colSpan}`} key={field.name}>
-    <label htmlFor={field.name}>{field.label}</label>
-    {field.type === 'textarea' ? (
-      <textarea
-        name={field.name}
-        id={field.name}
-        className="h-20 border mt-1 rounded px-4 w-full bg-gray-50"
-        value={formData[field.name] || ''}
-        onChange={handleChange}
-        placeholder={field.placeholder || ''}
-        required
-      />
-    ) : field.type === 'select' ? (
-      <div className="relative inline-block w-full">
-        <select
-          name={field.name}
-          id={field.name}
-          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-          value={formData[field.name] || ''}
-          onChange={handleChange}
-          placeholder={field.placeholder || ''}
-          required
-          style={{ position: 'relative' }} // Add this style
-        >
-          {field.options.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-        {/* Arrow icon or any other indicator if needed */}
-      </div>
-    ) : (
-      <input
-        type={field.type || 'text'}
-        name={field.name}
-        id={field.name}
-        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-        value={formData[field.name] || ''}
-        onChange={handleChange}
-        placeholder={field.placeholder || ''}
-        required
-      />
-    )}
-  </div>
-))}
+        <div className={`md:col-span-${field.colSpan}`} key={field.name}>
+          <label htmlFor={field.name}>{field.label}</label>
+          {isFieldRequired(field.name) && <span className="text-red-600">*</span>}
+          {field.customField ? field.customField(formData, handleChange) : (
+            field.type === 'textarea' ? (
+              <textarea
+                name={field.name}
+                id={field.name}
+                className="h-20 border mt-1 rounded w-full bg-gray-50"
+                value={formData[field.name] || ''}
+                onChange={handleChange}
+                placeholder={field.placeholder || ''}
+                required={isFieldRequired(field.name)}
+              />
+            ) : field.type === 'select' ? (
+              <div className="relative inline-block w-full">
+                <select
+                  name={field.name}
+                  id={field.name}
+                  className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                  value={formData[field.name] || ''}
+                  onChange={handleChange}
+                  placeholder={field.placeholder || ''}
+                  required={isFieldRequired(field.name)}
+                  style={{ position: 'relative' }}
+                >
+                  {field.options.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                {/* Arrow icon or any other indicator if needed */}
+              </div>
+            ) : (
+              <input
+                type={field.type || 'text'}
+                name={field.name}
+                id={field.name}
+                className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                value={formData[field.name] || ''}
+                onChange={handleChange}
+                placeholder={field.placeholder || ''}
+                required={isFieldRequired(field.name)}
+              />
+            )
+          )}
+        </div>
+      ))}
           <div className={`md:col-span-5 text-right`}>
             <div className="inline-flex items-end">
               <button type="submit" className="bg-secondary hover:bg-secondary/80

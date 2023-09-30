@@ -16,6 +16,7 @@ import OptionalService from './pages/Quote/OptionalService';
 import GetCoupon from './pages/Quote/GetCoupon';
 import ConsumerInfo from './pages/Quote/ConsumerInfo';
 import CommentsInfo from './pages/Quote/CommentsInfo';
+import PaymentInfo from './pages/Quote/PaymentInfo';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
     <Route path='/coupon' element={<GetCoupon />} />
     <Route path='/consumer' element={<ConsumerInfo />} />
     <Route path='/comments' element={<CommentsInfo />} />
+    <Route path='/payment' element={<PaymentInfo />} />
   </Routes>
   );
 }

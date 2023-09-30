@@ -6,6 +6,7 @@ export const useMyContext = () => useContext(MyContext);
 
 export const MyProvider = ({ children }) => {
   const [data, setData] = useState('abc');
+  let transtype = '';
    const [jsonData, setJsonData] = useState({});
    const [filteredProperties, setFilteredProperties] = useState([]);
   const updateData = newData => {
@@ -483,21 +484,62 @@ export const MyProvider = ({ children }) => {
           console.error(error);
         });
   }
-  
-  const saveProperty = async(payment,ezicAccount,propertyid,strADate,strEnd,tenantId,leaseId,ccTransType,firstName,lastName,ezicTagHere,ezicTranstype, ezicPayType,
-    cardNumberHere,
-   expireMonth,
-   expireYear,
-   cvv,
-   ccRateType,
-   ccType,
-   street,
-    city,
-    state,
-    zipCode,
-   country) =>{
-    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=false&Info=${payment}&Info=${ezicAccount}&Info=propertyId&Info=${strADate}&Info=${strEnd}&Info=6643&Info=120&Info=${ccTransType}&Info=${firstName}&Info=${lastName}&Info=${ezicTagHere}&Info=${ezicTranstype}&Info=${ezicPayType}&Info=${cardNumberHere}&Info=${expireMonth}&Info=${expireYear}&Info=${cvv}&Info=${ccRateType}&Info=${ccType}&Info=${street}&Info=${city}&Info=${state}&Info=${zipCode}&Info=${country}&Info=zip&Info=zip&Info=zip`;
+  const checkCCType = (ccType,isTestMode) =>{
+
+    let mappedCcType;
+
+    if (isTestMode === 'ON') {
+      // When isTestMode is 'ON,' set ccType to an empty string
+      mappedCcType = '';
+    } else {
+      // Convert ccType and comparison values to lowercase for case-insensitive comparison
+      const lowercaseCcType = ccType.toLowerCase();
     
+      switch (lowercaseCcType) {
+        case 'master':
+          mappedCcType = '1';
+          break;
+        case 'visa':
+          mappedCcType = '2';
+          break;
+        case 'discover':
+          mappedCcType = '3';
+          break;
+        case 'amex':
+          mappedCcType = '4';
+          break;
+        default:
+          // Handle other cases or set a default value if needed
+          mappedCcType = ''; // Set to empty string by default
+      }
+    }
+  return mappedCcType
+  }
+  const saveProperty = async(formValues) =>{
+    const {strPayment,ezicAccount,strADate,strEnd,
+      cFName,cLName,ezicTag,ezicTranstype,
+      creditCard,
+      expireDate,
+     cvv,
+     ccType,
+     street,
+      city,
+      state,
+      zip,
+     country} = formValues;
+     const ccTypeCheck = checkCCType(ccType)
+     const uniqueId = localStorage.getItem("propertyId");
+     const storedDataJSON = localStorage.getItem('quoteInfo');
+        const parseData = JSON.parse(storedDataJSON);
+        const leaseId = parseData?.QuoteInfo?.Leaseid;
+        const tenatId =  localStorage.getItem("tenantId");
+        const dateObj = new Date(expireDate);
+        const year = dateObj.getFullYear(); 
+        const month = dateObj.toLocaleString('default', { month: 'long' });
+        if (formValues.ezicAccount !== undefined) {
+        transtype = 'EZC3'
+        }
+    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=false&Info=${strPayment}&Info=${ezicAccount}&Info=${uniqueId}&Info=${strADate}&Info=${strEnd}&Info=${tenatId}&Info=${leaseId}&Info=${transtype}&Info=${cFName}&Info=${cLName}&Info=''&Info=${ezicTranstype}&Info=C&Info=${creditCard}&Info=${month}&Info=${year}&Info=${cvv}&Info=HOTEL&Info=${ccTypeCheck}&Info=${street}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=zip&Info=zip&Info=zip`;
       fetch(url)  
         .then(response => {
           if (!response.ok) {

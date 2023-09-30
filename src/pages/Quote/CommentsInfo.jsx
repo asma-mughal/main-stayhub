@@ -19,12 +19,12 @@ const CommentsInfo = () => {
         const res = await setCommentsInfo(formData,parseData?.QuoteInfo?.Leaseid);
         console.log(res?.string['#text']?.value)
     await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setResult(res?.boolean['#text']?.value);
+   
+    setResult(res?.string['#text']?.value);
 
         if (res?.string['#text']?.value === 'success') {
           setTimeout(() => {
-            //navigate('/getQuote');
+            navigate('/payment');
           }, 2000); 
         } else {
           setTimeout(() => {
