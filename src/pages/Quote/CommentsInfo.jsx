@@ -17,20 +17,22 @@ const CommentsInfo = () => {
         const storedDataJSON = localStorage.getItem('quoteInfo');
         const parseData = JSON.parse(storedDataJSON);
         const res = await setCommentsInfo(formData,parseData?.QuoteInfo?.Leaseid);
-        console.log(res?.string['#text']?.value)
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-   
-    setResult(res?.string['#text']?.value);
-
-        if (res?.string['#text']?.value === 'success') {
-          setTimeout(() => {
-            navigate('/payment');
-          }, 2000); 
-        } else {
-          setTimeout(() => {
-            navigate('/'); 
-          }, 2000);
-        }
+    
+  if (res && res?.string) {
+    const resultValue = res?.string['#text']?.value;
+    if (resultValue !== undefined) {
+      setResult(resultValue);
+      if (resultValue === 'success') {
+        setTimeout(() => {
+          navigate('/payment');
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
+      }
+    } 
+  } 
       } catch (error) {
         console.error(error);
       }

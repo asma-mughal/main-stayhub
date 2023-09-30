@@ -463,7 +463,6 @@ export const MyProvider = ({ children }) => {
   }
   async function setCosumerInfo(formValues) {
     const uniqueId = localStorage.getItem("propertyId")
-    console.log(formValues)
     const {street1,street2, city,state, zip,country,lastname,firstname,homephone,bizphone,fax,mobile,email,strADate,strDDate,SourceOfBusiness } = formValues;
     const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/SetConsumerInfo?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&Info=${street1}&Info=${street2}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=${lastname}&Info=${firstname}&Info=${homephone}&Info=${bizphone}&Info=${fax}&Info=${mobile}&Info=${email}&Info=${strADate}&Info=${strDDate}&Info=${uniqueId}&Info=${SourceOfBusiness}`;
     
@@ -555,7 +554,7 @@ export const MyProvider = ({ children }) => {
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
       const jsonData = xmlToJson(xmlDOM);
-      console.log(jsonData)
+      return jsonData;
         })
         .catch(error => {
           console.error(error);

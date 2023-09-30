@@ -29,11 +29,12 @@ const PaymentInfo = () => {
         try {
           setIsLoading(true);
           const data = await saveProperty(formData)
-          console.log(data)
+        // const folioId = convertXmlToJson(data?.string?.['#text']?.value)
           setTimeout(() => {
             setIsLoading(false);
             //navigate('/comments'); // Navigate to the comments page after a delay
           }, 2000);
+          
         } catch (error) {
           console.log(error)
           console.error('Error:', error);

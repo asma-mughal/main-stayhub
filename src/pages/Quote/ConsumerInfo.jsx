@@ -3,7 +3,7 @@ import { useMyContext } from '../../context/MyContext';
 import { useNavigate } from 'react-router-dom';
 import MainForm from '../../components/Forms/MainForm';
 const ConsumerInfo = () => {
-    const {convertXmlToJson, xmlToJson, setCosumerInfo} = useMyContext()
+    const {setCosumerInfo} = useMyContext()
     const [isLoading, setIsLoading] = useState(false);
     const [isStored, setIsStored] = useState(false); // 
     const navigate = useNavigate(); 

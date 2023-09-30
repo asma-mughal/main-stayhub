@@ -40,7 +40,6 @@ const PropertyRates = () => {
                   </div>
                 );
               } else {
-                // Handle invalid or missing data gracefully
                 return (
                   <div key={key} className="p-6 rounded-md shadow-md text-left">
                     <p>Data for this rate is incomplete or invalid.</p>
