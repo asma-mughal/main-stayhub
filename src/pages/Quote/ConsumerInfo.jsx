@@ -82,22 +82,22 @@ const ConsumerInfo = () => {
       'South Africa'
     ]
     const fields = [
-        { name: 'street1', label: 'Street # 01', colSpan: 5, type:'text' },
-        { name: 'street2', label: 'Street # 02', colSpan: 5, type:'text' },
-        { name: 'city', label: 'City', colSpan: 5 , type:'text'},
-        { name: 'state', label: 'State', colSpan: 5, type: 'select', options: stateOptions },
-        { name: 'zip', label: 'Zip Code', colSpan: 5, type:'number' },
-        { name: 'country', label: 'Country', colSpan: 5,  type: 'select', options: countryOptions },
-        { name: 'lastname', label: 'Last Name', colSpan: 5, type:'text' },
-        { name: 'firstname', label: 'First Name', colSpan: 5, type:'text' },
-        { name: 'homephone', label: 'Home Phone', colSpan: 5, type:'number' },
-        { name: 'bizphone', label: 'Other Phone', colSpan: 5, type:'number' },
-        { name: 'fax', label: 'Fax', colSpan: 5, type:'number' },
-        { name: 'mobile', label: 'Mobile Number', colSpan: 5, type:'number' },
-        { name: 'email', label: 'Email', colSpan: 5, type:'email' },
-        { name: 'strADate', label: 'Arrival Date', colSpan: 5, type:'date' },
-        { name: 'strDDate', label: 'Departure Date', colSpan: 5, type:'date' },
-        { name: 'SourceOfBusiness', label: 'Source of Busniess', colSpan: 5, type:'text' }
+        { name: 'street1', label: 'Street # 01', colSpan: 5, type:'text', required: true },
+        { name: 'street2', label: 'Street # 02', colSpan: 5, type:'text', required: true },
+        { name: 'city', label: 'City', colSpan: 5 , type:'text', required: true},
+        { name: 'state', label: 'State', colSpan: 5, type: 'select', options: stateOptions, required: true },
+        { name: 'zip', label: 'Zip Code', colSpan: 5, type:'number', required: true },
+        { name: 'country', label: 'Country', colSpan: 5,  type: 'select', options: countryOptions , required: true},
+        { name: 'lastname', label: 'Last Name', colSpan: 5, type:'text', required: true },
+        { name: 'firstname', label: 'First Name', colSpan: 5, type:'text', required: true },
+        { name: 'homephone', label: 'Home Phone', colSpan: 5, type:'number' , required: true},
+        { name: 'bizphone', label: 'Other Phone', colSpan: 5, type:'number', required: true },
+        { name: 'fax', label: 'Fax', colSpan: 5, type:'number' , required: true},
+        { name: 'mobile', label: 'Mobile Number', colSpan: 5, type:'number', required: true },
+        { name: 'email', label: 'Email', colSpan: 5, type:'email', required: true },
+        { name: 'strADate', label: 'Arrival Date', colSpan: 5, type:'date', required: true },
+        { name: 'strDDate', label: 'Departure Date', colSpan: 5, type:'date', required: true },
+        { name: 'SourceOfBusiness', label: 'Source of Busniess', colSpan: 5, type:'text', required: true }
       ];
       // useEffect(() => {
       //   const url = 'https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/SetConsumerInfo?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&Info=street1&Info=aasddfdf&Info=street1&Info=street1&Info=street1&Info=street1&Info=street1&Info=street1&Info=d&Info=ed&Info=ds&Info=ed&Info=sf&Info=rfr&Info=rrf&Info=srgr&Info=rgreg';

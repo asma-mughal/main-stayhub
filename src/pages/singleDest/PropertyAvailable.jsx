@@ -8,8 +8,8 @@ const PropertyAvailable = () => {
     const [result, setResult] = useState(null);
     const navigate = useNavigate(); 
     const fields = [
-        { name: 'date1', label: 'Arrival Date', colSpan: 5, type:'date' },
-        { name: 'date2', label: 'Departure Date', colSpan: 5, type:'date' },
+        { name: 'date1', label: 'Arrival Date', colSpan: 5, type:'date', required: true},
+        { name: 'date2', label: 'Departure Date', colSpan: 5, type:'date', required: true },
       ];
       const handleSubmit = async (formData) => {
         setIsLoading(true);

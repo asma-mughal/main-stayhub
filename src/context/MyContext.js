@@ -539,7 +539,7 @@ export const MyProvider = ({ children }) => {
         if (formValues.ezicAccount !== undefined) {
         transtype = 'EZC3'
         }
-    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=false&Info=${strPayment}&Info=${ezicAccount}&Info=${uniqueId}&Info=${strADate}&Info=${strEnd}&Info=${tenatId}&Info=${leaseId}&Info=${transtype}&Info=${cFName}&Info=${cLName}&Info=''&Info=${ezicTranstype}&Info=C&Info=${creditCard}&Info=${month}&Info=${year}&Info=${cvv}&Info=HOTEL&Info=${ccTypeCheck}&Info=${street}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=zip&Info=zip&Info=zip`;
+    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=true&Info=${strPayment}&Info=${ezicAccount}&Info=${uniqueId}&Info=${strADate}&Info=${strEnd}&Info=${tenatId}&Info=${leaseId}&Info=${transtype}&Info=${cFName}&Info=${cLName}&Info=''&Info=${ezicTranstype}&Info=C&Info=${creditCard}&Info=${month}&Info=${year}&Info=${cvv}&Info=HOTEL&Info=${ccTypeCheck}&Info=${street}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=zip&Info=zip&Info=zip`;
       fetch(url)  
         .then(response => {
           if (!response.ok) {
@@ -549,6 +549,13 @@ export const MyProvider = ({ children }) => {
         })
         .then(data => {
           console.log(data)
+          const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      console.log(jsonData)
         })
         .catch(error => {
           console.error(error);

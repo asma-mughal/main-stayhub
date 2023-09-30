@@ -8,7 +8,7 @@ const CommentsInfo = () => {
   const [result, setResult] = useState(null);
   const navigate = useNavigate(); 
   const fields = [
-      { name: 'comments', label: 'Add your Comments', colSpan: 5, type:'textarea' },
+      { name: 'comments', label: 'Add your Comments', colSpan: 5, type:'textarea' ,  required: true},
     ];
     const handleSubmit = async (formData) => {
       setIsLoading(true);
