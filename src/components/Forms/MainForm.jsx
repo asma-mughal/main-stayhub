@@ -44,7 +44,7 @@ const MainForm = ({ fields, onSubmit , heading}) => {
               <textarea
                 name={field.name}
                 id={field.name}
-                className="h-20 border mt-1 rounded w-full bg-gray-50"
+                className="h-20 border px-1 mt-1 rounded w-full bg-gray-50"
                 value={formData[field.name] || ''}
                 onChange={handleChange}
                 placeholder={field.placeholder || ''}

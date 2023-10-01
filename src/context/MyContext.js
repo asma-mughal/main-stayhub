@@ -6,6 +6,7 @@ export const useMyContext = () => useContext(MyContext);
 
 export const MyProvider = ({ children }) => {
   const [data, setData] = useState('abc');
+  const [propertyMessage, setPropertyMessage] = useState('')
   let transtype = '';
    const [jsonData, setJsonData] = useState({});
    const [filteredProperties, setFilteredProperties] = useState([]);
@@ -547,18 +548,19 @@ export const MyProvider = ({ children }) => {
           return response.text();
         })
         .then(data => {
-          console.log(data)
           const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(data, 'text/xml');
       const xmlString = new XMLSerializer().serializeToString(xmlDoc);
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
       const jsonData = xmlToJson(xmlDOM);
-      return jsonData;
+      setPropertyMessage(jsonData)
         })
         .catch(error => {
           console.error(error);
         });
+
+
     }
  
   // const convertXmlToJson = (xmlData) => {
@@ -633,7 +635,8 @@ export const MyProvider = ({ children }) => {
     xmlToJson,
     GetCouponList,
     setCosumerInfo,
-    setCommentsInfo
+    setCommentsInfo,
+    propertyMessage
   };
 
   return (
