@@ -3,16 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useMyContext } from '../../context/MyContext';
 import MainForm from '../../components/Forms/MainForm';
 const OptionalService = () => {
-    const [propertyRates, setPropertyRates] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const fields = [
-      { name: 'arrivalDate', label: 'Arrival Date', colSpan: 5, type:'date', required: true },
-      { name: 'deptDate', label: 'Departure Date', colSpan: 5, type:'date', required: true },
-      { name: 'numAdult', label: 'Number of Adult', colSpan: 5 , type:'number', required: true},
-      { name: 'numPet', label: 'Number of Pet', colSpan: 5 , type:'number', required: true},
-      { name: 'numBaby', label: 'Number of Baby', colSpan: 5, type:'number', required: true },
-      { name: 'numChild', label: 'Number of  Child', colSpan: 5, type:'number', required: true }
-    ];
     const navigate = useNavigate(); 
     const { GetOptionalServiceIDs,convertXmlToJson} = useMyContext();
     const [optionalServices, setOptionalServices] = useState();

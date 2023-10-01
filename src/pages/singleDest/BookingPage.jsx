@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import MainForm from '../../components/Forms/MainForm';
 import { useMyContext } from '../../context/MyContext';
 import { useNavigate } from 'react-router-dom';
@@ -38,6 +38,8 @@ function parseXmlData(xmlData) {
 const BookingPage = () => {
     const {GetQuoteRatesDetail,convertXmlToJson, xmlToJson} = useMyContext()
       const [isLoading, setIsLoading] = useState(false);
+      const [componentLoaded, setComponentLoaded] = useState(true);
+      const [errorMessage, setErrorMessage] = useState('');
       const navigate = useNavigate(); 
     const fields = [
         { name: 'arrivalDate', label: 'Arrival Date', colSpan: 5, type:'date', required: true },
@@ -52,35 +54,50 @@ const BookingPage = () => {
           setIsLoading(true);
           const res = await GetQuoteRatesDetail(formData);
           const data = convertXmlToJson(res?.string['#text']?.value);
-          const dataJSON = JSON.stringify(data);
-          localStorage.setItem('propertyRatesData', dataJSON);
-          const rawData = res?.string['#text']?.value;
-          const xmlDataWithRoot = `<root>${rawData}</root>`;
-          const result = parseXmlData(xmlDataWithRoot);
-          const resultJson = JSON.stringify(result);
-          localStorage.setItem('quoteInfo', resultJson);
-          setTimeout(()=>{
-         
-          },2000)
+          console.log(data)
+          if(data?.html?.body?.parsererror)
+          {
+            setErrorMessage('Please choose another date');
+            setComponentLoaded(false)
+          }
+          else {
+            const dataJSON = JSON.stringify(data);
+            const rawData = res?.string['#text']?.value;
+            const xmlDataWithRoot = `<root>${rawData}</root>`;
+            const result = parseXmlData(xmlDataWithRoot);
+            const resultJson = JSON.stringify(result);
+            localStorage.setItem('quoteInfo', resultJson);
+            localStorage.setItem('propertyRatesData', dataJSON);
+            navigate('/rates'); 
+          }
         } catch (error) {
           console.log(error)
           console.error('Error:', error);
         } finally {
           setIsLoading(false);
-          navigate("/rates")
+          setTimeout(()=>{
+           setComponentLoaded(true)
+           setErrorMessage('')
+          },2000)
         }
       };
+
   return (
     <div className="h-screen flex flex-col justify-center items-center">
-    <div>
-      {isLoading ? (
-     <div className="loader border-t-4 border-secondary border-solid rounded-full h-12 w-12 animate-spin mb-4">
-
-     </div>
-      ) : (
-        <MainForm fields={fields} onSubmit={handleSubmit} heading={'Property Details'} />
+      {errorMessage && (
+        <div className="text-red-500 mb-4 font-bold font-poppins">{errorMessage}</div>
       )}
-    </div>
+      {componentLoaded && (
+        <div>
+          {isLoading ? (
+            <div className="loader border-t-4 border-secondary border-solid rounded-full h-12 w-12 animate-spin mb-4">
+              {/* Loading spinner */}
+            </div>
+          ) : (
+            <MainForm fields={fields} onSubmit={handleSubmit} heading={'Property Details'} />
+          )}
+        </div>
+      )}
     </div>
   )
 }
