@@ -7,6 +7,7 @@ const PaymentInfo = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isStored, setIsStored] = useState(false); 
     const [isPaymentDone, setIsPaymentDone] = useState(false);
+    const [paymentError, setPaymentError] = useState(false); //
     const navigate = useNavigate(); 
     const stateOptions = [
       'Alabama',
@@ -135,44 +136,60 @@ const PaymentInfo = () => {
       try {
         setIsLoading(true);
         const data = await saveProperty(formData);
-        console.log(data)
+        //const folioData = convertXmlToJson(propertyMessage?.string['#text']?.value)
+        //console.log(folioData)
         setTimeout(() => {
           setIsLoading(false);
-          setIsPaymentDone(true); // Mark the payment as done
+          //setIsPaymentDone(true); // Mark the payment as done
         }, 2000);
       } catch (error) {
         console.log(error);
         console.error('Error:', error);
       }
     };
+   
     useEffect(() => {
-      if (isPaymentDone) {
+      if (propertyMessage) {
+        const data = convertXmlToJson(propertyMessage?.string['#text']?.value);
+        if (data?.html?.body?.parsererror) {
+          setPaymentError(true);
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
+        } else {
+        setIsPaymentDone(true)
         setTimeout(() => {
-          navigate('/'); // Navigate to the main page after a delay
+          navigate('/');
         }, 2000);
+        }
       }
-    }, [isPaymentDone, navigate]);
-    console.log(propertyMessage)
+    }, [propertyMessage, navigate]);
   return (
     <div className="h-full flex flex-col justify-center items-center">
-      <div className="flex flex-col items-center h-full">
-        <div className="mb-4">
-          {isLoading ? (
-            <div className="h-screen flex flex-col justify-center items-center">
-              <div className="loader border-t-4 border-secondary border-solid rounded-full h-12 w-12 animate-spin"></div>
-            </div>
-          ) : isPaymentDone ? (
-            <div className="flex flex-col items-center h-full">
-            <div className="text-green-600 font-semibold text-xl mb-4">
+    <div className="flex flex-col items-center h-full">
+      <div className="mb-4">
+        {isLoading ? (
+          <div className="h-screen flex flex-col justify-center items-center">
+            <div className="loader border-t-4 border-secondary border-solid rounded-full h-12 w-12 animate-spin"></div>
+          </div>
+        ) : isPaymentDone ? (
+          <div className="flex flex-col items-center h-screen">
+            <div className="text-green-600 font-semibold text-xl mb-4 font-poppins">
               Congratulations, your payment is done!
             </div>
+          </div>
+        ) : paymentError ? ( 
+          <div className="flex flex-col items-center h-full">
+            <div className="text-red-600 font-semibold text-xl mb-4">
+              Sorry, something went wrong.
             </div>
-          ) : (
-            <MainForm fields={fields} onSubmit={handleSubmit} heading={'Payment Details'} />
-          )}
-        </div>
+          </div>
+        ) : (
+          <MainForm fields={fields} onSubmit={handleSubmit} heading={'Payment Details'} />
+        )}
       </div>
     </div>
+  </div>
   )
 }
 

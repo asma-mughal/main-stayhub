@@ -19,8 +19,7 @@ const PropertyAvailable = () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       setResult(res?.boolean['#text']?.value);
-
-          if (res?.boolean['#text']?.value === 'true') {
+          if (res?.boolean['#text']?.value == 'true') {
             setTimeout(() => {
               navigate('/getQuote');
             }, 2000); 
