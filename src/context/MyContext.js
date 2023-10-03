@@ -261,6 +261,8 @@ export const MyProvider = ({ children }) => {
   }
   async function GetQuoteRatesDetail(formValues) {
     const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
+    localStorage.setItem('arrivalDate', arrivalDate);
+    localStorage.setItem('deptDate', deptDate);
     const uniqueId = localStorage.getItem("propertyId")
     const url = `${urlAPI}/CreateQuoteByReztypeid`;
     const requestBody = {
@@ -464,8 +466,10 @@ export const MyProvider = ({ children }) => {
   }
   async function setCosumerInfo(formValues) {
     const uniqueId = localStorage.getItem("propertyId")
-    const {street1,street2, city,state, zip,country,lastname,firstname,homephone,bizphone,fax,mobile,email,strADate,strDDate,SourceOfBusiness } = formValues;
-    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/SetConsumerInfo?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&Info=${street1}&Info=${street2}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=${lastname}&Info=${firstname}&Info=${homephone}&Info=${bizphone}&Info=${fax}&Info=${mobile}&Info=${email}&Info=${strADate}&Info=${strDDate}&Info=${uniqueId}&Info=${SourceOfBusiness}`;
+    const arrivalDate =  localStorage.getItem('arrivalDate');
+    const deptDate = localStorage.getItem("deptDate")
+    const {street1,street2, city,state, zip,country,lastname,firstname,homephone,bizphone,fax,mobile,email,SourceOfBusiness } = formValues;
+    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/SetConsumerInfo?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&Info=${street1}&Info=${street2}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=${lastname}&Info=${firstname}&Info=${homephone}&Info=${bizphone}&Info=${fax}&Info=${mobile}&Info=${email}&Info=${arrivalDate}&Info=${deptDate}&Info=${uniqueId}&Info=${SourceOfBusiness}`;
     
       fetch(url)  
         .then(response => {
@@ -516,7 +520,7 @@ export const MyProvider = ({ children }) => {
   return mappedCcType
   }
   const saveProperty = async(formValues) =>{
-    const {strPayment,ezicAccount,strADate,strEnd,
+    const {strPayment,ezicAccount,
       cFName,cLName,ezicTag,ezicTranstype,
       creditCard,
       expireDate,
@@ -535,11 +539,13 @@ export const MyProvider = ({ children }) => {
         const tenatId =  localStorage.getItem("tenantId");
         const dateObj = new Date(expireDate);
         const year = dateObj.getFullYear(); 
+        const arrivalDate =  localStorage.getItem('arrivalDate');
+        const deptDate = localStorage.getItem("deptDate")
         const month = dateObj.toLocaleString('default', { month: 'long' });
         if (formValues.ezicAccount !== undefined) {
         transtype = 'EZC3'
         }
-    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=true&Info=${strPayment}&Info=${ezicAccount}&Info=${uniqueId}&Info=${strADate}&Info=${strEnd}&Info=${tenatId}&Info=${leaseId}&Info=${transtype}&Info=${cFName}&Info=${cLName}&Info=''&Info=${ezicTranstype}&Info=C&Info=${creditCard}&Info=${month}&Info=${year}&Info=${cvv}&Info=HOTEL&Info=${ccTypeCheck}&Info=${street}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=zip&Info=zip&Info=zip`;
+    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=true&Info=${strPayment}&Info=${ezicAccount}&Info=${uniqueId}&Info=${arrivalDate}&Info=${deptDate}&Info=${tenatId}&Info=${leaseId}&Info=${transtype}&Info=${cFName}&Info=${cLName}&Info=''&Info=${ezicTranstype}&Info=C&Info=${creditCard}&Info=${month}&Info=${year}&Info=${cvv}&Info=HOTEL&Info=${ccTypeCheck}&Info=${street}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=zip&Info=zip&Info=zip`;
       fetch(url)  
         .then(response => {
           if (!response.ok) {

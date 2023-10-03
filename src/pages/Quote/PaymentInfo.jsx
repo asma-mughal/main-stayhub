@@ -117,8 +117,6 @@ const PaymentInfo = () => {
     const fields = [
       { name: 'strPayment', label: 'Amount(Initial amount)', colSpan: 5, type: 'number', required: true },
       { name: 'ezicAccount', label: 'Ezic Account (leave empty if you don\'t use it)', colSpan: 5, type: 'text' },
-      { name: 'strADate', label: 'Arrival Date', colSpan: 5, type: 'date', required: true },
-      { name: 'strEnd', label: 'Departure Date', colSpan: 5, type: 'date', required: true },
       { name: 'cFName', label: 'First Name', colSpan: 5, type: 'text', required: true },
       { name: 'cLName', label: 'Last Name', colSpan: 5, type: 'text', required: true },
       { name: 'ezicTag', label: 'Ezic Tag', colSpan: 5, type: 'text' },
@@ -173,9 +171,9 @@ const PaymentInfo = () => {
             <div className="loader border-t-4 border-secondary border-solid rounded-full h-12 w-12 animate-spin"></div>
           </div>
         ) : isPaymentDone ? (
-          <div className="flex flex-col items-center h-screen">
+          <div className="flex flex-col items-center justify-center h-screen">
             <div className="text-green-600 font-semibold text-xl mb-4 font-poppins">
-              Congratulations, your payment is done!
+           <p className='text-center'>   Congratulations, your payment is done!</p>
             </div>
           </div>
         ) : paymentError ? ( 

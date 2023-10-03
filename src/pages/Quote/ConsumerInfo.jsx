@@ -95,8 +95,6 @@ const ConsumerInfo = () => {
         { name: 'fax', label: 'Fax', colSpan: 5, type:'number' , required: true},
         { name: 'mobile', label: 'Mobile Number', colSpan: 5, type:'number', required: true },
         { name: 'email', label: 'Email', colSpan: 5, type:'email', required: true },
-        { name: 'strADate', label: 'Arrival Date', colSpan: 5, type:'date', required: true },
-        { name: 'strDDate', label: 'Departure Date', colSpan: 5, type:'date', required: true },
         { name: 'SourceOfBusiness', label: 'Source of Busniess', colSpan: 5, type:'text', required: true }
       ];
       // useEffect(() => {
