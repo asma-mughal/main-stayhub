@@ -1,16 +1,21 @@
 import React,{useEffect, useState} from 'react'
 import { bathroom, bedroom, comfort2, gallery4, guest, home, location } from '../../assets'
 import { destinatons } from '../../constants'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
+
 const CardDest = ({data, start, end,link, filterYes}) => {
   function handleLinkClick(propertyId) {
     // Set the propertyId in localStorage
     localStorage.setItem('propertyId', propertyId);
   }
   
-  const {  parseImages,filteredProperties} = useMyContext();
-  const [result,setResult] = useState([])
+  const { filteredProperties} = useMyContext();
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const maxDescriptionLength = 150; 
+  const navigate = useNavigate()
+
+ 
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2">
@@ -45,9 +50,31 @@ const CardDest = ({data, start, end,link, filterYes}) => {
               )}
             </header>
   
-            {item['description'] && (
-              <p className="flex-grow pb-3 px-2 md:px-4">{item['description']['#text']?.value}</p>
-            )}
+            {item['description']?.['#text']?.value && showFullDescription ? (
+        <p className="pb-3 px-2 md:px-4">{ item['description']?.['#text']?.value}</p>
+      ) : (
+        <p className="pb-3 px-2 md:px-4">
+          { item['description']?.['#text']?.value.length > maxDescriptionLength
+            ?  item['description']?.['#text']?.value.substring(0, maxDescriptionLength) + '...'
+            :  item['description']?.['#text']?.value}
+          { item['description']?.['#text']?.value.length > maxDescriptionLength && (
+              <button
+             
+              className="hover:underline focus:outline-none"
+            ><Link to={`/single/${item.PropertyID['#text']?.value}`
+          }
+          onClick={() => handleLinkClick(item.PropertyID['#text']?.value)}
+          >
+            <a className="text-secondary text-sm" href="#">
+              Read more
+            </a>
+          </Link>
+             
+            </button>
+
+          )}
+        </p>
+      )}
 {/*   
             {item['NumberFloors'] && (
                <div className="flex">
