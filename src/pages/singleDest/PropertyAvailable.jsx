@@ -41,7 +41,8 @@ const PropertyAvailable = () => {
     )}
     {!isLoading && (
       result === null ? (
-        <MainForm fields={fields} onSubmit={handleSubmit} heading={'Property Availability Lookup'} />
+        <MainForm fields={fields} onSubmit={handleSubmit} heading={'Property Availability Lookup'}
+        link={"https://images.pexels.com/photos/2527559/pexels-photo-2527559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} />
       ) : (
         <div className="result-container text-center">
           {result === 'true' ? (

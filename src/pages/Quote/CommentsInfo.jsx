@@ -45,7 +45,8 @@ const CommentsInfo = () => {
   )}
   {!isLoading && (
     result === null ? (
-      <MainForm fields={fields} onSubmit={handleSubmit} heading={'Property Availability Lookup'} />
+      <MainForm fields={fields} onSubmit={handleSubmit} heading={'Property Availability Lookup'}
+      link={"https://images.pexels.com/photos/2456351/pexels-photo-2456351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} />
     ) : (
       <div className="result-container text-center">
         {result === 'success' ? (

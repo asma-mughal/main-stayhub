@@ -183,7 +183,9 @@ const PaymentInfo = () => {
             </div>
           </div>
         ) : (
-          <MainForm fields={fields} onSubmit={handleSubmit} heading={'Payment Details'} />
+          <MainForm fields={fields} onSubmit={handleSubmit} heading={'Payment Details'}
+          
+          link={"https://images.pexels.com/photos/4386417/pexels-photo-4386417.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}/>
         )}
       </div>
     </div>

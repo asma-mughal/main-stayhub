@@ -180,7 +180,9 @@ const ConsumerInfo = () => {
         </div>
       ) : (
         
-        <MainForm fields={fields} onSubmit={handleSubmit} heading={'Consumer Details'} />
+        <MainForm fields={fields} onSubmit={handleSubmit} heading={'Consumer Details'}
+        
+        link={"https://images.pexels.com/photos/3071758/pexels-photo-3071758.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}/>
       )}
     </div>
   </div>
