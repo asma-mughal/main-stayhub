@@ -79,7 +79,7 @@ const DestPage = ({oneProperty}) => {
 }
         <h1 className="font-semibold text-heading mb-2 font-poppins">Description</h1>
         <p className={`text-xs text-justify text-gray-500 font-poppins my-2 xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl`}>
-          {oneProperty?.Basicinfo?.Description['#text']?.value}
+          {oneProperty?.Basicinfo?.Description['#text']?.value?.replace(/[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/g, '')}
         </p>
        
         <h1 className="font-semibold text-heading mb-2 font-poppins">Property Features</h1>
