@@ -13,13 +13,11 @@ const CardDest = ({data, start, end,link, filterYes}) => {
   const { filteredProperties} = useMyContext();
   const [showFullDescription, setShowFullDescription] = useState(false);
   const maxDescriptionLength = 150; 
-  const navigate = useNavigate()
-
- 
+  const pattern = /\d+/g;
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2">
-      { filteredProperties?.slice(0,3)?.map((item, index) => (
+      { filteredProperties?.slice(5,8)?.map((item, index) => (
         <div className="my-2 px-2 w-full md:w-1/2 lg:my-4 lg:w-1/3" key={index}>
           <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
             <a href="#">
@@ -49,32 +47,24 @@ const CardDest = ({data, start, end,link, filterYes}) => {
                 </div>
               )}
             </header>
-  
             {item['description']?.['#text']?.value && showFullDescription ? (
-        <p className="pb-3 px-2 md:px-4">{ item['description']?.['#text']?.value}</p>
-      ) : (
-        <p className="pb-3 px-2 md:px-4">
-          { item['description']?.['#text']?.value.length > maxDescriptionLength
-            ?  item['description']?.['#text']?.value.substring(0, maxDescriptionLength) + '...'
-            :  item['description']?.['#text']?.value}
-          { item['description']?.['#text']?.value.length > maxDescriptionLength && (
-              <button
-             
-              className="hover:underline focus:outline-none"
-            ><Link to={`/single/${item.PropertyID['#text']?.value}`
-          }
-          onClick={() => handleLinkClick(item.PropertyID['#text']?.value)}
-          >
-            <a className="text-secondary text-sm" href="#">
-              Read more
-            </a>
-          </Link>
-             
-            </button>
-
-          )}
-        </p>
-      )}
+  <p className="pb-3 px-2 md:px-4"> {item['description']?.['#text']?.value?.replace(/[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/g, '')}</p>
+) : (
+  <p className="pb-3 px-2 md:px-4">
+    {item['description']?.['#text']?.value.length > maxDescriptionLength
+      ? item['description']?.['#text']?.value.substring(0, maxDescriptionLength) + '...'
+      : item['description']?.['#text']?.value}
+    {item['description']?.['#text']?.value.length > maxDescriptionLength && (
+      <button className="hover:underline focus:outline-none" onClick={() => handleLinkClick(item.PropertyID['#text']?.value)}>
+        <Link to={`/single/${item.PropertyID['#text']?.value}`}>
+          <a className="text-secondary text-sm" href="#">
+            Read more
+          </a>
+        </Link>
+      </button>
+    )}
+  </p>
+)}
 {/*   
             {item['NumberFloors'] && (
                <div className="flex">

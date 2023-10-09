@@ -40,7 +40,7 @@ const NewCard = ({ data }) => {
          </header>
 
          {item['description'] && (
-           <p className="flex-grow pb-3 px-2 md:px-4">{item['description']['#text']?.value}</p>
+           <p className="flex-grow pb-3 px-2 md:px-4">{item['description']?.['#text']?.value?.replace(/[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/g, '')}</p>
          )}
 {/*   
          {item['NumberFloors'] && (

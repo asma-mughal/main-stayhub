@@ -49,8 +49,8 @@ const Destination = () => {
    
   </div>
   <CardDest data ={jsonData}
-  start={0}
-  end={3}
+  start={4}
+  end={8}
   link={true}
   filterYes= {true}
   />
