@@ -545,6 +545,7 @@ export const MyProvider = ({ children }) => {
         if (formValues.ezicAccount !== undefined) {
         transtype = 'EZC3'
         }
+       
     const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=true&Info=${strPayment}&Info=${ezicAccount}&Info=${uniqueId}&Info=${arrivalDate}&Info=${deptDate}&Info=${tenatId}&Info=${leaseId}&Info=${transtype}&Info=${cFName}&Info=${cLName}&Info=''&Info=${ezicTranstype}&Info=C&Info=${creditCard}&Info=${month}&Info=${year}&Info=${cvv}&Info=HOTEL&Info=${ccTypeCheck}&Info=${street}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=zip&Info=zip&Info=zip`;
       fetch(url)  
         .then(response => {

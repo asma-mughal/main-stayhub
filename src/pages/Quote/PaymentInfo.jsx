@@ -114,8 +114,18 @@ const PaymentInfo = () => {
       'Buenos Aires',
       'Cape Town',
     ];
+    const storedDataProperty = JSON.parse(localStorage.getItem('propertyRatesData'));
+    let ratesValue = storedDataProperty.propertyratesdetails.ratesvalue['#text'].value;
+    const arrivalDate = localStorage.getItem('arrivalDate');
+    const currentDate = new Date();
+    const differenceInDays = Math.floor((new Date(arrivalDate) - currentDate) / (1000 * 60 * 60 * 24));
+    if (differenceInDays > 14) {
+      ratesValue /= 2;
+    }
+    
     const fields = [
-      { name: 'strPayment', label: 'Amount(Initial amount)', colSpan: 5, type: 'number', required: true },
+      { name: 'strPayment', label: 'Amount(Initial amount)', colSpan: 5, type: 'number', required: true ,
+      defaultValue: ratesValue, },
       { name: 'ezicAccount', label: 'Ezic Account (leave empty if you don\'t use it)', colSpan: 5, type: 'text' },
       { name: 'cFName', label: 'First Name', colSpan: 5, type: 'text', required: true },
       { name: 'cLName', label: 'Last Name', colSpan: 5, type: 'text', required: true },
@@ -138,7 +148,6 @@ const PaymentInfo = () => {
         //console.log(folioData)
         setTimeout(() => {
           setIsLoading(false);
-          //setIsPaymentDone(true); // Mark the payment as done
         }, 2000);
       } catch (error) {
         console.log(error);
@@ -184,7 +193,7 @@ const PaymentInfo = () => {
           </div>
         ) : (
           <MainForm fields={fields} onSubmit={handleSubmit} heading={'Payment Details'}
-          
+          ratesValue={ratesValue}
           link={"https://images.pexels.com/photos/4386417/pexels-photo-4386417.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}/>
         )}
       </div>
