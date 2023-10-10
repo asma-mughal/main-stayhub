@@ -33,20 +33,17 @@ const MainForm = ({ fields, onSubmit , heading,link, ratesValue}) => {
   return (
     <>
 
-    <div className="min-h-screen p-6 flex items-center justify-center font-poppins">
-      <div className="container max-w-screen-lg mx-auto">
-        <div>
-          <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-            <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-              {/* Left container for the image */}
-              <div className="lg:col-span-1">
-                <div
-                  style={{ height: `${formContentHeight}px` }}
-                  id="image-container"
-                >
-                  <img src={link} alt="image" className="w-full max-h-full rounded" />
-                </div>
-              </div>
+<div className="min-h-screen p-6 flex items-center justify-center font-poppins">
+  <div className="container max-w-screen-lg mx-auto">
+    <div>
+      <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+        <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+          {/* Left container for the image */}
+          <div className="lg:col-span-1 flex items-center justify-center">
+            <div className="h-full" id="image-container">
+              <img src={link} alt="image" className="w-full max-h-full rounded" />
+            </div>
+          </div>
 
               {/* Right container for the form */}
               <div id="form-content" className="lg:col-span-2" ref={formContentRef}>
