@@ -95,7 +95,7 @@ const BookingPage = () => {
             </div>
           ) : (
             <MainForm fields={fields} onSubmit={handleSubmit} heading={'Property Details'}
-            link={"https://images.pexels.com/photos/2778189/pexels-photo-2778189.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} />
+            link={"https://images.pexels.com/photos/6186812/pexels-photo-6186812.jpeg?auto=compress&cs=tinysrgb&w=600"} />
           )}
         </div>
       )}
