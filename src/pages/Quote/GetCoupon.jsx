@@ -43,7 +43,7 @@ const GetCoupon = () => {
                   {Object.keys(value).length === 0 ? (
                     <p>No values available.</p>
                   ) : (
-                    <pre className='font-poppins'>{JSON.stringify(value, null, 2)}</pre>
+                    <pre className='font-poppins'>{JSON.stringify(value?.Coupon?.Name['#text']?.value, null, 2)}</pre>
                   )}
                 </div>
               ))
