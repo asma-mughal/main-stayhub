@@ -53,14 +53,9 @@ export const MyProvider = ({ children }) => {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'ASP.NET_SessionId=nksnbl2xfnhvahhvq1feejmt'
       },
-      body: new URLSearchParams({
-        'username': userName,
-        'password': password,
-        'barefootAccount': barefootAccount,
-      })
     };
   
-    fetch(`${urlAPI}/GetProperty`, requestOptions)
+    fetch(`https://rajanosha7.pythonanywhere.com/getproperty`, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
