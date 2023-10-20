@@ -464,24 +464,48 @@ export const MyProvider = ({ children }) => {
     const arrivalDate =  localStorage.getItem('arrivalDate');
     const deptDate = localStorage.getItem("deptDate")
     const {street1,street2, city,state, zip,country,lastname,firstname,homephone,bizphone,fax,mobile,email,SourceOfBusiness } = formValues;
-    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/SetConsumerInfo?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&Info=${street1}&Info=${street2}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=${lastname}&Info=${firstname}&Info=${homephone}&Info=${bizphone}&Info=${fax}&Info=${mobile}&Info=${email}&Info=${arrivalDate}&Info=${deptDate}&Info=${uniqueId}&Info=${SourceOfBusiness}`;
-    
-      fetch(url)  
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
-          }
-          return response.text();
-        })
-        .then(data => {
-          const parser = new DOMParser();
+    const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const requestBody = {
+    "a": "saif",
+    "b": "azeem",
+    "c": "Abbasi",
+    "d": "saif",
+    "e": "azeem",
+    "f": "Abbasi",
+    "g": "saif",
+    "h": "azeem",
+    "i": "Abbasi",
+    "j": "saif",
+    "k": "azeem",
+    "l": "Abbasi",
+    "m": "saif",
+    "n": "azeem",
+    "o": "Abbasi",
+    "p": "saif",
+    "q": "azeem",
+    "r": "Abbasi"
+  };
+
+  const requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify(requestBody),
+    redirect: 'follow'
+  };
+
+  fetch("https://rajanosha7.pythonanywhere.com/setcustomerinfo", requestOptions)
+    .then(response => response.text())
+    .then(data => {
+      const parser = new DOMParser();
+
     const xmlDoc = parser.parseFromString(data, "text/xml");
     const tenantId = xmlDoc.getElementsByTagName("int")[0]?.textContent;
     localStorage.setItem("tenantId", tenantId);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+  
+    })
+    .catch(error => console.log('error', error));
   }
   const checkCCType = (ccType,isTestMode) =>{
 
