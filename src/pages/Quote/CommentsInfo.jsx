@@ -17,7 +17,7 @@ const CommentsInfo = () => {
         const storedDataJSON = localStorage.getItem('quoteInfo');
         const parseData = JSON.parse(storedDataJSON);
         const res = await setCommentsInfo(formData,parseData?.QuoteInfo?.Leaseid);
-    
+        console.log(res)
   if (res && res?.string) {
     const resultValue = res?.string['#text']?.value;
     if (resultValue !== undefined) {

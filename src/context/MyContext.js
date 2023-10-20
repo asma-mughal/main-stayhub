@@ -6,6 +6,7 @@ export const useMyContext = () => useContext(MyContext);
 
 export const MyProvider = ({ children }) => {
   const [data, setData] = useState('abc');
+  let newJson1;
   const [propertyMessage, setPropertyMessage] = useState('')
   let transtype = '';
    const [jsonData, setJsonData] = useState({});
@@ -298,36 +299,36 @@ export const MyProvider = ({ children }) => {
   }
   async function setCommentsInfo(formValues, leaseID) {
     const { comments} = formValues;
-    const url = `${urlAPI}/SetCommentsInfo`;
-    const requestBody = {
-      'username': userName,
-      'password': password,
-      'barefootAccount': barefootAccount,
-      'leaseid':leaseID,
-      'comments':comments,
-      'commentType':'-1'
-    };
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      "leaseid": leaseID,
+      "comments": comments,
+      "commentType": 4
+    });
+
     const requestOptions = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(requestBody)
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
     };
+
     try {
-      const response = await fetch(url, requestOptions);
-      const data = await response.text();
+      const response = await fetch("https://rajanosha7.pythonanywhere.com/set_comments_info", requestOptions);
+      const result = await response.text();
       const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlDoc = parser.parseFromString(result, 'text/xml');
       const xmlString = new XMLSerializer().serializeToString(xmlDoc);
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
       const jsonData = xmlToJson(xmlDOM);
       return jsonData;
     } catch (error) {
-      console.error('API Request Error:', error);
-    
+      console.log('error', error);
     }
+
   }
   async function GetOptionalServiceIDs(formValues) {
     const uniqueId = localStorage.getItem("propertyId");
@@ -428,35 +429,40 @@ export const MyProvider = ({ children }) => {
     }
   }
   async function GetCouponList(leaseId) {
-   
-    const url = `${urlAPI}/GetValidCouponList`;
-    const requestBody = {
-      'username': userName,
-      'password': password,
-      'barefootAccount': barefootAccount,
-      'leaseid':leaseId
-    };
-
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    const raw = JSON.stringify({
+      "leaseid": leaseId
+    });
+  
     const requestOptions = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(requestBody)
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
     };
+  
     try {
-      const response = await fetch(url, requestOptions);
+      const response = await fetch("https://rajanosha7.pythonanywhere.com/get_valid_coupn_list", requestOptions);
+      
+      if (!response.ok) {
+        throw new Error('API Request Error');
+      }
+  
       const data = await response.text();
+  
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(data, 'text/xml');
       const xmlString = new XMLSerializer().serializeToString(xmlDoc);
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
       const jsonData = xmlToJson(xmlDOM);
-      return jsonData
+      
+      return jsonData;
     } catch (error) {
       console.error('API Request Error:', error);
-    
+      throw error;
     }
   }
   async function setCosumerInfo(formValues) {
