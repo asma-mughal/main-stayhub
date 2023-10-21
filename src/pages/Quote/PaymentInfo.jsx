@@ -161,12 +161,12 @@ const PaymentInfo = () => {
         if (data?.html?.body?.parsererror) {
           setPaymentError(true);
           setTimeout(() => {
-            navigate('/');
+            //navigate('/');
           }, 2000);
         } else {
         setIsPaymentDone(true)
         setTimeout(() => {
-          navigate('/');
+          //navigate('/');
         }, 2000);
         }
       }

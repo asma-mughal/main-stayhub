@@ -570,29 +570,57 @@ export const MyProvider = ({ children }) => {
         if (formValues.ezicAccount !== undefined) {
         transtype = 'EZC3'
         }
-       
-    const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=true&Info=${strPayment}&Info=${ezicAccount}&Info=${uniqueId}&Info=${arrivalDate}&Info=${deptDate}&Info=${tenatId}&Info=${leaseId}&Info=${transtype}&Info=${cFName}&Info=${cLName}&Info=''&Info=${ezicTranstype}&Info=C&Info=${creditCard}&Info=${month}&Info=${year}&Info=${cvv}&Info=HOTEL&Info=${ccTypeCheck}&Info=${street}&Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=zip&Info=zip&Info=zip`;
-      fetch(url)  
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
-          }
-          return response.text();
-        })
-        .then(data => {
-          const parser = new DOMParser();
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+    
+        const data = {
+          "portalid": "true",
+          "a": strPayment,
+          "b": ezicAccount,
+          "c": uniqueId,
+          "d": arrivalDate,
+          "e": deptDate,
+          "f": tenatId,
+          "g": leaseId,
+          "h": transtype,
+          "i": cFName,
+          "j": cLName,
+          "k": "",
+          "l": ezicTranstype,
+          "m": "s",
+          "n": creditCard,
+          "o": month,
+          "p": year,
+          "q": cvv,
+          "r": "HOTEl",
+          "s": ccTypeCheck,
+          "t": street,
+          "u": city,
+          "v": state,
+          "w": zip
+        };
+    
+        const requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: JSON.stringify(data),
+          redirect: 'follow'
+        };
+    
+        fetch("https://rajanosha7.pythonanywhere.com/payment_info", requestOptions)
+          .then(response => response.text())
+          .then(data =>{
+            const parser = new DOMParser();
+            console.log(data)
       const xmlDoc = parser.parseFromString(data, 'text/xml');
       const xmlString = new XMLSerializer().serializeToString(xmlDoc);
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
       const jsonData = xmlToJson(xmlDOM);
+      console.log(jsonData)
       setPropertyMessage(jsonData)
-        })
-        .catch(error => {
-          console.error(error);
-        });
-
-
+          })
+          .catch(error => console.log('error', error));
     }
  
   // const convertXmlToJson = (xmlData) => {
