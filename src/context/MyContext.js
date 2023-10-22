@@ -260,33 +260,30 @@ export const MyProvider = ({ children }) => {
     localStorage.setItem('arrivalDate', arrivalDate);
     localStorage.setItem('deptDate', deptDate);
     const uniqueId = localStorage.getItem("propertyId")
-    const url = `${urlAPI}/CreateQuoteByReztypeid`;
-    const requestBody = {
-      'username': userName,
-      'password': password,
-      'barefootAccount': barefootAccount,
-      'strADate':arrivalDate,
-      'strDDate': deptDate,
-      'propertyId':uniqueId,
-      'num_adult': numAdult,
-      'num_pet': numPet,
-      'num_baby': numBaby,
-      'num_child': numChild,
-      'reztypeid':20
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    const data = {
+      "strADate": arrivalDate,
+      "strDDate": deptDate,
+      "propertyId": uniqueId,
+      "num_adult": numAdult,
+      "num_pet": numPet,
+      "num_baby": numBaby,
+      "num_child": numChild,
+      "reztypeid": 1
     };
-
     const requestOptions = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(requestBody)
+      headers: myHeaders,
+      body: JSON.stringify(data),
+      redirect: 'follow'
     };
+  
     try {
-      const response = await fetch(url, requestOptions);
-      const data = await response.text();
+      const response = await fetch("https://rajanosha7.pythonanywhere.com/create_qoute_by_resid", requestOptions);
+      const result = await response.text();
       const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlDoc = parser.parseFromString(result, 'text/xml');
       const xmlString = new XMLSerializer().serializeToString(xmlDoc);
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
@@ -294,7 +291,6 @@ export const MyProvider = ({ children }) => {
       return jsonData;
     } catch (error) {
       console.error('API Request Error:', error);
-    
     }
   }
   async function setCommentsInfo(formValues, leaseID) {
