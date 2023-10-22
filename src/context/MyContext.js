@@ -111,41 +111,36 @@ export const MyProvider = ({ children }) => {
     });
     
   }
-  function fetchOneProperty() {
-    const uniqueId = localStorage.getItem("propertyId")
+ async function fetchOneProperty() {
+  const uniqueId = localStorage.getItem("propertyId")
+    const urlAPI = 'https://rajanosha7.pythonanywhere.com/get_singel_property';
+
     const requestOptions = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Cookie': 'ASP.NET_SessionId=nksnbl2xfnhvahhvq1feejmt'
+        'Content-Type': 'application/json',
       },
-      body: new URLSearchParams({
-        'username': userName,
-        'password': password,
-        'barefootAccount': barefootAccount,
-        'PropertyID': uniqueId
-      })
+      body: JSON.stringify({
+        "PropertyID": uniqueId,
+      }),
     };
-  
-    return fetch(`${urlAPI}/GetPropertyDetails`, requestOptions)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then(responseBody => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(responseBody, 'text/xml');
-        const xmlString = new XMLSerializer().serializeToString(xmlDoc);
-        const parser2 = new DOMParser();
-        const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
-        const jsonData = xmlToJson(xmlDOM);
-        return jsonData;
-      })
-      .catch(error => {
-        throw new Error('Error fetching data');
-      });
+
+    try {
+      const response = await fetch(urlAPI, requestOptions);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const responseBody = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(responseBody, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData;
+    } catch (error) {
+      console.log('Error:', error);
+    }
   }
  async function GetLeaseidByReztypeid(formValues) {
     const { arrivalDate, deptDate, numAdult, numPet, numBaby, numChild} = formValues;
