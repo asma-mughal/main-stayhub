@@ -190,28 +190,27 @@ export const MyProvider = ({ children }) => {
   async function IsPropertyAvailable(formValues) {
     const { date1, date2} = formValues;
     const uniqueId = localStorage.getItem("propertyId")
-    const url = `${urlAPI}/IsPropertyAvailability`;
-    const requestBody = {
-      'username': userName,
-      'password': password, 
-      'barefootAccount': barefootAccount,
-       'date1' :date1,
-       'date2' :date2,
-       'propertyId':uniqueId
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    const data = {
+      "propertyId":uniqueId,
+      "date1": date1,
+      "date2": date2
     };
-
+  
     const requestOptions = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(requestBody)
+      headers: myHeaders,
+      body: JSON.stringify(data),
+      redirect: 'follow'
     };
+
     try {
-      const response = await fetch(url, requestOptions);
-      const data = await response.text();
+      const response = await fetch("https://rajanosha7.pythonanywhere.com/is_property_available", requestOptions);
+      const result = await response.text();
       const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlDoc = parser.parseFromString(result, 'text/xml');
       const xmlString = new XMLSerializer().serializeToString(xmlDoc);
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
@@ -219,7 +218,6 @@ export const MyProvider = ({ children }) => {
       return jsonData;
     } catch (error) {
       console.error('API Request Error:', error);
-    
     }
   }
   async function getMinDays(formValues) {
