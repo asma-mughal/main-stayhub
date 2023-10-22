@@ -315,25 +315,24 @@ export const MyProvider = ({ children }) => {
   }
   async function GetOptionalServiceIDs(formValues) {
     const uniqueId = localStorage.getItem("propertyId");
-    const url = `${urlAPI}/GetOptionalServiceIDs`;
-    const requestBody = {
-      'username': userName,
-      'password': password,
-      'barefootAccount': barefootAccount,
-      'reztypeID':20,
-      'begindate':formValues?.ArrivedDate,
-      'enddate':formValues?.DepartureDate
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    const data = {
+      "reztypeID": "6",
+      "begindate": "11-18-2023",
+      "enddate": "11-25-2023"
     };
-
+  
     const requestOptions = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(requestBody)
+      headers: myHeaders,
+      body: JSON.stringify(data),
+      redirect: 'follow'
     };
+  
     try {
-      const response = await fetch(url, requestOptions);
+      const response = await fetch("https://rajanosha7.pythonanywhere.com/optional_services", requestOptions);
       const data = await response.text();
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(data, 'text/xml');
@@ -344,7 +343,6 @@ export const MyProvider = ({ children }) => {
       return jsonData
     } catch (error) {
       console.error('API Request Error:', error);
-    
     }
   }
   async function AddCoupon(couponCode, leaseId) {
