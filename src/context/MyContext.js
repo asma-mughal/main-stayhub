@@ -77,38 +77,32 @@ export const MyProvider = ({ children }) => {
         callback('Error fetching data', null);
       });
   }
-  const getAvailablityByDate = (date1, date2) =>{
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Cookie': 'ASP.NET_SessionId=nksnbl2xfnhvahhvq1feejmt'
-      },
-      body: new URLSearchParams({
-        'username': userName,
-        'password': password,
-        'barefootAccount': barefootAccount,
-        'date1' :date1,
-        'date2' : date2,
-        'weekly' : 0
-      })
-    };
-    return fetch(`${urlAPI}/GetPropertyAvailabilityByDateXML`, requestOptions)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.text();
-    })
-    .then(responseBody => {
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(responseBody, 'text/xml');
+  const getAvailablityByDate = async(date1, date2) =>{
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  const data = {
+    "weekly":0,
+    "date1": date1,
+    "date2": date2
+  };
+
+  const requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify(data),
+    redirect: 'follow'
+  };
+
+  try {
+    const response = await fetch("https://rajanosha7.pythonanywhere.com/get_property_xml_date", requestOptions);
+    const result = await response.text();
+    const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(result, 'text/xml');
       const jsonData = xmlToJson(xmlDoc);
       return jsonData;
-    })
-    .catch(error => {
-      throw new Error('Error fetching data');
-    });
+  } catch (error) {
+    console.error('API Request Error:', error);
+  }
     
   }
  async function fetchOneProperty() {
