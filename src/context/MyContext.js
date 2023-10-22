@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { urlAPI , barefootAccount, userName, password} from '../constants';
+import { urlAPI} from '../constants';
 const MyContext = createContext();
 
 export const useMyContext = () => useContext(MyContext);
@@ -56,7 +56,7 @@ export const MyProvider = ({ children }) => {
       },
     };
   
-    fetch(`https://rajanosha7.pythonanywhere.com/getproperty`, requestOptions)
+    fetch(`${urlAPI}/getproperty`, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -107,7 +107,7 @@ export const MyProvider = ({ children }) => {
   }
  async function fetchOneProperty() {
   const uniqueId = localStorage.getItem("propertyId")
-    const urlAPI = 'https://rajanosha7.pythonanywhere.com/get_singel_property';
+    const urlAPI = `https://rajanosha7.pythonanywhere.com/get_singel_property`;
 
     const requestOptions = {
       method: 'POST',
@@ -142,9 +142,6 @@ export const MyProvider = ({ children }) => {
     const uniqueId = localStorage.getItem("propertyId")
     const url = `${urlAPI}/CreateQuote`;
     const requestBody = {
-      'username': userName,
-      'password': password,
-      'barefootAccount': barefootAccount,
       'strADate':arrivalDate,
       'strDDate': deptDate,
       'propertyId':uniqueId,
@@ -196,7 +193,7 @@ export const MyProvider = ({ children }) => {
     };
 
     try {
-      const response = await fetch("https://rajanosha7.pythonanywhere.com/is_property_available", requestOptions);
+      const response = await fetch(`${urlAPI}/is_property_available`, requestOptions);
       const result = await response.text();
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(result, 'text/xml');
@@ -213,9 +210,6 @@ export const MyProvider = ({ children }) => {
     const uniqueId = localStorage.getItem("propertyId")
     const url = `${urlAPI}/GetMinimumDays`;
     const requestBody = {
-      'username': userName,
-      'password': password, 
-      'barefootAccount': barefootAccount,
        'propertyId':uniqueId,
        'reztypeid':'20'
     };
@@ -267,7 +261,7 @@ export const MyProvider = ({ children }) => {
     };
   
     try {
-      const response = await fetch("https://rajanosha7.pythonanywhere.com/create_qoute_by_resid", requestOptions);
+      const response = await fetch(`${urlAPI}/create_qoute_by_resid`, requestOptions);
       const result = await response.text();
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(result, 'text/xml');
@@ -299,7 +293,7 @@ export const MyProvider = ({ children }) => {
     };
 
     try {
-      const response = await fetch("https://rajanosha7.pythonanywhere.com/set_comments_info", requestOptions);
+      const response = await fetch(`${urlAPI}/set_comments_info`, requestOptions);
       const result = await response.text();
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(result, 'text/xml');
@@ -332,7 +326,7 @@ export const MyProvider = ({ children }) => {
     };
   
     try {
-      const response = await fetch("https://rajanosha7.pythonanywhere.com/optional_services", requestOptions);
+      const response = await fetch(`${urlAPI}/optional_services`, requestOptions);
       const data = await response.text();
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(data, 'text/xml');
@@ -348,9 +342,6 @@ export const MyProvider = ({ children }) => {
   async function AddCoupon(couponCode, leaseId) {
     const url = `${urlAPI}/AddCoupon`;
     const requestBody = {
-      'username': userName,
-      'password': password,
-      'barefootAccount': barefootAccount,
       'leaseid':leaseId,
     'couponCode':couponCode,
 
@@ -381,9 +372,6 @@ export const MyProvider = ({ children }) => {
   async function deleteCoupon(couponCode, leaseId) {
     const url = `${urlAPI}/RemoveCoupon`;
     const requestBody = {
-      'username': userName,
-      'password': password,
-      'barefootAccount': barefootAccount,
       'leaseid':leaseId,
     };
 
@@ -425,7 +413,7 @@ export const MyProvider = ({ children }) => {
     };
   
     try {
-      const response = await fetch("https://rajanosha7.pythonanywhere.com/get_valid_coupn_list", requestOptions);
+      const response = await fetch(`${urlAPI}/get_valid_coupn_list`, requestOptions);
       
       if (!response.ok) {
         throw new Error('API Request Error');
@@ -482,7 +470,7 @@ export const MyProvider = ({ children }) => {
     redirect: 'follow'
   };
 
-  fetch("https://rajanosha7.pythonanywhere.com/setcustomerinfo", requestOptions)
+  fetch(`${urlAPI}/setcustomerinfo`, requestOptions)
     .then(response => response.text())
     .then(data => {
       const parser = new DOMParser();
