@@ -221,7 +221,7 @@ const NewsLetter = ({news}) => {
     </div>
 
     <p class="text-xs text-white">
-      &copy; 2022. Company Name. All rights reserved.
+      &copy; 2022. Stay Hub. All rights reserved.
     </p>
   </div>
 </footer>

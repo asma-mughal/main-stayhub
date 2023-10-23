@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import { close, logo, menu } from "../assets";
 import { navLinks } from "../constants";
 import styles from "../style";
@@ -31,8 +31,10 @@ const navigate = useNavigate();
     items-center navbar ${
       navbarFixed ? " bg-black" : ""
     } `}>
-      <img src={logo} alt="companyLogo" className="w-[140px] h-[36px]" />
-
+      <Link href="/"><img src={logo} alt="companyLogo" className="w-[140px] h-[36px]" 
+      
+      />
+</Link>
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
         {navLinks.map((nav, index) => (
         
