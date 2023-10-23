@@ -320,17 +320,26 @@ export const footerLinks = [
       {
         name: "Documentation",
         link: "https://www.hoobank.com/our-partner/",
+        pagedev: false
       },
       {
         name: "License",
         link: "https://www.hoobank.com/become-a-partner/",
+        pagedev: false
       },
       {
-        name: "Changelog",
+        name: "Change log",
         link: "https://www.hoobank.com/become-a-partner/",
+        pagedev: false
+      },
+      {
+        name: "Developer page",
+        link: "/developer",
+        pagedev: true
       },
       
     ],
+    
   },
 ];
 

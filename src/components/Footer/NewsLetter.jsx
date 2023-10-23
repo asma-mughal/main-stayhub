@@ -1,8 +1,8 @@
 import React from 'react'
-import { CalendarDaysIcon, HandRaisedIcon } from '@heroicons/react/24/outline'
 import { newsLetter } from '../../assets'
 import { logo } from '../../assets'
 import { footerLinks } from '../../constants'
+import { Link } from 'react-router-dom'
 const NewsLetter = ({news}) => {
   return (
     <div className="relative isolate overflow-hidden
@@ -202,9 +202,12 @@ const NewsLetter = ({news}) => {
                 {i.links.map((j)=>{
                     return (
 <li>
-                <a href={j.link} class="text-white transition hover:opacity-75">
+  {j.pagedev == false ?  <a href={j.link} class="text-white transition hover:opacity-75">
                   {j?.name}
-                </a>
+                </a> :   <Link to={j.link} class="text-white transition hover:opacity-75">
+                  {j?.name}
+                </Link> }
+              
               </li>
                     )
                 })}

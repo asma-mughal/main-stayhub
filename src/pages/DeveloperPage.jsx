@@ -1,5 +1,5 @@
 import React from 'react'
-import { internet } from '../assets'
+import { google, fb, linkedin, gith, acc} from '../assets'
 
 import { useNavigate  } from 'react-router-dom';
 const DeveloperPage = () => {
@@ -20,7 +20,7 @@ const DeveloperPage = () => {
                 <div className="px-6">
                   <img
                     alt="..."
-                    src={internet}
+                    src={acc}
                     className="shadow-lg rounded-full mx-auto max-w-120-px"
                   />
                   <div className="pt-6 text-center">
@@ -37,7 +37,7 @@ const DeveloperPage = () => {
                          outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                       >
-                       <img src={internet} className="" />
+                       <img src={fb} className="" />
                       </button>
                       </a>
                       <a href='https://www.linkedin.com/in/asma-mughal-36b341244/'>
@@ -48,7 +48,7 @@ const DeveloperPage = () => {
                           outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                       >
-                            <img src={internet} className="m-2" />
+                            <img src={linkedin} className="m-2" />
                       </button>
                       </a>
                       <a href='https://github.com/asma-mughal'>
@@ -58,7 +58,7 @@ const DeveloperPage = () => {
                         w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                       >
-                        <img src={internet} className="" />
+                        <img src={gith} className="" />
                       </button>
                       </a>
                     </div>
@@ -66,13 +66,13 @@ const DeveloperPage = () => {
                 </div>
               </div>
               <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-10">
-              
+                
               </div>
               <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-10">
                 <div className="px-6">
                   <img
                     alt="..."
-                    src={internet}
+                    src={acc}
 
                     className="shadow-lg rounded-full mx-auto max-w-120-px"
                   />
@@ -89,7 +89,7 @@ const DeveloperPage = () => {
                          outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                       >
-                       <img src={internet} className="" />
+                       <img src={fb} className="" />
                       </button>
                       </a>
                       <a href=''>
@@ -99,7 +99,7 @@ const DeveloperPage = () => {
                           outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                       >
-                            <img src={internet} className="m-2" />
+                            <img src={linkedin} className="m-2" />
                       </button>
                       </a>
                       <a href=''>
@@ -109,7 +109,7 @@ const DeveloperPage = () => {
                         w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                       >
-                        <img src={internet} className="m-2" />
+                        <img src={google} className="m-2" />
                       </button>
                       </a>
                     </div>
