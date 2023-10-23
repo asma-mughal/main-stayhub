@@ -46,8 +46,11 @@ const PropertyAvailable = () => {
   <div className="min-h-screen flex flex-col justify-between">
   <div className="pt-16 sm:pt-12 md:pt-16 lg:pt-20 xl:pt-24">
     {isLoading && (
-      <div className="loader border-t-4 border-secondary
-   border-solid rounded-full h-12 w-12 animate-spin mb-4"></div>
+      <div className="min-h-screen flex flex-col justify-center items-center">
+      <div className="loader border-t-4 border-secondary border-solid rounded-full h-12 w-12 animate-spin mb-4">
+        {/* Loading spinner */}
+      </div>
+    </div>
     )}
     {!isLoading && (
       result === null ? (

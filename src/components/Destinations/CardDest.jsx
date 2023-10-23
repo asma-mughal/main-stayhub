@@ -21,7 +21,10 @@ const CardDest = ({data, start, end,link, filterYes}) => {
           <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
             <a href="#">
 
-   <Link  to={`/single/${item.PropertyID['#text']?.value}` }>         <img
+            <Link to={`/single/${item.PropertyID['#text']?.value}`
+                }
+                onClick={() => handleLinkClick(item.PropertyID['#text']?.value)}
+                >     <img
   alt="Placeholder"
   className="block h-80 w-full object-cover"
   src={item['imagepath']['#text']?.value || gallery4}

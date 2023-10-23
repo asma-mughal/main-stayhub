@@ -26,7 +26,7 @@ function App() {
     <Route path='/dest' element={<DestinationPage />} />
     <Route path='/success' element={<Success />} />
     <Route path='/modern' element={<Modern />} />
-    <Route path='/single/:id' element={<SingleDest />} />
+    <Route path='/single/:id' element={<SingleDest />} /> 
     <Route path='/test' element={<TestAPI />} />
     <Route path='/getQuote' element={<BookingPage />} />
     <Route path='/available' element={<PropertyAvailable />} />
@@ -42,3 +42,4 @@ function App() {
 }
 
 export default App;
+//StayHubRentals.com
