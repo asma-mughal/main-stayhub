@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { gallery4,location } from '../../assets'
 import { Link } from 'react-router-dom'
 function handleLinkClick(propertyId) {
@@ -6,6 +6,8 @@ function handleLinkClick(propertyId) {
 }
 
 const NewCard = ({ data }) => {
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const maxDescriptionLength = 150; 
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2"> {/* Adjust mx-2 for spacing */}
@@ -13,11 +15,13 @@ const NewCard = ({ data }) => {
        <div className="my-2 px-2 w-full md:w-1/2 lg:my-4 lg:w-1/3" key={index}>
        <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
          <a href="#">
+         <Link  to={`/single/${item.PropertyID['#text']?.value}` }> 
            <img
              alt="Placeholder"
              className="block h-80 w-full object-cover"
              src={item['imagepath']['#text']?.value || gallery4}
            />
+           </Link>
          </a>
 
          <header className="flex items-center justify-between leading-tight p-2 md:p-4">
@@ -38,10 +42,22 @@ const NewCard = ({ data }) => {
              </div>
            )}
          </header>
-
-         {item['description'] && (
-           <p className="flex-grow pb-3 px-2 md:px-4">{item['description']?.['#text']?.value?.replace(/[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/g, '')}</p>
-         )}
+         {item['description']?.['#text']?.value &&  (
+  <p className="pb-3 px-2 md:px-4">
+  {item['description']?.['#text']?.value
+    ?.replace(/[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/g, '').substring(0, maxDescriptionLength)}
+  {item['description']?.['#text']?.value.length > maxDescriptionLength && '...'}
+  {item['description']?.['#text']?.value.length > maxDescriptionLength && (
+    <button className="hover:underline focus:outline-none" onClick={() => handleLinkClick(item.PropertyID['#text']?.value)}>
+      <Link to={`/single/${item.PropertyID['#text']?.value}`}>
+        <a className="text-secondary text-sm" href="#">
+          Read more
+        </a>
+      </Link>
+    </button>
+  )}
+</p>
+)}
 {/*   
          {item['NumberFloors'] && (
             <div className="flex">

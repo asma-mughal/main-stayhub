@@ -1,7 +1,8 @@
 import React,{useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useMyContext } from '../../context/MyContext';
-import MainForm from '../../components/Forms/MainForm';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer/Footer';
 const OptionalService = () => {
     const navigate = useNavigate(); 
     const { GetOptionalServiceIDs,convertXmlToJson} = useMyContext();
@@ -28,6 +29,11 @@ const OptionalService = () => {
     
     }
   return (
+    <>
+   <Navbar background={true}
+      forms={true}
+      className="fixed top-0 w-full"
+      />
     <div className="flex flex-col justify-center font-poppins items-center h-screen ">
   <div className="bg-white rounded-lg p-8 shadow-xl text-center">
     <h1 className="text-3xl font-semibold mb-4">Optional Services</h1>
@@ -55,6 +61,8 @@ const OptionalService = () => {
   </div>
 </div>
 
+<Footer className="fixed bottom-0 w-full" />
+</>
 
   
   

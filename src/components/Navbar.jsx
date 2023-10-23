@@ -4,7 +4,7 @@ import { close, logo, menu } from "../assets";
 import { navLinks } from "../constants";
 import styles from "../style";
 import { useNavigate } from "react-router-dom";
-const Navbar = ({background}) => {
+const Navbar = ({background,forms}) => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
   const [navbarFixed, setNavbarFixed] = useState(false);
@@ -30,7 +30,8 @@ const navigate = useNavigate();
     ${background ? 'bg-heading' : ""}
     items-center navbar ${
       navbarFixed ? " bg-black" : ""
-    } `}>
+    } `}
+    >
       <Link href="/"><img src={logo} alt="companyLogo" className="w-[140px] h-[36px]" 
       
       />

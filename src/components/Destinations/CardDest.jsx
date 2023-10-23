@@ -20,12 +20,14 @@ const CardDest = ({data, start, end,link, filterYes}) => {
         <div className="my-2 px-2 w-full md:w-1/2 lg:my-4 lg:w-1/3" key={index}>
           <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
             <a href="#">
-            <img
+
+   <Link  to={`/single/${item.PropertyID['#text']?.value}` }>         <img
   alt="Placeholder"
   className="block h-80 w-full object-cover"
   src={item['imagepath']['#text']?.value || gallery4}
-/>
+/></Link>
             </a>
+          
   
             <header className="flex items-center justify-between leading-tight p-2 md:p-4">
               <h1 className="text-lg">

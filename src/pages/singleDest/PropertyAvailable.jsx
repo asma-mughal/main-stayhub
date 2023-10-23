@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import MainForm from '../../components/Forms/MainForm'
 import { useMyContext } from '../../context/MyContext'
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer/Footer';
 const PropertyAvailable = () => {
     const {IsPropertyAvailable} = useMyContext()
     const [isLoading, setIsLoading] = useState(false);
@@ -35,9 +37,17 @@ const PropertyAvailable = () => {
         setIsLoading(false);
       };
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
+    <>
+      
+      <Navbar background={true}
+      forms={true}
+      className="fixed top-0 w-full"
+      />
+  <div className="min-h-screen flex flex-col justify-between">
+  <div className="pt-16 sm:pt-12 md:pt-16 lg:pt-20 xl:pt-24">
     {isLoading && (
-      <div className="loader border-t-4 border-secondary border-solid rounded-full h-12 w-12 animate-spin mb-4"></div>
+      <div className="loader border-t-4 border-secondary
+   border-solid rounded-full h-12 w-12 animate-spin mb-4"></div>
     )}
     {!isLoading && (
       result === null ? (
@@ -56,7 +66,13 @@ const PropertyAvailable = () => {
         </div>
       )
     )}
+    <div>
+   
+    </div>
   </div>
+  <Footer className="fixed bottom-0 w-full" />
+  </div>
+  </>
   )
 }
 

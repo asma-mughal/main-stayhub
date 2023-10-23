@@ -566,7 +566,13 @@ export const MyProvider = ({ children }) => {
           "t": street,
           "u": city,
           "v": state,
-          "w": zip
+          "w": zip,
+          "x": zip,
+          "y": zip,
+          "z": zip,
+          "z1": zip,
+          "z2": zip
+
         };
     
         const requestOptions = {

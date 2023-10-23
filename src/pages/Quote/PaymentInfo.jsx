@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { useMyContext } from '../../context/MyContext';
 import { useNavigate } from 'react-router-dom';
 import MainForm from '../../components/Forms/MainForm';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer/Footer';
 const PaymentInfo = () => {
     const {convertXmlToJson, saveProperty,propertyMessage} = useMyContext()
     const [isLoading, setIsLoading] = useState(false);
@@ -172,7 +174,13 @@ const PaymentInfo = () => {
       }
     }, [propertyMessage, navigate]);
   return (
-    <div className="h-full flex flex-col justify-center items-center">
+    <>
+      <Navbar background={true}
+      forms={true}
+      className="fixed top-0 w-full"
+      />
+    <div className="min-h-screen flex flex-col justify-between">
+  <div className="pt-16 sm:pt-12 md:pt-16 lg:pt-20 xl:pt-24">
     <div className="flex flex-col items-center h-full">
       <div className="mb-4">
         {isLoading ? (
@@ -199,6 +207,9 @@ const PaymentInfo = () => {
       </div>
     </div>
   </div>
+  <Footer className="fixed bottom-0 w-full" />
+  </div>
+  </>
   )
 }
 

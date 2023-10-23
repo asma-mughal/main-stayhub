@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useMyContext } from '../../context/MyContext'
 import { useNavigate } from 'react-router-dom';
-
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer/Footer';
 const GetCoupon = () => {
     const { GetCouponList,convertXmlToJson } = useMyContext();
     const [data, setData] = useState(null);
@@ -32,6 +33,11 @@ const GetCoupon = () => {
         
     }
   return (
+    <>
+    <Navbar background={true}
+      forms={true}
+      className="fixed top-0 w-full"
+      />
     <div className="flex flex-col justify-center font-poppins items-center h-screen ">
     <div className="bg-white rounded-lg p-8 shadow-xl text-center">
       <h1 className="text-3xl font-semibold mb-4">Coupon List</h1>
@@ -72,6 +78,9 @@ const GetCoupon = () => {
       </button>
     </div>
   </div>
+  
+  <Footer className="fixed bottom-0 w-full" />
+  </>
   )
 }
 

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useMyContext } from '../../context/MyContext';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer/Footer';
 const PropertyRates = () => {
     const [propertyRates, setPropertyRates] = useState(null);
     const navigate = useNavigate(); 
@@ -18,6 +19,11 @@ const PropertyRates = () => {
     
     }
     return (
+      <>
+         <Navbar background={true}
+      forms={true}
+      className="fixed top-0 w-full"
+      />
       <div className="flex flex-col justify-center font-poppins items-center h-screen">
       <div className="bg-white rounded-lg p-8 shadow-xl text-center">
         <h1 className="text-3xl font-semibold mb-4">Property Rates</h1>
@@ -62,6 +68,8 @@ const PropertyRates = () => {
       </div>
     </div>
     
+  <Footer className="fixed bottom-0 w-full" />
+    </>
     );
   };
 
