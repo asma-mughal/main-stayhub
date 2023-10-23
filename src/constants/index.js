@@ -329,6 +329,7 @@ export const footerLinks = [
         name: "Changelog",
         link: "https://www.hoobank.com/become-a-partner/",
       },
+      
     ],
   },
 ];
