@@ -3,6 +3,7 @@ import { bathroom, bedroom, comfort2, gallery4, guest, home, location } from '..
 import { destinatons } from '../../constants'
 import { Link, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
+import Resizer from "react-image-file-resizer";
 const CardDest = ({data, start, end,link, filterYes}) => {
   function handleLinkClick(propertyId) {
     // Set the propertyId in localStorage
