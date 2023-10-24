@@ -32,10 +32,13 @@ const navigate = useNavigate();
       navbarFixed ? " bg-black" : ""
     } `}
     >
-      <Link href="/"><img src={logo} alt="companyLogo" className="w-[140px] h-[36px]" 
-      
-      />
-</Link>
+        <Link to="/"> {/* Set the "to" prop to the URL of the next page */}
+        <img
+          src={logo}
+          alt="companyLogo"
+          className="w-[140px] h-[36px]"
+        />
+      </Link>
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
         {navLinks.map((nav, index) => (
         

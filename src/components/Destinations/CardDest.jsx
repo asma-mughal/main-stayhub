@@ -13,7 +13,7 @@ const CardDest = ({data, start, end,link, filterYes}) => {
   const { filteredProperties} = useMyContext();
   const [showFullDescription, setShowFullDescription] = useState(false);
   const maxDescriptionLength = 150; 
- 
+
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2">
