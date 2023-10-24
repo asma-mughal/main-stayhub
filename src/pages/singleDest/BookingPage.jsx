@@ -55,6 +55,7 @@ const BookingPage = () => {
         try {
           setIsLoading(true);
           const res = await GetQuoteRatesDetail(formData);
+          console.log(res)
           const data = convertXmlToJson(res?.string['#text']?.value);
           console.log(data)
           if(data?.html?.body?.parsererror)
