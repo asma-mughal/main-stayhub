@@ -3,7 +3,6 @@ import { bathroom, bedroom, comfort2, gallery4, guest, home, location } from '..
 import { destinatons } from '../../constants'
 import { Link, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
-
 const CardDest = ({data, start, end,link, filterYes}) => {
   function handleLinkClick(propertyId) {
     // Set the propertyId in localStorage
@@ -13,6 +12,7 @@ const CardDest = ({data, start, end,link, filterYes}) => {
   const { filteredProperties} = useMyContext();
   const [showFullDescription, setShowFullDescription] = useState(false);
   const maxDescriptionLength = 150; 
+ 
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2">
@@ -24,11 +24,12 @@ const CardDest = ({data, start, end,link, filterYes}) => {
             <Link to={`/single/${item.PropertyID['#text']?.value}`
                 }
                 onClick={() => handleLinkClick(item.PropertyID['#text']?.value)}
-                >     <img
-  alt="Placeholder"
-  className="block h-80 w-full object-cover"
-  src={item['imagepath']['#text']?.value || gallery4}
-/></Link>
+                >  
+                <img
+                  alt="Placeholder"
+                  className="w-full h-48 object-cover"
+                  src={item['imagepath']['#text']?.value || gallery4}
+                /></Link>
             </a>
           
   
