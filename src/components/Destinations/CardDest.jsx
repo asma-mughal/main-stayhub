@@ -28,7 +28,7 @@ const CardDest = ({data, start, end,link, filterYes}) => {
                 >  
                 <img
                   alt="Placeholder"
-                  className="w-full h-48 object-cover"
+                  className="block w-full h-72 object-cover"
                   src={item['imagepath']['#text']?.value || gallery4}
                 /></Link>
             </a>

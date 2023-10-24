@@ -23,7 +23,7 @@ import gift from './pexels-photo-6161674.jpeg';
 import gallery1 from './pexels-photo-2090651.jpeg';
 import gallery2 from './pexels-photo-751268.jpeg';
 import gallery3 from './pexels-photo-1697076.jpeg';
-import gallery4 from './pexels-photo-3272589.jpeg';
+import gallery4 from './4304128.jpg';
 import gallery5 from './pexels-photo-2204880.jpeg';
 import star1 from './star.png';
 import food2 from './food2 (1).jpeg';
