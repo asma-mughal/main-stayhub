@@ -518,7 +518,7 @@ export const MyProvider = ({ children }) => {
   return mappedCcType
   }
   const saveProperty = async(formValues) =>{
-    const {strPayment,ezicAccount,
+    const {ezicAccount,
       cFName,cLName,ezicTag,ezicTranstype,
       creditCard,
       expireDate,
@@ -543,35 +543,69 @@ export const MyProvider = ({ children }) => {
         if (formValues.ezicAccount !== undefined) {
         transtype = 'EZC3'
         }
-        const url = `https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/
-        PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3c
-        bsc0526&portalid=1&Info=true&Info=${strPayment}&Info=${ezicAccount}&Info=${uniqueId}
-        &Info=${arrivalDate}&Info=${deptDate}&Info=${tenatId}&Info=${leaseId}&Info=${transtype}
-        &Info=${cFName}&Info=${cLName}&Info=''&Info=${ezicTranstype}&Info=C&Info=${creditCard}
-        &Info=${month}&Info=${year}&Info=${cvv}&Info=HOTEL&Info=${ccTypeCheck}&Info=${street}
-        &Info=${city}&Info=${state}&Info=${zip}&Info=${country}&Info=zip&Info=zip&Info=zip`;
-              fetch(url)  
-                .then(response => {
-                  if (!response.ok) {
-                    throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
-                  }
-                   console.log(response.text())
-                  return response.text();
-                 
-                })
-                .then(data => {
-                  console.log(data)
-                  const parser = new DOMParser();
-              const xmlDoc = parser.parseFromString(data, 'text/xml');
-              const xmlString = new XMLSerializer().serializeToString(xmlDoc);
-              const parser2 = new DOMParser();
-              const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
-              const jsonData = xmlToJson(xmlDOM);
-              setPropertyMessage(jsonData)
-                })
-                .catch(error => {
-                  console.error(error);
-                });
+        const storedDataProperty = JSON.parse(localStorage.getItem('propertyRatesData'));
+        let ratesValue = storedDataProperty.propertyratesdetails.ratesvalue['#text'].value;
+        const currentDate = new Date();
+        const differenceInDays = Math.floor((new Date(arrivalDate) - currentDate) / (1000 * 60 * 60 * 24));
+        if (differenceInDays > 14) {
+          ratesValue /= 2;
+        }
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json")
+        const raw = JSON.stringify({
+          "portalid": "1",
+          "a": "true",
+          "b": ratesValue,
+          "c": ezicAccount,
+          "d": uniqueId,
+          "e": arrivalDate,
+          "f": deptDate,
+          "g": tenatId,
+          "h": leaseId,
+          "i": transtype,
+          "j": cFName,
+          "k": cLName,
+          "l": "ab",
+          "m": "S",
+          "n": "C",
+          "o": creditCard,
+          "p": month,
+          "q": year,
+          "r": cvv,
+          "s": "HOTEL",
+          "t": ccTypeCheck,
+          "u": street,
+          "v": city,
+          "w": state,
+          "x": zip,
+          "y": country,
+          "z": "12",
+          "z1": "zip",
+          "z2": "zip",
+          "z3": "zip"
+        });
+  
+        const requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+  
+        try {
+          const response = await fetch(`${urlAPI}/payment_info`, requestOptions);
+          const result = await response.text();
+          console.log(result);
+          const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(result, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      setPropertyMessage(jsonData)
+        } catch (error) {
+          console.error('API Request Error:', error);
+        }
     }
  
   // const convertXmlToJson = (xmlData) => {

@@ -164,33 +164,32 @@ const PaymentInfo = () => {
         if (data?.html?.body?.parsererror) {
           setPaymentError(true);
           setTimeout(() => {
-            //navigate('/');
+            navigate('/');
           }, 2000);
         } else {
         setIsPaymentDone(true)
         setTimeout(() => {
-          //navigate('/');
+          navigate('/');
         }, 2000);
         }
       }
     }, [propertyMessage, navigate]);
-     useEffect(() => {
-        const url = 'https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=true&Info=12&Info=12&Info=6809&Info=12-01-2023&Info=12-29-2023&Info=6652&Info=195&Info=12&Info=12&Info=12&Info=ab&Info=9589454&Info=C&Info=44747&Info=12&Info=12&Info=12&Info=HOTEL&Info=12&Info=12&Info=12&Info=12&Info=12&Info=12&Info=zip&Info=zip&Info=zip';
-    
-        fetch(url)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
-            }
-            return response.text();
-          })
-          .then(data => {
-            console.log(data);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }, []);
+    //  useEffect(() => {
+    //     const url = 'https://portals.barefoot.com/barefootwebservice/BarefootService.asmx/PropertyBooking?username=bsc20230607&password=%2320230607vhgfbefe%23375378&barefootAccount=v3cbsc0526&portalid=1&Info=true&Info=12&Info=12&Info=6809&Info=12-01-2023&Info=12-29-2023&Info=6652&Info=195&Info=12&Info=12&Info=12&Info=ab&Info=9589454&Info=C&Info=44747&Info=12&Info=12&Info=12&Info=HOTEL&Info=12&Info=12&Info=12&Info=12&Info=12&Info=12&Info=zip&Info=zip&Info=zip';
+    //     fetch(url)
+    //       .then(response => {
+    //         if (!response.ok) {
+    //           throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+    //         }
+    //         return response.text();
+    //       })
+    //       .then(data => {
+    //         console.log(data);
+    //       })
+    //       .catch(error => {
+    //         console.error(error);
+    //       });
+    //   }, []);
   return (
     <>
       <Navbar background={true}
