@@ -311,13 +311,15 @@ export const MyProvider = ({ children }) => {
   }
   async function GetOptionalServiceIDs(formValues) {
     const uniqueId = localStorage.getItem("propertyId");
+    const arrivalDate =  localStorage.getItem('arrivalDate');
+    const deptDate = localStorage.getItem("deptDate")
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
   
     const data = {
-      "reztypeID": "6",
-      "begindate": "11-18-2023",
-      "enddate": "11-25-2023"
+      "reztypeID": "20",
+      "begindate": arrivalDate,
+      "enddate": deptDate
     };
   
     const requestOptions = {
