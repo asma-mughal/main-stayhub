@@ -61,10 +61,12 @@ const PropertyAvailable = () => {
           {result === 'true' ? (
             <p className="text-green-500 text-xl font-semibold font-poppins">The property is available.</p>
           ) : (
-            <div className="result-not-available flex items-center text-center">
-                <p className="text-red-500 text-xl text-center font-semibold font-poppins mr-2">Sorry, the property is not available.</p>
-                <div className="sad-face text-xl">😞</div>
-              </div>
+            <div className="result-not-available flex flex-col items-center justify-center h-screen">
+            <p className="text-red-500 text-xl font-semibold font-poppins mb-2">
+              Sorry, the property is not available.
+            </p>
+            <div className="sad-face text-2xl">😞</div>
+          </div>
           )}
         </div>
       )

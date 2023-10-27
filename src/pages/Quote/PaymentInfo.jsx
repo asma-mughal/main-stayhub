@@ -207,7 +207,7 @@ const PaymentInfo = () => {
         ) : isPaymentDone ? (
           <div className="flex flex-col items-center justify-center h-screen">
             <div className="text-green-600 font-semibold text-xl mb-4 font-poppins">
-           <p className='text-center'>   Congratulations, your payment is done!</p>
+           <p className='text-center'>Congratulations, your payment is done!</p>
             </div>
           </div>
         ) : paymentError ? ( 
