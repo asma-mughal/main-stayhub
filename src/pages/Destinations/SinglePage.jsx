@@ -1,7 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import CardDest from '../../components/Destinations/CardDest';
-import { destinatons } from '../../constants';
-import Footer from '../../components/Footer/Footer';
 import { useMyContext } from '../../context/MyContext';
 import NewCard from '../singleDest/NewCard';
 const DateRange = ({setFilteredData}) =>{
@@ -70,6 +67,7 @@ const SinglePage = () => {
    });
 
    }, [])
+   console.log(jsonData?.PropertyList?.Property.length)
   return (
     <>
      <div className="flex flex-col md:flex-row font-poppins">
@@ -103,6 +101,11 @@ const SinglePage = () => {
     filteredData={filteredData}
     setFilteredData ={setFilteredData}
      />
+
+{jsonData?.PropertyList?.Property?.length == undefined && <div className="result-not-available flex flex-col items-center justify-center h-screen">
+            <p className="text-red-500 text-xl font-semibold font-poppins mb-2">
+              Something Went Wrong.
+            </p></div>}
     {Object.keys(filteredData).length > 0 ? (
         <NewCard data={filteredData} link={true} />
       ) : (

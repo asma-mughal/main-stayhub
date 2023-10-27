@@ -6,7 +6,7 @@ import Navbar from '../../components/Navbar';
 import DestPage from './DestPage';
 import { useMyContext } from '../../context/MyContext';
 const SingleDest = () => {
-  const { fetchOneProperty,convertXmlToJson,getAvailablityByDate} = useMyContext()
+  const { fetchOneProperty,singleProError,getAvailablityByDate} = useMyContext()
   const [error, setError] = useState()
   const [oneProperty, setOneProperty] = useState({});
   useEffect(() => {
@@ -26,7 +26,6 @@ const SingleDest = () => {
         console.error('Error fetching property data:', error);
       });
   }, []);
-  console.log(oneProperty)
   return (
     <div className="w-full overflow-hidden">
     
@@ -40,9 +39,12 @@ const SingleDest = () => {
     </div>
     <div className={`bg-primary ${styles.paddingX} ${styles.marginY}  ${styles.flexCenter}`}>
       <div className={`${styles.boxWidth}`}>
-       <DestPage
+      {singleProError ? <div className="result-not-available flex flex-col items-center justify-center h-screen">
+            <p className="text-red-500 text-xl font-semibold font-poppins mb-2">
+              Something Went Wrong.
+            </p></div> :<DestPage
        oneProperty={oneProperty}
-       />
+       /> } 
         <Contact />
         </div>
         </div>

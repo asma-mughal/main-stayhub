@@ -8,6 +8,8 @@ export const MyProvider = ({ children }) => {
   const [data, setData] = useState('abc');
   let newJson1;
   const [propertyMessage, setPropertyMessage] = useState('')
+  const [singleProError, setSinglePropError] = useState(false)
+  const [destProError, setDestProError] = useState(false);
   let transtype = '';
    const [jsonData, setJsonData] = useState({});
    const [filteredProperties, setFilteredProperties] = useState([]);
@@ -74,6 +76,7 @@ export const MyProvider = ({ children }) => {
         callback(null, jsonData?.string);
       })
       .catch(error => {
+        setDestProError(true)
         callback('Error fetching data', null);
       });
   }
@@ -133,6 +136,7 @@ export const MyProvider = ({ children }) => {
       const jsonData = xmlToJson(xmlDOM);
       return jsonData;
     } catch (error) {
+      setSinglePropError(true)
       console.log('Error:', error);
     }
   }
@@ -681,7 +685,9 @@ export const MyProvider = ({ children }) => {
     GetCouponList,
     setCosumerInfo,
     setCommentsInfo,
-    propertyMessage
+    propertyMessage,
+    singleProError,
+    destProError
   };
 
   return (
