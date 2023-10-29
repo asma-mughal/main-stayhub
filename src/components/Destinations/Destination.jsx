@@ -28,7 +28,8 @@ const Destination = () => {
       if (propertyData) {
         for (const property of propertyData) {
           const propertyID = property.PropertyID;
-          const responseData = await fetchImage(propertyID);
+          const responseData = await fetchImage(propertyID['#text']?.value);
+          console.log(responseData)
           if (responseData && responseData.length > 0) {
             const firstImagePath = responseData[0].imagepath['#text'].value;
             paths.push(firstImagePath);
@@ -42,7 +43,6 @@ const Destination = () => {
       fetchImagesForProperties();
     }
   }, [jsonData]);
-  
   return (
     <>
    
@@ -76,6 +76,7 @@ const Destination = () => {
   end={8}
   link={true}
   filterYes= {true}
+  imagePaths={imagePaths} 
   />
   </>
   )

@@ -521,12 +521,12 @@ export const MyProvider = ({ children }) => {
     }
   return mappedCcType
   }
-  async function fetchImage() {
+  async function fetchImage(propertyID) {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
   
     const data = {
-      "PropertyID": "6809"
+      "PropertyID": propertyID
     };
   
     const requestOptions = {
