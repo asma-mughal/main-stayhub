@@ -5,7 +5,7 @@ function handleLinkClick(propertyId) {
   localStorage.setItem('propertyId', propertyId);
 }
 
-const NewCard = ({ data }) => {
+const NewCard = ({ data,imagePaths }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const maxDescriptionLength = 150; 
   return (
@@ -19,7 +19,8 @@ const NewCard = ({ data }) => {
            <img
              alt="Placeholder"
              className="block h-80 w-full object-cover"
-             src={item['imagepath']['#text']?.value || gallery4}
+             src={imagePaths[index] || gallery4}
+            loading='lazy'
            />
            </Link>
          </a>

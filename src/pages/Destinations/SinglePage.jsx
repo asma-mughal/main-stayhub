@@ -52,10 +52,11 @@ const DateRange = ({setFilteredData}) =>{
 };
 
 const SinglePage = () => {
-  const { fetchData,convertXmlToJson} = useMyContext()
+  const { fetchData,convertXmlToJson, fetchImage} = useMyContext()
   const [jsonData, setJsonData] = useState({});
   const [error, setError] = useState();
   const [filteredData, setFilteredData] = useState({});
+  const [imagePaths, setImagePaths] = useState([]);
   useEffect(() => {
    fetchData((error, responseData) => {
      if (error) {
@@ -67,7 +68,28 @@ const SinglePage = () => {
    });
 
    }, [])
-   console.log(jsonData?.PropertyList?.Property.length)
+   useEffect(() => {
+    const propertyData = jsonData?.PropertyList?.Property;
+    const paths = [];
+    const fetchImagesForProperties = async () => {
+      if (propertyData) {
+        for (const property of propertyData) {
+          const propertyID = property.PropertyID;
+          const responseData = await fetchImage(propertyID['#text']?.value);
+          console.log(responseData)
+          if (responseData && responseData.length > 0) {
+            const firstImagePath = responseData[0].imagepath['#text'].value;
+            paths.push(firstImagePath);
+          }
+        }
+      }
+      setImagePaths(paths);
+    }
+  
+    if (propertyData) {
+      fetchImagesForProperties();
+    }
+  }, [jsonData]);
   return (
     <>
      <div className="flex flex-col md:flex-row font-poppins">
@@ -107,10 +129,14 @@ const SinglePage = () => {
               Something Went Wrong.
             </p></div>}
     {Object.keys(filteredData).length > 0 ? (
-        <NewCard data={filteredData} link={true} />
+        <NewCard data={filteredData} link={true} 
+        imagePaths={imagePaths}
+        />
       ) : (
         <NewCard data={jsonData?.PropertyList?.Property
-        }  link={true} />
+        }  link={true}
+        imagePaths={imagePaths}
+        />
       )}
     </>
 
