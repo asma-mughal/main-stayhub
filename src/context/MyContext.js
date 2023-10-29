@@ -521,6 +521,37 @@ export const MyProvider = ({ children }) => {
     }
   return mappedCcType
   }
+  async function fetchImage() {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    const data = {
+      "PropertyID": "6809"
+    };
+  
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify(data),
+      redirect: 'follow'
+    };
+  
+    try {
+      const response = await fetch(`${urlAPI}/get_singel_property_images`, requestOptions);
+      const data = await response.text();
+  
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData?.DataSet['diffgr:diffgram']?.Property?.PropertyImg
+
+    } catch (error) {
+      console.error('API Request Error:', error);
+    }
+  }
   const saveProperty = async(formValues) =>{
     const {ezicAccount,
       cFName,cLName,ezicTag,ezicTranstype,
@@ -687,7 +718,8 @@ export const MyProvider = ({ children }) => {
     setCommentsInfo,
     propertyMessage,
     singleProError,
-    destProError
+    destProError,
+    fetchImage
   };
 
   return (

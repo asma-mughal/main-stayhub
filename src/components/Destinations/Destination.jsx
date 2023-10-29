@@ -7,8 +7,9 @@ import { Link, json, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext'
 const Destination = () => {
   const navigate = useNavigate()
-  const { fetchData,convertXmlToJson,jsonData, setJsonData} = useMyContext()
+  const { fetchData,convertXmlToJson,jsonData, setJsonData,fetchImage} = useMyContext()
   const [error, setError] = useState()
+  const [imagePaths, setImagePaths] = useState([]);
   useEffect(() => {
    fetchData((error, responseData) => {
      if (error) {
@@ -20,6 +21,28 @@ const Destination = () => {
    });
 
    }, [])
+   useEffect(() => {
+    const propertyData = jsonData?.PropertyList?.Property;
+    const paths = [];
+    const fetchImagesForProperties = async () => {
+      if (propertyData) {
+        for (const property of propertyData) {
+          const propertyID = property.PropertyID;
+          const responseData = await fetchImage(propertyID);
+          if (responseData && responseData.length > 0) {
+            const firstImagePath = responseData[0].imagepath['#text'].value;
+            paths.push(firstImagePath);
+          }
+        }
+      }
+      setImagePaths(paths);
+    }
+  
+    if (propertyData) {
+      fetchImagesForProperties();
+    }
+  }, [jsonData]);
+  
   return (
     <>
    
