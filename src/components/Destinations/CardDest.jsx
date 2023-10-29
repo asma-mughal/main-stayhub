@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useState} from 'react'
 import { bathroom, bedroom, comfort2, gallery4, guest, home, location } from '../../assets'
 import { Link, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
@@ -28,7 +28,7 @@ const CardDest = ({data, start, end,link, filterYes,imagePaths}) => {
                   alt="Placeholder"
                   className="block w-full h-72 object-cover"
                   src={imagePaths[index] || gallery4}
-                  loading='lazy'
+                 loading='lazy'
                 /></Link>
             </a>
           
