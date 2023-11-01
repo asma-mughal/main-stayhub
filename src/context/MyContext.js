@@ -347,63 +347,71 @@ export const MyProvider = ({ children }) => {
       console.error('API Request Error:', error);
     }
   }
-  async function AddCoupon(couponCode, leaseId) {
-    const url = `${urlAPI}/AddCoupon`;
-    const requestBody = {
-      'leaseid':leaseId,
-    'couponCode':couponCode,
+  async function AddCoupon(leaseId,couponCode) {
+    console.log(leaseId,couponCode)
+    const storedDataJSON = localStorage.getItem('quoteInfo');
+    const parseData = JSON.parse(storedDataJSON);
+  
+    // const url = `${urlAPI}/AddCoupon`;
+    // const requestBody = {
+    //   'leaseid':leaseId,
+    // 'couponCode':couponCode,
 
-    };
+    // };
 
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(requestBody)
-    };
-    try {
-      const response = await fetch(url, requestOptions);
-      const data = await response.text();
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(data, 'text/xml');
-      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
-      const parser2 = new DOMParser();
-      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
-      const jsonData = xmlToJson(xmlDOM);
-      return jsonData
-    } catch (error) {
-      console.error('API Request Error:', error);
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded',
+    //   },
+    //   body: new URLSearchParams(requestBody)
+    // };
+    // try {
+    //   const response = await fetch(url, requestOptions);
+    //   const data = await response.text();
+    //   const parser = new DOMParser();
+    //   const xmlDoc = parser.parseFromString(data, 'text/xml');
+    //   const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+    //   const parser2 = new DOMParser();
+    //   const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+    //   const jsonData = xmlToJson(xmlDOM);
+    //   return jsonData
+    // } catch (error) {
+    //   console.error('API Request Error:', error);
     
-    }
+    // }
   }
-  async function deleteCoupon(couponCode, leaseId) {
-    const url = `${urlAPI}/RemoveCoupon`;
-    const requestBody = {
-      'leaseid':leaseId,
-    };
+  async function deleteCoupon(leaseID) {
+    console.log(leaseID)
+    // const storedDataJSON = localStorage.getItem('quoteInfo');
+    // const parseData = JSON.parse(storedDataJSON);
+    // const leaseId = parseData?.QuoteInfo?.Leaseid;
+    // const url = `${urlAPI}/RemoveCoupon`;
+    // const requestBody = {
+    //   'leaseid':leaseID,
+    // };
 
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(requestBody)
-    };
-    try {
-      const response = await fetch(url, requestOptions);
-      const data = await response.text();
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(data, 'text/xml');
-      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
-      const parser2 = new DOMParser();
-      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
-      const jsonData = xmlToJson(xmlDOM);
-      return jsonData
-    } catch (error) {
-      console.error('API Request Error:', error);
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded',
+    //   },
+    //   body: new URLSearchParams(requestBody)
+    // };
+    // try {
+    //   const response = await fetch(url, requestOptions);
+    //   const data = await response.text();
+    //   const parser = new DOMParser();
+    //   const xmlDoc = parser.parseFromString(data, 'text/xml');
+    //   const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+    //   const parser2 = new DOMParser();
+    //   const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+    //   const jsonData = xmlToJson(xmlDOM);
+    //   return jsonData
+    // } catch (error) {
+    //   console.error('API Request Error:', error);
     
-    }
+    // }
   }
   async function GetCouponList(leaseId) {
     const myHeaders = new Headers();
@@ -719,7 +727,9 @@ export const MyProvider = ({ children }) => {
     propertyMessage,
     singleProError,
     destProError,
-    fetchImage
+    fetchImage,
+    AddCoupon,
+    deleteCoupon
   };
 
   return (

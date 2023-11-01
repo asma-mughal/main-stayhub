@@ -55,9 +55,9 @@ const BookingPage = () => {
         try {
           setIsLoading(true);
           const res = await GetQuoteRatesDetail(formData);
-          console.log(res)
+          //console.log(res)
           const data = convertXmlToJson(res?.string['#text']?.value);
-          console.log(data)
+          //console.log(data)
           if(data?.html?.body?.parsererror)
           {
             setErrorMessage('Please choose another date');

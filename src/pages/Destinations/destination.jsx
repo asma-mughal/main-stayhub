@@ -4,7 +4,7 @@ import Hero from '../../components/Hero'
 import SinglePage from './SinglePage';
 import Footer from '../../components/Footer/Footer';
 import Contact from '../../components/Contact';
-const DestinationPage = () => {
+const   DestinationPage = () => {
   return (
     <div className="w-full overflow-hidden">
     

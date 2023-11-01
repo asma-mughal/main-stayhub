@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer/Footer';
 const GetCoupon = () => {
-    const { GetCouponList,convertXmlToJson } = useMyContext();
+    const { GetCouponList,convertXmlToJson, AddCoupon,deleteCoupon } = useMyContext();
     const [data, setData] = useState(null);
     const navigate = useNavigate(); 
+     const storedDataJSON = localStorage.getItem('quoteInfo');
+     const parseData = JSON.parse(storedDataJSON);
     useEffect(() => {
-        // Load data from local storage
-        const storedDataJSON = localStorage.getItem('quoteInfo');
-        const parseData = JSON.parse(storedDataJSON);
+       
         async function fetchData() {
           try {
             const couponList = await GetCouponList(parseData?.QuoteInfo?.Leaseid);
@@ -25,12 +25,14 @@ const GetCoupon = () => {
     const handleSubmit = () =>{
       navigate('/consumer')
     }
-  
-    const handleDeleteCoupon =() =>{
-
+    const handleAddCoupon =() =>{
+    const leaseId = parseData?.QuoteInfo?.Leaseid;
+    const counponCode = data?.CouponCodeList?.Coupons?.Coupon?.Code['#text']?.value 
+    const result = AddCoupon(leaseId,counponCode)
     }
-    const handleAddCoupon = () =>{
-        
+    const handleDeleteCoupon = () =>{
+      const leaseId = parseData?.QuoteInfo?.Leaseid;
+      const result = deleteCoupon(leaseId)
     }
   return (
     <>

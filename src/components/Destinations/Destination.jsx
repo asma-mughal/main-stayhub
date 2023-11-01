@@ -29,7 +29,7 @@ const Destination = () => {
         for (const property of propertyData) {
           const propertyID = property.PropertyID;
           const responseData = await fetchImage(propertyID['#text']?.value);
-          console.log(responseData)
+          //console.log(responseData)
           if (responseData && responseData.length > 0) {
             const firstImagePath = responseData[0].imagepath['#text'].value;
             paths.push(firstImagePath);
