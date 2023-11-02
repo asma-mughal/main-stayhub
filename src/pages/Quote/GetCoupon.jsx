@@ -9,6 +9,7 @@ const GetCoupon = () => {
     const navigate = useNavigate(); 
      const storedDataJSON = localStorage.getItem('quoteInfo');
      const parseData = JSON.parse(storedDataJSON);
+     let numberOfCoupons;
     useEffect(() => {
        
         async function fetchData() {
@@ -23,16 +24,24 @@ const GetCoupon = () => {
         fetchData();
       }, []);
     const handleSubmit = () =>{
-      navigate('/consumer')
+      //navigate('/consumer')
     }
     const handleAddCoupon =() =>{
     const leaseId = parseData?.QuoteInfo?.Leaseid;
     const counponCode = data?.CouponCodeList?.Coupons?.Coupon?.Code['#text']?.value 
     const result = AddCoupon(leaseId,counponCode)
+    const res = convertXmlToJson(result?.string['#text']?.value);
+    console.log(res)
     }
     const handleDeleteCoupon = () =>{
       const leaseId = parseData?.QuoteInfo?.Leaseid;
       const result = deleteCoupon(leaseId)
+    }
+    const couponsObject = data?.CouponCodeList?.Coupons;
+    if (couponsObject && typeof couponsObject === 'object') {
+      numberOfCoupons = Object.keys(couponsObject).length;
+    } else {
+      console.log("Coupons object is undefined or not an object.");
     }
   return (
     <>
@@ -66,18 +75,29 @@ const GetCoupon = () => {
         className="bg-secondary hover:bg-secondary/80 mt-5 w-full text-white text-sm px-6 py-4 rounded-full transition duration-300 font-poppins">
         Next
       </button>
-      <button
-        type="submit"
-        onClick={handleAddCoupon}
-        className="bg-secondary hover:bg-secondary/80 mt-5 w-full text-white text-sm px-6 py-4 rounded-full transition duration-300 font-poppins">
-        Add Coupon
-      </button>
-      <button
-        type="submit"
-        onClick={handleDeleteCoupon}
-        className="bg-secondary hover:bg-secondary/80 mt-5 w-full text-white text-sm px-6 py-4 rounded-full transition duration-300 font-poppins">
-        Delete Coupon
-      </button>
+      {data && (
+  <>
+    {numberOfCoupons > 0 && (
+      <>
+        <button
+          type="submit"
+          onClick={handleAddCoupon}
+          className="bg-secondary hover-bg-secondary/80 mt-5 w-full text-white text-sm px-6 py-4 rounded-full transition duration-300 font-poppins"
+        >
+          Add Coupon
+        </button>
+        <button
+          type="submit"
+          onClick={handleDeleteCoupon}
+          className="bg-secondary hover-bg-secondary/80 mt-5 w-full text-white text-sm px-6 py-4 rounded-full transition duration-300 font-poppins"
+        >
+          Remove Coupon
+        </button>
+      </>
+    )}
+  </>
+)}
+
     </div>
   </div>
   

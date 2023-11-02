@@ -352,34 +352,36 @@ export const MyProvider = ({ children }) => {
     const storedDataJSON = localStorage.getItem('quoteInfo');
     const parseData = JSON.parse(storedDataJSON);
   
-    // const url = `${urlAPI}/AddCoupon`;
-    // const requestBody = {
-    //   'leaseid':leaseId,
-    // 'couponCode':couponCode,
-
-    // };
-
-    // const requestOptions = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //   },
-    //   body: new URLSearchParams(requestBody)
-    // };
-    // try {
-    //   const response = await fetch(url, requestOptions);
-    //   const data = await response.text();
-    //   const parser = new DOMParser();
-    //   const xmlDoc = parser.parseFromString(data, 'text/xml');
-    //   const xmlString = new XMLSerializer().serializeToString(xmlDoc);
-    //   const parser2 = new DOMParser();
-    //   const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
-    //   const jsonData = xmlToJson(xmlDOM);
-    //   return jsonData
-    // } catch (error) {
-    //   console.error('API Request Error:', error);
-    
-    // }
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    const data = {
+      "leaseid": leaseId,
+  "couponCode": couponCode
+    };
+  
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify(data),
+      redirect: 'follow'
+    };
+  
+    try {
+      const response = await fetch(`${urlAPI}/add_coupn_code`, requestOptions);
+      const result = await response.text();
+      console.log(result)
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(result, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+      return jsonData
+    } catch (error) {
+      console.error('API Request Error:', error);
+      return null;
+    }
   }
   async function deleteCoupon(leaseID) {
     console.log(leaseID)
