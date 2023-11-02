@@ -36,9 +36,14 @@ const GetCoupon = () => {
       console.log("Go to Next Page")
     }
     }
-    const handleDeleteCoupon = () =>{
+    const handleDeleteCoupon = async() =>{
       const leaseId = parseData?.QuoteInfo?.Leaseid;
-      const result = deleteCoupon(leaseId)
+      const result = await deleteCoupon(leaseId)
+      const res = convertXmlToJson(result?.string['#text'].value);
+      console.log(res?.Response)
+      if(res?.Response.Success['#text'].value){
+        console.log("Go to Next Page")
+      }
     }
     const couponsObject = data?.CouponCodeList?.Coupons;
     if (couponsObject && typeof couponsObject === 'object') {
@@ -80,7 +85,7 @@ const GetCoupon = () => {
       </button>
       {data && (
   <>
-    { (
+    { numberOfCoupons > 0 &&(
       <>
         <button
           type="submit"

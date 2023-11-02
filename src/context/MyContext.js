@@ -357,7 +357,7 @@ export const MyProvider = ({ children }) => {
   
     const data = {
       "leaseid": leaseId,
-  "couponCode": "CRepeat2023-1"
+  "couponCode": couponCode
     };
   
     const requestOptions = {
@@ -385,35 +385,38 @@ export const MyProvider = ({ children }) => {
   }
   async function deleteCoupon(leaseID) {
     console.log(leaseID)
-    // const storedDataJSON = localStorage.getItem('quoteInfo');
-    // const parseData = JSON.parse(storedDataJSON);
-    // const leaseId = parseData?.QuoteInfo?.Leaseid;
-    // const url = `${urlAPI}/RemoveCoupon`;
-    // const requestBody = {
-    //   'leaseid':leaseID,
-    // };
-
-    // const requestOptions = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //   },
-    //   body: new URLSearchParams(requestBody)
-    // };
-    // try {
-    //   const response = await fetch(url, requestOptions);
-    //   const data = await response.text();
-    //   const parser = new DOMParser();
-    //   const xmlDoc = parser.parseFromString(data, 'text/xml');
-    //   const xmlString = new XMLSerializer().serializeToString(xmlDoc);
-    //   const parser2 = new DOMParser();
-    //   const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
-    //   const jsonData = xmlToJson(xmlDOM);
-    //   return jsonData
-    // } catch (error) {
-    //   console.error('API Request Error:', error);
-    
-    // }
+    const storedDataJSON = localStorage.getItem('quoteInfo');
+    const parseData = JSON.parse(storedDataJSON);
+  
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    const data = {
+      "leaseid": leaseID,
+    };
+  
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify(data),
+      redirect: 'follow'
+    };
+  
+    try {
+      
+      const response = await fetch(`${urlAPI}/remove_coupn_code`, requestOptions);
+      const result = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(result, 'text/xml');
+      const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+      const parser2 = new DOMParser();
+      const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
+      const jsonData = xmlToJson(xmlDOM);
+     return (jsonData)
+    } catch (error) {
+      console.error('API Request Error:', error);
+      return null;
+    }
   }
   async function GetCouponList(leaseId) {
     const myHeaders = new Headers();
