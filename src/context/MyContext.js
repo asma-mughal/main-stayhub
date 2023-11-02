@@ -357,7 +357,7 @@ export const MyProvider = ({ children }) => {
   
     const data = {
       "leaseid": leaseId,
-  "couponCode": couponCode
+  "couponCode": "CRepeat2023-1"
     };
   
     const requestOptions = {
@@ -368,9 +368,9 @@ export const MyProvider = ({ children }) => {
     };
   
     try {
+      
       const response = await fetch(`${urlAPI}/add_coupn_code`, requestOptions);
       const result = await response.text();
-      console.log(result)
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(result, 'text/xml');
       const xmlString = new XMLSerializer().serializeToString(xmlDoc);
@@ -445,7 +445,6 @@ export const MyProvider = ({ children }) => {
       const parser2 = new DOMParser();
       const xmlDOM = parser2.parseFromString(xmlString, 'application/xml');
       const jsonData = xmlToJson(xmlDOM);
-      
       return jsonData;
     } catch (error) {
       console.error('API Request Error:', error);

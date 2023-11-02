@@ -26,12 +26,15 @@ const GetCoupon = () => {
     const handleSubmit = () =>{
       //navigate('/consumer')
     }
-    const handleAddCoupon =() =>{
+    const handleAddCoupon =async() =>{
     const leaseId = parseData?.QuoteInfo?.Leaseid;
     const counponCode = data?.CouponCodeList?.Coupons?.Coupon?.Code['#text']?.value 
-    const result = AddCoupon(leaseId,counponCode)
-    const res = convertXmlToJson(result?.string['#text']?.value);
-    console.log(res)
+    const result = await AddCoupon(leaseId,counponCode)
+    const res = convertXmlToJson(result?.string['#text'].value);
+    console.log(res?.Response)
+    if(res?.Response.Success['#text'].value){
+      console.log("Go to Next Page")
+    }
     }
     const handleDeleteCoupon = () =>{
       const leaseId = parseData?.QuoteInfo?.Leaseid;
@@ -77,7 +80,7 @@ const GetCoupon = () => {
       </button>
       {data && (
   <>
-    {numberOfCoupons > 0 && (
+    { (
       <>
         <button
           type="submit"
