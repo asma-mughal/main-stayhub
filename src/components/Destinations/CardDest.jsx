@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { bathroom, bedroom, comfort2, gallery4, guest, home, location } from '../../assets'
 import { Link, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
+
 const CardDest = ({data, start, end,link, filterYes,imagePaths}) => {
   function handleLinkClick(propertyId) {
     // Set the propertyId in localStorage

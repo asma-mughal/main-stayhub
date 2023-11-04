@@ -5,8 +5,10 @@ import CardDest from './CardDest'
 import { destinatons } from '../../constants'
 import { Link, json, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext'
+import { useTranslation } from 'react-i18next';
 const Destination = () => {
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation();
   const { fetchData,convertXmlToJson,jsonData, setJsonData,fetchImage} = useMyContext()
   const [error, setError] = useState()
   const [imagePaths, setImagePaths] = useState([]);
@@ -17,6 +19,11 @@ const Destination = () => {
      } else {
       const res = convertXmlToJson(responseData['#text']?.value)
       setJsonData((res))
+      const userLanguage = i18n.language; // Get the user's selected language
+
+      // Assuming the API response contains content in multiple languages
+      //const contentInUserLanguage = response.data[userLanguage];
+
      }
    });
 

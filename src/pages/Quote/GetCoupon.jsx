@@ -31,7 +31,7 @@ const GetCoupon = () => {
     const counponCode = data?.CouponCodeList?.Coupons?.Coupon?.Code['#text']?.value 
     const result = await AddCoupon(leaseId,counponCode)
     const res = convertXmlToJson(result?.string['#text'].value);
-    console.log(res?.Response)
+    //console.log(res?.Response)
     if(res?.Response.Success['#text'].value){
       console.log("Go to Next Page")
     }
@@ -40,7 +40,7 @@ const GetCoupon = () => {
       const leaseId = parseData?.QuoteInfo?.Leaseid;
       const result = await deleteCoupon(leaseId)
       const res = convertXmlToJson(result?.string['#text'].value);
-      console.log(res?.Response)
+      //console.log(res?.Response)
       if(res?.Response.Success['#text'].value){
         console.log("Go to Next Page")
       }
