@@ -19,11 +19,6 @@ const Destination = () => {
      } else {
       const res = convertXmlToJson(responseData['#text']?.value)
       setJsonData((res))
-      const userLanguage = i18n.language; // Get the user's selected language
-
-      // Assuming the API response contains content in multiple languages
-      //const contentInUserLanguage = response.data[userLanguage];
-
      }
    });
 
