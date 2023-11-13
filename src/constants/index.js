@@ -432,7 +432,7 @@ export const amenityIconMapping = {
   "Coffee Machine":coffee
   
 };
-export const urlAPI = "https://rajanosha7.pythonanywhere.com"
+export const urlAPI = "https://aflorido17.pythonanywhere.com/"
 export const userName =   'bsc20230607'
 export const password =  '#20230607vhgfbefe#375378'
 export const barefootAccount =  'v3cbsc0526'

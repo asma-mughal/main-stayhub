@@ -97,7 +97,7 @@ export const MyProvider = ({ children }) => {
   };
 
   try {
-    const response = await fetch("https://rajanosha7.pythonanywhere.com/get_property_xml_date", requestOptions);
+    const response = await fetch("https://aflorido17.pythonanywhere.com/get_property_xml_date", requestOptions);
     const result = await response.text();
     const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(result, 'text/xml');
@@ -110,7 +110,7 @@ export const MyProvider = ({ children }) => {
   }
  async function fetchOneProperty() {
   const uniqueId = localStorage.getItem("propertyId")
-    const urlAPI = `https://rajanosha7.pythonanywhere.com/get_singel_property`;
+    const urlAPI = `https://aflorido17.pythonanywhere.com/`;
 
     const requestOptions = {
       method: 'POST',
