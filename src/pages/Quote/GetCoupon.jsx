@@ -24,7 +24,7 @@ const GetCoupon = () => {
         fetchData();
       }, []);
     const handleSubmit = () =>{
-      //navigate('/consumer')
+      navigate('/consumer')
     }
     const handleAddCoupon =async() =>{
     const leaseId = parseData?.QuoteInfo?.Leaseid;

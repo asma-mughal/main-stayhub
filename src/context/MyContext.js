@@ -110,7 +110,7 @@ export const MyProvider = ({ children }) => {
   }
  async function fetchOneProperty() {
   const uniqueId = localStorage.getItem("propertyId")
-    const urlAPI = `https://aflorido17.pythonanywhere.com/`;
+    const urlapi = `https://aflorido17.pythonanywhere.com/get_singel_property`;
 
     const requestOptions = {
       method: 'POST',
@@ -123,7 +123,7 @@ export const MyProvider = ({ children }) => {
     };
 
     try {
-      const response = await fetch(urlAPI, requestOptions);
+      const response = await fetch(urlapi, requestOptions);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
