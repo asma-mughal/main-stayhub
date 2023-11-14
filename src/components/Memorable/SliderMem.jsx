@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import styles from '../../style';
 import { cardImage } from '../../assets';
 import { memorableStay } from '../../constants';
-const SliderMem = (t) => {
+const SliderMem = ({t}) => {
  
     const settings = {
         dots: true,
@@ -36,7 +36,7 @@ const SliderMem = (t) => {
                             xl:text-[18px]
                              leading-[30.8px]
                              text-heading`}>
-                             {t(i?.title)}</p>
+                             {t(i?.title)}.</p>
                           </div>
                           <div>
                             <p  className={`text-xs xs:text-xs 

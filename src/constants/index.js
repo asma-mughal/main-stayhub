@@ -198,21 +198,21 @@ export const memorableStay = [
   {
     id: "1",
     title: "Food & Beverages",
-    description : "At our hotel, we believe that food and beverages are an integral part of creating a memorable stay.",
+    description : "At our hotel, we believe that food and beverages are an integral part of creating a memorable stay",
     icon : sliderFood,
     tag:"food"
   },
   {
     id: "2",
     title: "Service & Amenities",
-    description : "At our hotel, we are committed to providing unparalleled service and amenities to ensure that your stay exceeds your expectations in every way.",
+    description : "At our hotel, we are committed to providing unparalleled service and amenities to ensure that your stay exceeds your expectations in every way",
     icon : aminties,
     tag:"services"
   },
   {
     id: "3",
     title: "Gift shop",
-    description : "Step into our gift shop, a haven for those seeking unique treasures and mementos to commemorate their stay.",
+    description : "Step into our gift shop, a haven for those seeking unique treasures and mementos to commemorate their stay",
     icon : gift ,
     tag:"Gift Shop"
   },
@@ -222,42 +222,42 @@ export const galleryData = [
   {
     id: "1",
     title: "Azure Heights Lodge",
-    description : "Offers endless opportunities for adventure enthusiasts.",
+    description : "Offers endless opportunities for adventure enthusiasts",
     star : 4.9,
     icon : gallery1,
   },
   {
     id: "2",
     title: "Harmony Valley Resort",
-    description : "Offers endless opportunities for adventure enthusiasts.",
+    description : "Offers endless opportunities for adventure enthusiasts",
     star : 4.9,
     icon: gallery2
   },
   {
     id: "3",
     title: "Coastal Breeze Inn",
-    description : "Offers endless opportunities for adventure enthusiasts.",
+    description : "Offers endless opportunities for adventure enthusiasts",
     star : 4.9,
     icon : gallery3
   },
   {
     id: "4",
     title: "Oasis Retreat Inn",
-    description : "Offers endless opportunities for adventure enthusiasts.",
+    description : "Offers endless opportunities for adventure enthusiasts",
     star : 4.9,
-    icon: gallery4
+    icon: gallery2
   },
   {
     id: "5",
     title: "Serene Haven Hotel",
-    description : "Offers endless opportunities for adventure enthusiasts.",
+    description : "Offers endless opportunities for adventure enthusiasts",
     star : 4.9,
     icon : gallery5
   },
   {
     id: "6",
     title: "Serene Haven Hotel",
-    description : "Offers endless opportunities for adventure enthusiasts.",
+    description : "Offers endless opportunities for adventure enthusiasts",
     star : 4.9,
     icon : gallery1
   },

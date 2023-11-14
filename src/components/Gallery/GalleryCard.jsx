@@ -1,7 +1,7 @@
 import React from 'react'
 import { star1 } from '../../assets'
 
-const GalleryCard = ({data}) => {
+const GalleryCard = ({data, t}) => {
   return (
     <div class="px-3 font-poppins">
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
@@ -21,7 +21,7 @@ const GalleryCard = ({data}) => {
                     <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                         <h1 class="text-lg">
                             <a class="no-underline hover:underline font-semibold text-heading" href="#">
-                             {i?.title}
+                             {t(i?.title)}
                             </a>
                            
                         </h1>
@@ -36,7 +36,7 @@ const GalleryCard = ({data}) => {
                     {i.description && <p className='pb-5 px-2 lg:px-4
 xl:px-4 md:px-4
                     
-                    '>{i.description}</p>}
+                    '>{t(i.description)}</p>}
                    
     
                 </article>
