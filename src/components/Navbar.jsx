@@ -6,6 +6,7 @@ import styles from "../style";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import {americaIcon, spanishIcon, portugueseIcon} from '../assets/index';
+import i18next from "i18next";
 const Navbar = ({background,forms}) => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
@@ -13,8 +14,14 @@ const Navbar = ({background,forms}) => {
   const {t, i18n} = useTranslation(['ABOUT']);
 const navigate = useNavigate();
 useEffect(() => {
-  if (localStorage.getItem("i18nextLng")?.length > 2) {
-   console.log("hellow")
+  if (localStorage.getItem("i18nextLng") == "es") {
+    i18next.changeLanguage("es"); 
+  }
+ else if (localStorage.getItem("i18nextLng") == "en") {
+    i18next.changeLanguage("en"); 
+  }
+  else if (localStorage.getItem("i18nextLng") == "ps") {
+    i18next.changeLanguage("ps"); 
   }
 }, []);
   useEffect(() => {
