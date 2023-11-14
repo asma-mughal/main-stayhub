@@ -66,6 +66,7 @@ import globeIcon from './lang.png';
 import portugueseIcon from './portugal.png';
 import spanishIcon from './spain.png';
 import americaIcon from './united-kingdom.png';
+import gallery7 from './gallery7.jpg';
 export {
   area, complex, coffee, dvd, fireplace, bbq, info, locker, pets, microwave, TV, washing,cap,dustbin,
   logo, close,menu, hero, tag1, tag2, tag3, cardImage, arrow, location,
@@ -73,5 +74,5 @@ export {
   sliderFood, aminties, gift,star1,food2, food3, comfort2, comfort3, desert2 , desert3,
   gallery1, gallery2, gallery3, gallery4, gallery5, newsLetter, mainDest, air, bath,
    internet, pakring, pool, iron, blackLogo, fb, acc, linkedin, gith, Mail, google, developer, globeIcon,
-   portugueseIcon, spanishIcon, americaIcon
+   portugueseIcon, spanishIcon, americaIcon, gallery7
 };

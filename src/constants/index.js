@@ -1,5 +1,5 @@
 import { air, aminties, bath, bathroom, bedroom, cap, comfort2, comfort3, desert2, desert3, 
-  dustbin, food2, food3, gift, internet, iron, location, pakring, pool, scene, scene2, sliderFood } from "../assets";
+  dustbin, food2, food3, gallery7, gift, internet, iron, location, pakring, pool, scene, scene2, sliderFood } from "../assets";
 import { comfort, desert, food, area,  complex, coffee, dvd, fireplace, bbq, info,
    locker, pets, microwave, TV, washing} from "../assets";
 import { gallery1, gallery2, gallery3, gallery4, gallery5 } from "../assets";
@@ -245,7 +245,7 @@ export const galleryData = [
     title: "Oasis Retreat Inn",
     description : "Offers endless opportunities for adventure enthusiasts",
     star : 4.9,
-    icon: gallery2
+    icon: gallery7
   },
   {
     id: "5",
