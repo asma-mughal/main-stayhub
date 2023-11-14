@@ -4,7 +4,6 @@ import { close, logo, menu } from "../assets";
 import { navLinks } from "../constants";
 import styles from "../style";
 import { useNavigate } from "react-router-dom";
-import i18next from "i18next";
 import { useTranslation } from 'react-i18next';
 import {globeIcon, americaIcon, spanishIcon, portugueseIcon} from '../assets/index';
 const Navbar = ({background,forms}) => {
@@ -29,7 +28,6 @@ const navigate = useNavigate();
     };
   }, []);
   const handleLanguageChange = (e) => {
-    console.log(e)
      i18n.changeLanguage(e);
    };
    const [isOpen, setIsOpen] = useState(false);
@@ -71,7 +69,7 @@ const navigate = useNavigate();
     aria-haspopup="true"
     aria-expanded="true"
 >
-    <span>Language</span>
+    <span>{t("Language")}</span>
     <svg
         className="w-4 h-4 ml-2"
         viewBox="0 0 20 20"
@@ -132,7 +130,7 @@ const navigate = useNavigate();
           onClick={() => navigate("/dest")}
           className="bg-secondary hover:bg-secondary/80 text-white text-xs px-6 py-4 rounded-full transition duration-300"
         >
-          Book your stay
+          {t("Book your stay")}
         </button> }
           </li>
           </>
@@ -171,7 +169,7 @@ const navigate = useNavigate();
     aria-haspopup="true"
     aria-expanded="true"
 >
-    <span>Language</span>
+    <span>{t("Language")}</span>
     <svg
         className="w-4 h-4 ml-2"
         viewBox="0 0 20 20"
@@ -204,6 +202,7 @@ const navigate = useNavigate();
         <button
           className=" px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
           role="menuitem"
+          onClick={() => handleLanguageChange('es')}
         >
           <img
             src={spanishIcon}
@@ -214,6 +213,7 @@ const navigate = useNavigate();
         <button
           className=" px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
           role="menuitem"
+          onClick={() => handleLanguageChange('ps')}
         >
           <img
             src={portugueseIcon}
@@ -230,7 +230,7 @@ const navigate = useNavigate();
           onClick={() => navigate("/dest")}
           className="bg-secondary hover:bg-secondary/80 text-white text-xs px-6 py-4 rounded-full transition duration-300"
         >
-          Book your stay
+          {t("Book your stay")}
         </button> }   
               </li>
             ))}
