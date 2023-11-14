@@ -4,10 +4,13 @@ import { close, logo, menu } from "../assets";
 import { navLinks } from "../constants";
 import styles from "../style";
 import { useNavigate } from "react-router-dom";
+import i18next from "i18next";
+import { useTranslation } from 'react-i18next';
 const Navbar = ({background,forms}) => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
   const [navbarFixed, setNavbarFixed] = useState(false);
+  const {t, i18n} = useTranslation(['ABOUT']);
 const navigate = useNavigate();
   useEffect(() => {
     const handleScroll = () => {
