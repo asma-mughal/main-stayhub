@@ -3,7 +3,9 @@ import { newsLetter } from '../../assets'
 import { logo } from '../../assets'
 import { footerLinks } from '../../constants'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 const NewsLetter = ({news}) => {
+  const {t} = useTranslation()
   return (
     <div className="relative isolate overflow-hidden
     font-poppins
@@ -12,11 +14,11 @@ const NewsLetter = ({news}) => {
         {news && <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
           <div className="max-w-xl lg:max-w-lg">
             <h2 className="text-[24px] font-poppins font-bold text-white leading-[30.8px]">
-                Get our stories delivered From us to your inbox weekly.</h2>
+               {t("Get our stories delivered From us to your inbox weekly")}.</h2>
            
             <div className="mt-6 flex max-w-md gap-x-4">
               <label htmlFor="email-address" className="sr-only">
-                Email address
+                {t("Email address")}
               </label>
               <input
                 id="email-address"
@@ -25,7 +27,7 @@ const NewsLetter = ({news}) => {
                 autoComplete="email"
                 required
                 className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
-                placeholder="Enter your email"
+                placeholder={t("Enter your email")}
               />
               <button
                 type="submit"
@@ -33,11 +35,11 @@ const NewsLetter = ({news}) => {
                 bg-secondary hover:bg-secondary/80
                 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
-                Subscribe
+               {t("Subscribe")}
               </button>
             </div>
             <p className="mt-2 text-sm leading-8 text-gray-200">
-            Get a response tomorrow if you submit by 9pm today. If we received after 9pm will get a reponse the following day.
+           {t("Get a response tomorrow if you submit by 9pm today. If we received after 9pm will get a reponse the following day")}.
             </p>
           </div>
           <dl className="
@@ -65,8 +67,7 @@ const NewsLetter = ({news}) => {
         </div>
 
         <p class="mt-4 max-w-xs text-white">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non
-          cupiditate quae nam molestias.
+         {( "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse noncupiditate quae nam molestias")}.
         </p>
 
         <ul class="mt-8 flex gap-6">
@@ -196,16 +197,16 @@ const NewsLetter = ({news}) => {
         {footerLinks.map((i)=>{
          return(
             <div>
-            <p class="font-medium text-white">{i?.title}</p>
+            <p class="font-medium text-white">{t(i?.title)}</p>
   
             <ul class="mt-6 space-y-4 text-sm">
                 {i.links.map((j)=>{
                     return (
 <li>
   {j.pagedev == false ?  <a href={j.link} class="text-white transition hover:opacity-75">
-                  {j?.name}
+                  {t(j?.name)}
                 </a> :   <Link to={j.link} class="text-white transition hover:opacity-75">
-                  {j?.name}
+                  {t(j?.name)}
                 </Link> }
               
               </li>
@@ -224,7 +225,7 @@ const NewsLetter = ({news}) => {
     </div>
 
     <p class="text-xs text-white">
-      &copy; 2022. Stay Hub. All rights reserved.
+      &copy; {t("2023. Stay Hub. All rights reserved")}.
     </p>
   </div>
 </footer>

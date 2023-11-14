@@ -12,6 +12,11 @@ const Navbar = ({background,forms}) => {
   const [navbarFixed, setNavbarFixed] = useState(false);
   const {t, i18n} = useTranslation(['ABOUT']);
 const navigate = useNavigate();
+useEffect(() => {
+  if (localStorage.getItem("i18nextLng")?.length > 2) {
+   console.log("hellow")
+  }
+}, []);
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.pageYOffset;

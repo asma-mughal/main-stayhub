@@ -288,7 +288,7 @@ export const footerLinks = [
     title: "About",
     links: [
       {
-        name: "Expreience",
+        name: "Experience",
         link: "https://www.hoobank.com/help-center/",
       },
       {
