@@ -62,11 +62,16 @@ import linkedin from './linkedin.png';
 import gith from './github.png';
 import Mail from './mail.png';
 import developer from './dev.jpeg';
+import globeIcon from './lang.png';
+import portugueseIcon from './portugal.png';
+import spanishIcon from './spain.png';
+import americaIcon from './united-kingdom.png';
 export {
   area, complex, coffee, dvd, fireplace, bbq, info, locker, pets, microwave, TV, washing,cap,dustbin,
   logo, close,menu, hero, tag1, tag2, tag3, cardImage, arrow, location,
   bathroom, guest, home, bedroom, scene, scene2, food, comfort, desert,
   sliderFood, aminties, gift,star1,food2, food3, comfort2, comfort3, desert2 , desert3,
   gallery1, gallery2, gallery3, gallery4, gallery5, newsLetter, mainDest, air, bath,
-   internet, pakring, pool, iron, blackLogo, fb, acc, linkedin, gith, Mail, google, developer
+   internet, pakring, pool, iron, blackLogo, fb, acc, linkedin, gith, Mail, google, developer, globeIcon,
+   portugueseIcon, spanishIcon, americaIcon
 };

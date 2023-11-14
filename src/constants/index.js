@@ -30,10 +30,16 @@ export const navLinks = [
     link:"/success"
   },
   {
+    id: "dropdown",
+    title: "DropDown",
+    link:"/dest"
+  },
+  {
     id: "button",
     title: "Button",
     link:"/dest"
   },
+  
 ];
 export const modern = [
   {
