@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import styles from '../../style'
 import { arrow } from '../../assets'
 import CardDest from './CardDest'
 import { destinatons } from '../../constants'
 import { Link, json, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext'
 import { useTranslation } from 'react-i18next';
+
 const Destination = () => {
-  const navigate = useNavigate()
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { fetchData,convertXmlToJson,jsonData, setJsonData,fetchImage} = useMyContext()
   const [error, setError] = useState()
   const [imagePaths, setImagePaths] = useState([]);
+
   useEffect(() => {
    fetchData((error, responseData) => {
      if (error) {
@@ -50,10 +50,10 @@ const Destination = () => {
    
     <div className="flex flex-col md:flex-row font-poppins">
     <div className="md:w-1/2 p-4">
-    <h1 className={`text-[24px] font-poppins font-bold text-heading leading-[30.8px]`}>Popular Destinations</h1>
+    <h1 className={`text-[24px] font-poppins font-bold text-heading leading-[30.8px]`}>{t("Popular Destinations")}</h1>
     <p className={`text-xs my-2 xs:text-xs sm:text-base md:text-sm lg:text-base xl:text-xl
     text-justify text-gray-500
-    `}>From pristine beaches with crystal-clear waters to majestic mountains with panoramic views, breathtaking beauty at every turn.</p>  
+    `}>{t("From pristine beaches with crystal-clear waters to majestic mountains with panoramic views, breathtaking beauty at every turn")}.</p>  
     </div>
     <div className="md:w-1/2 p-4 flex lg:justify-end xl:justify-end items-center
     sm:justify-start
@@ -66,7 +66,7 @@ const Destination = () => {
      >
     <span className="mr-2 text-xs"
     
-  >View All</span>
+  >{t("View All")}</span>
       <img src={arrow} alt="Icon" className="w-3 h-3" />
       </button>
       </Link>
@@ -79,6 +79,7 @@ const Destination = () => {
   link={true}
   filterYes= {true}
   imagePaths={imagePaths} 
+  t={t}
   />
   </>
   )

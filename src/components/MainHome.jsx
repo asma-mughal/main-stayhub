@@ -8,8 +8,6 @@ import MemStay from './Memorable/MemStay';
 import Gallery from './Gallery/Gallery';
 import Footer from './Footer/Footer';
 const MainHome = () => {
-  
-  const [error, setError] = useState(null);
  
   return (
     <div className=" w-full overflow-hidden">

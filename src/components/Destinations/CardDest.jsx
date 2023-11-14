@@ -3,7 +3,7 @@ import { bathroom, bedroom, comfort2, gallery4, guest, home, location } from '..
 import { Link, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../../context/MyContext';
 
-const CardDest = ({data, start, end,link, filterYes,imagePaths}) => {
+const CardDest = ({t, imagePaths}) => {
   function handleLinkClick(propertyId) {
     // Set the propertyId in localStorage
     localStorage.setItem('propertyId', propertyId);
@@ -62,7 +62,7 @@ const CardDest = ({data, start, end,link, filterYes,imagePaths}) => {
     <button className="hover:underline focus:outline-none" onClick={() => handleLinkClick(item.PropertyID['#text']?.value)}>
       <Link to={`/single/${item.PropertyID['#text']?.value}`}>
         <a className="text-secondary text-sm" href="#">
-          Read more
+         {t("Read more")}
         </a>
       </Link>
     </button>
@@ -104,7 +104,7 @@ const CardDest = ({data, start, end,link, filterYes,imagePaths}) => {
   leading-none p-2 md:p-4">
                         <a class="flex items-center no-underline hover:underline text-black" href="#">
                             <p class="ml-2 text-sm">
-                               $ {item['maxprice']['#text']?.value} per night
+                               $ {item['maxprice']['#text']?.value} {t("per night")}
                             </p>
                         </a>
                      

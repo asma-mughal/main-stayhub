@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import styles from '../../style';
 import { cardImage } from '../../assets';
 import { memorableStay } from '../../constants';
-const SliderMem = () => {
+const SliderMem = (t) => {
  
     const settings = {
         dots: true,
@@ -27,7 +27,7 @@ const SliderMem = () => {
                       <div class="p-4 pb-0 flex-1">
                       <div class="flex items-center justify-center w-24 h-8
                        bg-secondary/60 rounded-full">
-        <span class="text-center text-black text-xs font-bold">{i?.tag}</span>
+        <span class="text-center text-black text-xs font-bold">{t(i?.tag)}</span>
       </div>
                           <div class="text-xs flex items-center mt-3">
                             
@@ -36,12 +36,12 @@ const SliderMem = () => {
                             xl:text-[18px]
                              leading-[30.8px]
                              text-heading`}>
-                             {i?.title}</p>
+                             {t(i?.title)}</p>
                           </div>
                           <div>
                             <p  className={`text-xs xs:text-xs 
                             sm:text-base md:text-sm lg:text-base
-                             xl:text-xl`}>{i?.description}</p>
+                             xl:text-xl`}>{t(i?.description)}</p>
                           </div>
                                           </div>
                       

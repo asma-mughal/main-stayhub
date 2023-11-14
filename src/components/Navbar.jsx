@@ -5,7 +5,7 @@ import { navLinks } from "../constants";
 import styles from "../style";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import {globeIcon, americaIcon, spanishIcon, portugueseIcon} from '../assets/index';
+import {americaIcon, spanishIcon, portugueseIcon} from '../assets/index';
 const Navbar = ({background,forms}) => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { location } from '../../assets'
-const CardModern = ({data, start, end,link}) => {
+const CardModern = ({data, start, end,link, t}) => {
   return (
     <div className="px-3 font-poppins">
     <div className="flex flex-wrap -mx-2"> {/* Adjust mx-2 for spacing */}
@@ -23,21 +23,21 @@ const CardModern = ({data, start, end,link}) => {
               <h1 className="text-lg">
                 <Link to={link ? `/single/${i.id}` : ''}>
                   <a className="no-underline hover:underline font-semibold text-heading" href="#">
-                  {i?.title}
+                  {t(i?.title)}
                   </a>
                 </Link>
               </h1>
             </header>
   
             {i.description && (
-              <p className="flex-grow pb-3 px-2 md:px-4">{i.description}</p>
+              <p className="flex-grow pb-3 px-2 md:px-4">{t(i.description)}</p>
             )}
   
   
             {i.price && (
               <footer className="flex items-center justify-between leading-none p-2 md:p-4">
                 <a className="flex items-center no-underline hover:underline text-black" href="#">
-                  <p className="ml-2 text-sm">${i.price} per night</p>
+                  <p className="ml-2 text-sm">${t(i.price)} {t("per night")}</p>
                 </a>
               </footer>
             )}
