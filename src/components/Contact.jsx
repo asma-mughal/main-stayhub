@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { useTranslation } from 'react-i18next';
 const Contact = () => {
     const ContactInputBox = ({ type, placeholder, name }) => {
         return (
@@ -34,7 +34,7 @@ const Contact = () => {
           </>
         );
       };
-      
+      const { t} = useTranslation()
   return (
     
           <section className="bg-white border mx-3 rounded-lg shadow-lg py-10 px-10 lg:py-[50px]
@@ -45,8 +45,8 @@ const Contact = () => {
                 <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
                   <div className="mb-12 max-w-[570px] lg:mb-0">
                   
-                    <h2 className="mb-6 text-[24px] font-poppins font-bold text-heading leading-[30.8px]">
-                      GET IN TOUCH WITH US
+                    <h2 className="mb-6 text-[24px] font-poppins font-bold text-heading capitalize leading-[30.8px]">
+                     {t("Get In Touch With Us")}
                     </h2>
                   
                     <div className="mb-8 flex w-full max-w-[370px]">
@@ -64,10 +64,10 @@ const Contact = () => {
                       </div>
                       <div className="w-full">
                         <h4 className="mb-1 font-semibold text-heading">
-                          Our Location
+                          {t("Our Location")}
                         </h4>
                         <p className="text-sm text-gray-500">
-                          99 S.t Jomblo Park Pekanbaru 28292. Indonesia
+                          {t("99 S.t Jomblo Park Pekanbaru 28292. Indonesia")}
                         </p>
                       </div>
                     </div>
@@ -88,7 +88,7 @@ const Contact = () => {
                       </div>
                       <div className="w-full">
                         <h4 className="mb-1 font-semibold text-heading">
-                          Phone Number
+                          {t("Phone Number")}
                         </h4>
                         <p className="text-sm text-gray-500">
                           (+62)81 414 257 9980
@@ -110,10 +110,10 @@ const Contact = () => {
                       </div>
                       <div className="w-full">
                         <h4 className="mb-1 font-semibold text-heading">
-                          Email Address
+                          {t("Email Address")}
                         </h4>
                         <p className="text-sm text-gray-500">
-                          info@yourdomain.com
+                          {t("info@yourdomain.com")}
                         </p>
                       </div>
                     </div>
@@ -125,17 +125,17 @@ const Contact = () => {
                       <ContactInputBox
                         type="text"
                         name="name"
-                        placeholder="Your Name"
+                        placeholder={t("Your Name")}
                       />
                       <ContactInputBox
                         type="text"
                         name="email"
-                        placeholder="Your Email"
+                        placeholder={t("Your Email")}
                       />
                      
                       <ContactTextArea
                         row="6"
-                        placeholder="Your Message"
+                        placeholder={t("Your Message")}
                         name="details"
                         defaultValue=""
                       />
@@ -145,7 +145,7 @@ const Contact = () => {
                           className="w-full p-3 text-white transition border rounded
                            border-primary bg-secondary hover:bg-secondary/80"
                         >
-                          Send Message
+                         {t("Send Message")}
                         </button>
                       </div>
                     </form>

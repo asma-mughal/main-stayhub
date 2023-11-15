@@ -46,7 +46,7 @@ hover:bg-opacity-50`}
   <div class={`text-center mx-auto ${styles.paddingY}`}>
     <h1 class={`lg:text-[30px] xl:text-[30px] text-[25px]
  font-poppins font-semibold text-white leading-[30.8px]`}>
-      {title ? title : t("Explore Destinations")}
+      {title ? t(title) : t("Explore Destinations")}
  </h1> 
  <div className="max-w-3xl my-5 px-3">
     {heading === false && 

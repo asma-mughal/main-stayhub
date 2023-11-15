@@ -5,8 +5,7 @@ function handleLinkClick(propertyId) {
   localStorage.setItem('propertyId', propertyId);
 }
 
-const NewCard = ({ data,imagePaths }) => {
-  const [showFullDescription, setShowFullDescription] = useState(false);
+const NewCard = ({ data,imagePaths,t }) => {
   const maxDescriptionLength = 150; 
   return (
     <div className="px-3 font-poppins">
@@ -52,7 +51,7 @@ const NewCard = ({ data,imagePaths }) => {
     <button className="hover:underline focus:outline-none" onClick={() => handleLinkClick(item.PropertyID['#text']?.value)}>
       <Link to={`/single/${item.PropertyID['#text']?.value}`}>
         <a className="text-secondary text-sm" href="#">
-          Read more
+         {t("Read more")}
         </a>
       </Link>
     </button>
@@ -94,7 +93,7 @@ const NewCard = ({ data,imagePaths }) => {
 leading-none p-2 md:p-4">
                      <a class="flex items-center no-underline hover:underline text-black" href="#">
                          <p class="ml-2 text-sm">
-                            $ {item['maxprice']['#text']?.value} per night
+                            $ {item['maxprice']['#text']?.value} {t("per night")}
                          </p>
                      </a>
                   
