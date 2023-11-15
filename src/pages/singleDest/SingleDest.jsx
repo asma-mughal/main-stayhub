@@ -5,6 +5,7 @@ import styles from '../../style';
 import Navbar from '../../components/Navbar';
 import DestPage from './DestPage';
 import { useMyContext } from '../../context/MyContext';
+import { useTranslation } from 'react-i18next';
 const SingleDest = () => {
   const { fetchOneProperty,singleProError,getAvailablityByDate} = useMyContext()
   const [error, setError] = useState()
@@ -27,6 +28,7 @@ const SingleDest = () => {
       });
   }, []);
   console.log(oneProperty)
+  const {t} = useTranslation()
   return (
     <div className="w-full overflow-hidden">
     
@@ -42,9 +44,10 @@ const SingleDest = () => {
       <div className={`${styles.boxWidth}`}>
       {singleProError ? <div className="result-not-available flex flex-col items-center justify-center h-screen">
             <p className="text-red-500 text-xl font-semibold font-poppins mb-2">
-              Something Went Wrong.
+              {t("Something Went Wrong")}.
             </p></div> :<DestPage
        oneProperty={oneProperty}
+       t={t}
        /> } 
         <Contact />
         </div>

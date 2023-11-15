@@ -81,5 +81,13 @@
   "Your Message":"Your Message",
   "Send Message":"Send Message",
   "Start Date":"Start Date",
-  "End Date":"End Date"
+  "End Date":"End Date",
+  "The Space":"The Space",
+  "Property Location":"Property Location",
+  "Description":"Description",
+  "Property Features":"Property Features",
+ "Guests":"Guests",
+ "Bedroom(s)":"Bedroom(s)",
+ "Bathroom(s)":"Bathroom(s)",
+ "Amenities":"Amenities"
 }
