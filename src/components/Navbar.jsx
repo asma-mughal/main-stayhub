@@ -71,7 +71,9 @@ useEffect(() => {
               active === nav.title ? "text-white" : "text-dimWhite"
             } ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
             onClick={() => setActive(nav.title)}
-          >  {nav.title != "Button" && nav.title == "DropDown" &&  <div className="relative inline-block text-left">
+          >  {nav.title != "Button" && nav.title == "DropDown" &&  
+          <div className="relative inline-block text-left">
+            
           <div>
           <button
     onClick={toggleDropdown}
@@ -99,7 +101,7 @@ useEffect(() => {
           </div>
   
           {isOpen && (
-        <div className="absolute right-0 mt-2 space-y-2 bg-white border rounded-md shadow-md">
+        <div className="absolute z-20 right-0 mt-2 space-y-2 bg-white border rounded-md shadow-md">
         <button
           className=" px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
           role="menuitem"

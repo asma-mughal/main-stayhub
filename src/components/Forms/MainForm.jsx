@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react'
 import Footer from '../Footer/Footer';
 import Navbar from '../Navbar';
 
-const MainForm = ({ fields, onSubmit , heading,link, ratesValue}) => {
+const MainForm = ({ fields, onSubmit , heading,link, ratesValue, t}) => {
   const [formData, setFormData] = useState({});
   const [formContentHeight, setFormContentHeight] = useState(0);
   const formContentRef = useRef(null)
@@ -48,14 +48,14 @@ const MainForm = ({ fields, onSubmit , heading,link, ratesValue}) => {
               {/* Right container for the form */}
               <div id="form-content" className="lg:col-span-2" ref={formContentRef}>
                 <div className="text-gray-600">
-                  <p className="font-medium text-lg ">{heading}</p>
-                  <p className="font-sm mb-2">Please fill out all the fields.</p>
+                  <p className="font-medium text-lg ">{t(heading)}</p>
+                  <p className="font-sm mb-2">{t("Please fill out all the fields")}.</p>
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                   {fields.map((field) => (
                       <div className={`md:col-span-${field.colSpan}`} key={field.name}>
-                        <label htmlFor={field.name}>{field.label}</label>
+                        <label htmlFor={field.name}>{t(field.label)}</label>
                         {isFieldRequired(field.name) && <span className="text-red-600">*</span>}
                         {field.name === 'strPayment' ? (
                           <input
@@ -118,7 +118,7 @@ const MainForm = ({ fields, onSubmit , heading,link, ratesValue}) => {
                           type="submit"
                           className="bg-secondary hover:bg-secondary/80 mt-5 text-white text-sm px-6 py-4 rounded-full transition duration-300 font-poppins"
                         >
-                          Submit
+                          {t("Submit")}
                         </button>
                       </div>
                     </div>

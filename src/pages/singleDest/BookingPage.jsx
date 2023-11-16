@@ -4,6 +4,7 @@ import { useMyContext } from '../../context/MyContext';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer/Footer';
+import { useTranslation } from 'react-i18next';
 function parseXmlData(xmlData) {
   try {
     const parser = new DOMParser();
@@ -43,6 +44,7 @@ const BookingPage = () => {
       const [componentLoaded, setComponentLoaded] = useState(true);
       const [errorMessage, setErrorMessage] = useState('');
       const navigate = useNavigate(); 
+      const {t} = useTranslation()
     const fields = [
         { name: 'arrivalDate', label: 'Arrival Date', colSpan: 5, type:'date', required: true },
         { name: 'deptDate', label: 'Departure Date', colSpan: 5, type:'date', required: true },
@@ -106,6 +108,7 @@ const BookingPage = () => {
        </div>
           ) : (
             <MainForm fields={fields} onSubmit={handleSubmit} heading={'Property Details'}
+            t={t}
             link={"https://images.pexels.com/photos/6186812/pexels-photo-6186812.jpeg?auto=compress&cs=tinysrgb&w=600"} />
           )}
         </div>

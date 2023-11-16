@@ -4,11 +4,13 @@ import { useMyContext } from '../../context/MyContext'
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer/Footer';
+import { useTranslation } from 'react-i18next';
 const PropertyAvailable = () => {
     const {IsPropertyAvailable} = useMyContext()
     const [isLoading, setIsLoading] = useState(false);
     const [result, setResult] = useState(null);
     const navigate = useNavigate(); 
+    const {t} = useTranslation()
     const fields = [
         { name: 'date1', label: 'Arrival Date', colSpan: 5, type:'date', required: true},
         { name: 'date2', label: 'Departure Date', colSpan: 5, type:'date', required: true },
@@ -55,17 +57,18 @@ const PropertyAvailable = () => {
     {!isLoading && (
       result === null ? (
         <MainForm fields={fields} onSubmit={handleSubmit} heading={'Property Availability Lookup'}
+      t={t}
         link={"https://images.pexels.com/photos/3639542/pexels-photo-3639542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} />
       ) : (
         <div className="result-container text-center">
           {result === 'true' ? (
              <div className="result-not-available flex flex-col items-center justify-center h-screen">
-            <p className="text-green-500 text-xl font-semibold font-poppins">The property is available.</p>
+            <p className="text-green-500 text-xl font-semibold font-poppins">{t("The property is available")}.</p>
             </div>
           ) : (
             <div className="result-not-available flex flex-col items-center justify-center h-screen">
             <p className="text-red-500 text-xl font-semibold font-poppins mb-2">
-              Sorry, the property is not available.
+              {t("Sorry, the property is not available")}.
             </p>
             <div className="sad-face text-2xl">😞</div>
           </div>

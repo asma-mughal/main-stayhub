@@ -89,5 +89,16 @@
  "Guests":"Guests",
  "Bedroom(s)":"Bedroom(s)",
  "Bathroom(s)":"Bathroom(s)",
- "Amenities":"Amenities"
+ "Amenities":"Amenities",
+ "The property is available":"The property is available",
+ "Sorry, the property is not available":"Sorry, the property is not available",
+ "Property Availability Lookup":"Property Availability Lookup",
+ "Please fill out all the fields":"Please fill out all the fields",
+ "Arrival Date":"Arrival Date",
+ "Departure Date":"Departure Date",
+ "Property Details":"Property Details",
+ "Number of Adult":"Number of Adult",
+ "Number of Pet":"Number of Pet",
+ "Number of Baby":"Number of Baby",
+ "Number of  Child":"Number of  Child"
 }

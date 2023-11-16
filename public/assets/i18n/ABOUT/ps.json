@@ -89,5 +89,17 @@
  "Guests":"Hóspedes",
  "Bedroom(s)":"Quarto(s)",
  "Bathroom(s)":"Banheiro(s)",
- "Amenities":"Comodidades"
+ "Amenities":"Comodidades",
+ "The property is available":"A propriedade está disponível",
+ "Sorry, the property is not available":"Desculpe, a propriedade não está disponível",
+ "Property Availability Lookup":"Consulta de Disponibilidade da Propriedade",
+ "Please fill out all the fields":"Por favor, preencha todos os campos",
+ "Contact":"contato",
+ "Arrival Date":"Data de Chegada",
+ "Departure Date":"Data de Saída",
+ "Property Details":"Detalhes da Propriedade",
+ "Number of Adult":"Número de Adultos",
+ "Number of Pet":"Número de Animais de Estimação",
+ "Number of Baby":"Número de Bebês",
+ "Number of Child":"Número de Crianças"
 }
