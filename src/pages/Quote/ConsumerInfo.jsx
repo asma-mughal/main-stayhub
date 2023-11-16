@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import MainForm from '../../components/Forms/MainForm';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer/Footer';
+import { useTranslation } from 'react-i18next';
 const ConsumerInfo = () => {
     const {setCosumerInfo} = useMyContext()
     const [isLoading, setIsLoading] = useState(false);
     const [isStored, setIsStored] = useState(false); // 
     const navigate = useNavigate(); 
+    const {t} = useTranslation()
     const stateOptions = [
       'Alabama',
       'Alaska',
@@ -83,37 +85,6 @@ const ConsumerInfo = () => {
       'Russia',
       'South Africa'
     ]
-    const cityOptions = [
-      'New York',
-      'Los Angeles',
-      'London',
-      'Paris',
-      'Sydney',
-      'Tokyo',
-      'Toronto',
-      'Chicago',
-      'Mumbai',
-      'Miami',
-      'Berlin',
-      'Hong Kong',
-      'Rome',
-      'San Francisco',
-      'Seoul',
-      'Vancouver',
-      'Madrid',
-      'Melbourne',
-      'Dubai',
-      'Singapore',
-      'Shanghai',
-      'Amsterdam',
-      'Boston',
-      'Barcelona',
-      'Vienna',
-      'Stockholm',
-      'Prague',
-      'Buenos Aires',
-      'Cape Town',
-    ];
     const fields = [
         { name: 'street1', label: 'Street # 01', colSpan: 5, type:'text', required: true },
         { name: 'street2', label: 'Street # 02', colSpan: 5, type:'text', required: true },
@@ -189,7 +160,7 @@ const ConsumerInfo = () => {
       ) : (
         
         <MainForm fields={fields} onSubmit={handleSubmit} heading={'Consumer Details'}
-        
+        t={t}
         link={"https://images.pexels.com/photos/3767442/pexels-photo-3767442.jpeg?auto=compress&cs=tinysrgb&w=600"}/>
       )}
     </div>

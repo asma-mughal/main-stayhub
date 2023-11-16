@@ -3,6 +3,7 @@ import { useMyContext } from '../../context/MyContext'
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer/Footer';
+import { useTranslation } from 'react-i18next';
 const GetCoupon = () => {
     const { GetCouponList,convertXmlToJson, AddCoupon,deleteCoupon } = useMyContext();
     const [data, setData] = useState(null);
@@ -10,6 +11,7 @@ const GetCoupon = () => {
      const storedDataJSON = localStorage.getItem('quoteInfo');
      const parseData = JSON.parse(storedDataJSON);
      let numberOfCoupons;
+     const {t} = useTranslation()
     useEffect(() => {
        
         async function fetchData() {
@@ -22,7 +24,7 @@ const GetCoupon = () => {
           }
         }
         fetchData();
-      }, []);
+      }, [data]);
     const handleSubmit = () =>{
       navigate('/consumer')
     }
@@ -64,16 +66,17 @@ const GetCoupon = () => {
       {data ? (
               Object.entries(data.CouponCodeList).map(([key, value]) => (
                 <div key={key}>
-                  <span className="font-semibold p-1 font-poppins">{key}</span>
+                  <span className="font-semibold p-1 font-poppins">{t(key)}</span>
                   {Object.keys(value).length === 0 ? (
-                    <p>No values available.</p>
+                    <p>{t("No values available")}.</p>
                   ) : (
-                    <pre className='font-poppins'>{JSON.stringify(value?.Coupon?.Name['#text']?.value, null, 2)}</pre>
+                    <pre className='font-poppins'>
+                      {JSON.stringify(value?.Coupon?.Name['#text']?.value, null, 2)}</pre>
                   )}
                 </div>
               ))
             ) : (
-              <p className="font-poppins">Loading coupon data...</p>
+              <p className="font-poppins">{t("Loading coupon data")}...</p>
             )}
         </div>
   
@@ -81,7 +84,7 @@ const GetCoupon = () => {
         type="submit"
         onClick={handleSubmit}
         className="bg-secondary hover:bg-secondary/80 mt-5 w-full text-white text-sm px-6 py-4 rounded-full transition duration-300 font-poppins">
-        Next
+       {t("Next")}
       </button>
       {data && (
   <>

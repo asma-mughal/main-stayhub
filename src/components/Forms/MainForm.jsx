@@ -92,7 +92,7 @@ const MainForm = ({ fields, onSubmit , heading,link, ratesValue, t}) => {
                             >
                               {field.options.map((option) => (
                                 <option key={option} value={option}>
-                                  {option}
+                                  {t(option)}
                                 </option>
                               ))}
                             </select>
