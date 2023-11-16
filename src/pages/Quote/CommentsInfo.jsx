@@ -4,11 +4,13 @@ import { useMyContext } from '../../context/MyContext'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer/Footer'
+import { useTranslation } from 'react-i18next'
 const CommentsInfo = () => {
   const {setCommentsInfo} = useMyContext()
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const {t}  = useTranslation() 
   const fields = [
       { name: 'comments', label: 'Add your Comments', colSpan: 5, type:'textarea' ,  required: true},
     ];
@@ -60,14 +62,17 @@ const CommentsInfo = () => {
   {!isLoading && (
     result === null ? (
       <MainForm fields={fields} onSubmit={handleSubmit} heading={'Property Availability Lookup'}
+      t={t}
       link={"https://images.pexels.com/photos/2456351/pexels-photo-2456351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} />
     ) : (
       <div className="result-container text-center">
         {result === 'success' ? (
-          <p className="text-green-500 text-xl font-semibold font-poppins">Thankyou!</p>
+          <div className='min-h-screen flex flex-col justify-center items-center'>
+          <p className="text-green-500 text-xl font-semibold font-poppins">{t("Thankyou")}!</p>
+          </div>
         ) : (
           <div className="result-not-available flex items-center">
-              <p className="text-red-500 text-xl font-semibold font-poppins mr-2">Sorry, Something went wrong.</p>
+              <p className="text-red-500 text-xl font-semibold font-poppins mr-2">{t("Sorry, Something went wrong")}.</p>
               <div className="sad-face text-xl">😞</div>
             </div>
         )}

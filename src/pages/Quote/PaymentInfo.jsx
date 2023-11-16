@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import MainForm from '../../components/Forms/MainForm';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer/Footer';
+import { useTranslation } from 'react-i18next';
 const PaymentInfo = () => {
     const {convertXmlToJson, saveProperty,propertyMessage} = useMyContext()
     const [isLoading, setIsLoading] = useState(false);
@@ -11,6 +12,7 @@ const PaymentInfo = () => {
     const [isPaymentDone, setIsPaymentDone] = useState(false);
     const [paymentError, setPaymentError] = useState(false); //
     const navigate = useNavigate(); 
+    const {t} = useTranslation()
     const stateOptions = [
       'Alabama',
       'Alaska',
@@ -128,7 +130,7 @@ const PaymentInfo = () => {
     const fields = [
       { name: 'strPayment', label: 'Amount(Initial amount)', colSpan: 5, type: 'number', required: true ,
       defaultValue: ratesValue, },
-      { name: 'ezicAccount', label: 'Ezic Account (leave empty if you don\'t use it)', colSpan: 5, type: 'text' },
+      { name: 'ezicAccount', label: 'Ezic Account (leave empty if you do not use it)', colSpan: 5, type: 'text' },
       { name: 'cFName', label: 'First Name', colSpan: 5, type: 'text', required: true },
       { name: 'cLName', label: 'Last Name', colSpan: 5, type: 'text', required: true },
       { name: 'ezicTag', label: 'Ezic Tag', colSpan: 5, type: 'text' },
@@ -207,18 +209,19 @@ const PaymentInfo = () => {
         ) : isPaymentDone ? (
           <div className="flex flex-col items-center justify-center h-screen">
             <div className="text-green-600 font-semibold text-xl mb-4 font-poppins">
-           <p className='text-center'>Congratulations, your payment is done!</p>
+           <p className='text-center'>{t("Congratulations, your payment is done")}!</p>
             </div>
           </div>
         ) : paymentError ? ( 
           <div className="flex flex-col items-center h-full">
             <div className="text-red-600 font-semibold text-xl mb-4">
-              Sorry, something went wrong.
+              {t("Sorry, something went wrong")}.
             </div>
           </div>
         ) : (
           <MainForm fields={fields} onSubmit={handleSubmit} heading={'Payment Details'}
           ratesValue={ratesValue}
+          t={t}
           link={"https://images.pexels.com/photos/4386417/pexels-photo-4386417.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}/>
         )}
       </div>

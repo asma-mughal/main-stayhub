@@ -196,6 +196,20 @@
   "South Korea": "South Korea",
   "Spain": "Spain",
   "Italy": "Italy",
-  "Netherlands": "Netherlands"
+  "Netherlands": "Netherlands",
+  "Thankyou":"Thankyou",
+  "Sorry, Something went wrong":"Sorry, Something went wrong",
+  "Add your Comments":"Add your Comments",
+  "Congratulations, your payment is done":"Congratulations, your payment is done",
+  "Sorry, something went wrong":"Sorry, something went wrong",
+"Ezic Account (leave empty if you do not use it)":"Ezic Account (leave empty if you do not use it)",
+"Ezic Tag":"Ezic Tag",
+"Credit Card Number":"Credit Card Number",
+"CC Expire Date":"CC Expire Date",
+"CC Security Number":"CC Security Number",
+"CC Type":"CC Type",
+"Street":"Street",
+"Zip code":"Zip code",
+"Amount(Initial amount)":"Amount(Initial amount)"
  
 }

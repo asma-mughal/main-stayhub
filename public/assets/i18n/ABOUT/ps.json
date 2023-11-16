@@ -200,5 +200,19 @@
   "Netherlands": "Países Baixos",
   "Sweden": "Suécia",
   "Norway": "Noruega",
-  "Denmark": "Dinamarca"
+  "Denmark": "Dinamarca",
+  "Thankyou": "Obrigado(a)",
+  "Sorry, Something went wrong": "Desculpe, algo deu errado",
+  "Add your Comments": "Adicione seus Comentários",
+  "Congratulations, your payment is done": "Parabéns, seu pagamento foi concluído!",
+  "Sorry, something went wrong": "Desculpe, algo deu errado",
+  "Ezic Account (leave empty if you do not use it)": "Conta Ezic (deixe em branco se não usar)",
+  "Ezic Tag": "Tag Ezic",
+  "Credit Card Number": "Número do Cartão de Crédito",
+  "CC Expire Date": "Data de Expiração",
+  "CC Security Number": "Número de Segurança",
+  "CC Type": "Tipo de Cartão de Crédito",
+  "Street": "Rua",
+  "Zip code": "Código Postal",
+"Amount(Initial amount)":"Valor (Valor inicial)"
 }
