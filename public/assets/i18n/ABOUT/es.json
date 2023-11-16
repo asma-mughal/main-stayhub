@@ -100,5 +100,17 @@
  "Number of Pet":"Número de Mascotas",
  "Number of Baby":"Número de Bebés",
  "Number of Child":"Número de Niños",
+ "Property Rates":"Tarifas de la Propiedad",
+ "Loading property rates data":"Cargando datos de tarifas de la propiedad",
+ "No property rates data available":"No hay datos de tarifas de la propiedad disponibles",
+ "Rates Name":"Nombre de las Tarifas",
+ "Rates Value":"Valor de las Tarifas",
+ "Data for this rate is incomplete or invalid":"Los datos para esta tarifa son incompletos o inválidos",
+ "Disclaimer: Please review the property rates carefully before proceeding":"Descargo de responsabilidad: Por favor, revise cuidadosamente las tarifas de la propiedad antes de continuar",
+ "Next":"Siguiente",
+ "No optional services available":"No hay servicios opcionales disponibles",
+ "Optional Services":"Servicios Opcionales",
+ "Rates ID":"ID de Tarifas",
+ "Loading optional services":"Cargando servicios opcionales",
 "Welcome to our popular destinations section, where we unveil a curated collection of captivating locations that are beloved by travelers worldwide. Whether you seek the tranquility of a beachside retreat, the vibrant energy of a bustling city, or the charm of a historic town, our selection of popular destinations offers something for every wanderlust-filled soul. Prepare to embark on an unforgettable journey as we highlight the unique experiences and hidden gems that await you": "Bienvenido a nuestra sección de destinos populares, donde revelamos una colección seleccionada de lugares cautivadores que adoran los viajeros de todo el mundo. Ya sea que busque la tranquilidad de un retiro junto a la playa, la energía vibrante de una ciudad bulliciosa o el encanto de una ciudad histórica, nuestra selección de destinos populares ofrece algo para cada alma llena de pasión por los viajes. Prepárese para embarcarse en un viaje inolvidable mientras destacamos las experiencias únicas y las gemas escondidas que le esperan"
 }

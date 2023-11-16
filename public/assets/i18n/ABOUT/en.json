@@ -100,5 +100,18 @@
  "Number of Adult":"Number of Adult",
  "Number of Pet":"Number of Pet",
  "Number of Baby":"Number of Baby",
- "Number of  Child":"Number of  Child"
+ "Number of  Child":"Number of  Child",
+ "Property Rates":"Property Rates",
+ "Loading property rates data":"Loading property rates data",
+ "No property rates data available":"No property rates data available",
+ "Rates Name":"Rates Name",
+ "Rates Value":"Rates Value",
+ "Data for this rate is incomplete or invalid":"Data for this rate is incomplete or invalid",
+ "Disclaimer: Please review the property rates carefully before proceeding":"Disclaimer: Please review the property rates carefully before proceeding",
+ "Next":"Next",
+ "No optional services available":"No optional services available",
+ "Optional Services":"Optional Services",
+ "Rates ID":"Rates ID",
+ "Loading optional services":"Loading optional services"
+
 }

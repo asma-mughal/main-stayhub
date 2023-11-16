@@ -101,5 +101,17 @@
  "Number of Adult":"Número de Adultos",
  "Number of Pet":"Número de Animais de Estimação",
  "Number of Baby":"Número de Bebês",
- "Number of Child":"Número de Crianças"
+ "Number of Child":"Número de Crianças",
+ "Property Rates":"Tarifas da Propriedade",
+ "Loading property rates data":"Carregando dados de tarifas da propriedade",
+ "No property rates data available":"Não há dados de tarifas da propriedade disponíveis",
+ "Rates Name":"Nome das Tarifas",
+ "Rates Value":"Valor das Tarifas",
+ "Data for this rate is incomplete or invalid":"Os dados para esta tarifa estão incompletos ou inválidos",
+ "Disclaimer: Please review the property rates carefully before proceeding":"Aviso Legal: Por favor, revise cuidadosamente as tarifas da propriedade antes de prosseguir",
+ "Next":"Próximo",
+ "No optional services available":"Nenhum serviço opcional disponível",
+ "Optional Services":"Serviços Opcionais",
+ "Rates ID":"ID das Tarifas",
+ "Loading optional services":"Carregando serviços opcionais"
 }
