@@ -59,6 +59,7 @@ const   SinglePage = () => {
   const [filteredData, setFilteredData] = useState({});
   const [imagePaths, setImagePaths] = useState([]);
   const {t} = useTranslation()
+  const [loading, setLoading] = useState(true); 
   useEffect(() => {
    fetchData((error, responseData) => {
      if (error) {

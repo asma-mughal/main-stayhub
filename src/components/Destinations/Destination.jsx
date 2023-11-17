@@ -11,7 +11,7 @@ const Destination = () => {
   const { fetchData,convertXmlToJson,jsonData, setJsonData,fetchImage} = useMyContext()
   const [error, setError] = useState()
   const [imagePaths, setImagePaths] = useState([]);
-
+  const [loading, setLoading] = useState(true); 
   useEffect(() => {
    fetchData((error, responseData) => {
      if (error) {
@@ -19,10 +19,12 @@ const Destination = () => {
      } else {
       const res = convertXmlToJson(responseData['#text']?.value)
       setJsonData((res))
+      setLoading(false); 
      }
    });
 
    }, [])
+   console.log(jsonData)
    useEffect(() => {
     const propertyData = jsonData?.PropertyList?.Property;
     const paths = [];
@@ -73,14 +75,21 @@ const Destination = () => {
     </div>
    
   </div>
-  <CardDest data ={jsonData}
-  start={4}
-  end={8}
-  link={true}
-  filterYes= {true}
-  imagePaths={imagePaths} 
-  t={t}
-  />
+  {loading ? (
+       <div className="flex flex-col justify-center items-center">
+       <div className="loader border-t-4 border-secondary border-solid rounded-full h-12 w-12 animate-spin mb-4">
+         {/* Loading spinner */}
+       </div>
+     </div>
+      ) : ( <CardDest data ={jsonData}
+        start={4}
+        end={8}
+        link={true}
+        filterYes= {true}
+        imagePaths={imagePaths} 
+        t={t}
+        />)}
+ 
   </>
   )
 }
