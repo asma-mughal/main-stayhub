@@ -11,7 +11,7 @@ const CardModern = ({data, start, end,link, t}) => {
           key={index}
         >
           <article className="h-full overflow-hidden rounded-lg shadow-lg flex flex-col">
-            <a href="#">
+            <a href="">
               <img
                 alt="Placeholder"
                 className="block h-48 md:h-64 lg:h-80 xl:h-80 w-full object-cover"
@@ -21,7 +21,7 @@ const CardModern = ({data, start, end,link, t}) => {
   
             <header className="flex items-center justify-between leading-tight p-2 md:p-4">
               <h1 className="text-lg">
-                <Link to={link ? `/single/${i.id}` : ''}>
+                <Link to='/modern'>
                   <a className="no-underline hover:underline font-semibold text-heading" href="#">
                   {t(i?.title)}
                   </a>
